@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Free Text Convert - Case Converter & Text Transformation Tools</title>
+    <meta name="description" content="Convert text case instantly - UPPERCASE, lowercase, Title Case, camelCase. Free online text tools with no signup required.">
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📝</text></svg>">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Free Text Convert</h1>
+            <p class="tagline">Simple, fast, and free text transformation tools</p>
+        </header>
+
+        <main>
+            <div class="tool-card">
+                <h2>Case Converter</h2>
+                <div class="input-section">
+                    <label for="input">Input Text:</label>
+                    <textarea 
+                        id="input" 
+                        placeholder="Type or paste your text here..."
+                        rows="8"
+                    ></textarea>
+                    <div class="char-count">
+                        Characters: <span id="charCount">0</span>
+                    </div>
+                </div>
+
+                <div class="button-grid">
+                    <button onclick="convertCase('upper')" class="btn">
+                        UPPERCASE
+                    </button>
+                    <button onclick="convertCase('lower')" class="btn">
+                        lowercase
+                    </button>
+                    <button onclick="convertCase('title')" class="btn">
+                        Title Case
+                    </button>
+                    <button onclick="convertCase('sentence')" class="btn">
+                        Sentence case
+                    </button>
+                    <button onclick="convertCase('camel')" class="btn">
+                        camelCase
+                    </button>
+                    <button onclick="convertCase('pascal')" class="btn">
+                        PascalCase
+                    </button>
+                    <button onclick="convertCase('snake')" class="btn">
+                        snake_case
+                    </button>
+                    <button onclick="convertCase('kebab')" class="btn">
+                        kebab-case
+                    </button>
+                </div>
+
+                <div class="output-section">
+                    <label for="output">Result:</label>
+                    <textarea 
+                        id="output" 
+                        readonly 
+                        placeholder="Your converted text will appear here..."
+                        rows="8"
+                    ></textarea>
+                </div>
+
+                <div class="action-buttons">
+                    <button onclick="copyToClipboard()" class="btn btn-primary">
+                        📋 Copy to Clipboard
+                    </button>
+                    <button onclick="clearAll()" class="btn btn-secondary">
+                        🗑️ Clear All
+                    </button>
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            <p>&copy; 2024 FreeTextConvert.com - More tools coming soon!</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
