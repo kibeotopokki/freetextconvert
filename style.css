@@ -194,3 +194,25 @@ nav a {
 nav a:hover {
     text-decoration: underline;
 }
+
+/* Fix bullet point spacing */
+ul {
+    padding-left: 40px; /* Increase space from left edge */
+    margin: 15px 0; /* Add space above and below lists */
+}
+
+ul li {
+    margin-bottom: 8px; /* Space between bullet points */
+    line-height: 1.8; /* Make lines easier to read */
+}
+
+/* Also fix ordered lists (numbered lists) */
+ol {
+    padding-left: 40px;
+    margin: 15px 0;
+}
+
+ol li {
+    margin-bottom: 8px;
+    line-height: 1.8;
+}
