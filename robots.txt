@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://freetextconvert.com/sitemap.xml
