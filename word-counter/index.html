@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Word Counter - Free Character & Word Count Tool | Free Text Convert</title>
+    <meta name="description" content="Free online word counter tool. Count words, characters, sentences, paragraphs, and reading time instantly. Perfect for essays, social media posts, and SEO content.">
+    <link rel="stylesheet" href="../style.css">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📝</text></svg>">
+    <link rel="canonical" href="https://freetextconvert.com/word-counter">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Free Text Convert</h1>
+            <p class="tagline">Simple, fast, and free text transformation tools</p>
+            <nav style="margin-top: 15px; text-align: center;">
+                <a href="/" style="margin-right: 20px; color: #3498db; text-decoration: none;">Tools</a>
+                <a href="/blog" style="color: #3498db; text-decoration: none;">Blog</a>
+            </nav>
+        </header>
+
+        <main>
+            <div class="tool-card">
+                <h2>Word Counter</h2>
+                <p style="text-align: center; color: #666; margin-bottom: 20px;">
+                    Count words, characters, sentences, and estimate reading time instantly
+                </p>
+                
+                <div class="input-section">
+                    <label for="textInput">Enter or paste your text:</label>
+                    <textarea 
+                        id="textInput" 
+                        placeholder="Start typing or paste your text here to see live statistics..."
+                        rows="12"
+                        style="font-size: 16px; line-height: 1.6;"
+                    ></textarea>
+                </div>
+
+                <!-- Statistics Grid -->
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px; margin: 25px 0;">
+                    <!-- Words -->
+                    <div style="background: #3498db; color: white; padding: 20px; border-radius: 10px; text-align: center;">
+                        <div style="font-size: 36px; font-weight: bold;" id="wordCount">0</div>
+                        <div style="font-size: 14px; opacity: 0.9;">Words</div>
+                    </div>
+                    
+                    <!-- Characters with spaces -->
+                    <div style="background: #2ecc71; color: white; padding: 20px; border-radius: 10px; text-align: center;">
+                        <div style="font-size: 36px; font-weight: bold;" id="charCountWithSpaces">0</div>
+                        <div style="font-size: 14px; opacity: 0.9;">Characters</div>
+                    </div>
+                    
+                    <!-- Characters without spaces -->
+                    <div style="background: #e74c3c; color: white; padding: 20px; border-radius: 10px; text-align: center;">
+                        <div style="font-size: 36px; font-weight: bold;" id="charCountNoSpaces">0</div>
+                        <div style="font-size: 14px; opacity: 0.9;">Characters (no spaces)</div>
+                    </div>
+                    
+                    <!-- Sentences -->
+                    <div style="background: #f39c12; color: white; padding: 20px; border-radius: 10px; text-align: center;">
+                        <div style="font-size: 36px; font-weight: bold;" id="sentenceCount">0</div>
+                        <div style="font-size: 14px; opacity: 0.9;">Sentences</div>
+                    </div>
+                    
+                    <!-- Paragraphs -->
+                    <div style="background: #9b59b6; color: white; padding: 20px; border-radius: 10px; text-align: center;">
+                        <div style="font-size: 36px; font-weight: bold;" id="paragraphCount">0</div>
+                        <div style="font-size: 14px; opacity: 0.9;">Paragraphs</div>
+                    </div>
+                    
+                    <!-- Reading Time -->
+                    <div style="background: #34495e; color: white; padding: 20px; border-radius: 10px; text-align: center;">
+                        <div style="font-size: 36px; font-weight: bold;" id="readingTime">0</div>
+                        <div style="font-size: 14px; opacity: 0.9;">Min Read</div>
+                    </div>
+                </div>
+
+                <!-- Social Media Limits -->
+                <div style="margin-top: 30px;">
+                    <h3 style="margin-bottom: 15px;">Social Media Limits</h3>
+                    
+                    <!-- Twitter/X -->
+                    <div style="margin-bottom: 15px;">
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 5px;">
+                            <span>Twitter/X</span>
+                            <span id="twitterCount">0 / 280</span>
+                        </div>
+                        <div style="background: #e0e0e0; height: 10px; border-radius: 5px; overflow: hidden;">
+                            <div id="twitterBar" style="background: #1DA1F2; height: 100%; width: 0%; transition: width 0.3s;"></div>
+                        </div>
+                    </div>
+                    
+                    <!-- Facebook -->
+                    <div style="margin-bottom: 15px;">
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 5px;">
+                            <span>Facebook</span>
+                            <span id="facebookCount">0 / 63,206</span>
+                        </div>
+                        <div style="background: #e0e0e0; height: 10px; border-radius: 5px; overflow: hidden;">
+                            <div id="facebookBar" style="background: #4267B2; height: 100%; width: 0%; transition: width 0.3s;"></div>
+                        </div>
+                    </div>
+                    
+                    <!-- Instagram -->
+                    <div style="margin-bottom: 15px;">
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 5px;">
+                            <span>Instagram</span>
+                            <span id="instagramCount">0 / 2,200</span>
+                        </div>
+                        <div style="background: #e0e0e0; height: 10px; border-radius: 5px; overflow: hidden;">
+                            <div id="instagramBar" style="background: #E1306C; height: 100%; width: 0%; transition: width 0.3s;"></div>
+                        </div>
+                    </div>
+                    
+                    <!-- LinkedIn -->
+                    <div style="margin-bottom: 15px;">
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 5px;">
+                            <span>LinkedIn</span>
+                            <span id="linkedinCount">0 / 3,000</span>
+                        </div>
+                        <div style="background: #e0e0e0; height: 10px; border-radius: 5px; overflow: hidden;">
+                            <div id="linkedinBar" style="background: #0077B5; height: 100%; width: 0%; transition: width 0.3s;"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="action-buttons" style="margin-top: 30px;">
+                    <button onclick="copyText()" class="btn btn-primary">
+                        📋 Copy Text
+                    </button>
+                    <button onclick="clearText()" class="btn btn-secondary">
+                        🗑️ Clear All
+                    </button>
+                    <button onclick="downloadStats()" class="btn" style="background-color: #2ecc71; color: white;">
+                        📊 Download Stats
+                    </button>
+                </div>
+
+                <!-- Top Keywords Section -->
+                <div style="margin-top: 30px; padding: 20px; background: #f8f9fa; border-radius: 10px;">
+                    <h3 style="margin-bottom: 15px;">Top Keywords (2+ letters)</h3>
+                    <div id="topKeywords" style="display: flex; flex-wrap: wrap; gap: 10px;">
+                        <span style="color: #666;">Start typing to see most used words...</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SEO Content Section -->
+            <div style="margin-top: 40px; padding: 20px;">
+                <h3>About This Word Counter Tool</h3>
+                <p>Our free online word counter provides instant, accurate counts of words, characters, sentences, and paragraphs. Perfect for:</p>
+                <ul style="margin: 15px 0; padding-left: 30px;">
+                    <li>Students checking essay word counts</li>
+                    <li>Writers tracking article length</li>
+                    <li>Social media managers staying within platform limits</li>
+                    <li>SEO professionals optimizing content length</li>
+                    <li>Anyone needing quick text statistics</li>
+                </ul>
+                <p>Simply paste or type your text above to get instant results. No signup required, completely free, and works on all devices.</p>
+            </div>
+        </main>
+
+        <footer>
+            <p>&copy; 2025 FreeTextConvert.com - More tools coming soon!</p>
+        </footer>
+    </div>
+
+    <script>
+        // Get elements
+        const textInput = document.getElementById('textInput');
+        const wordCountEl = document.getElementById('wordCount');
+        const charCountWithSpacesEl = document.getElementById('charCountWithSpaces');
+        const charCountNoSpacesEl = document.getElementById('charCountNoSpaces');
+        const sentenceCountEl = document.getElementById('sentenceCount');
+        const paragraphCountEl = document.getElementById('paragraphCount');
+        const readingTimeEl = document.getElementById('readingTime');
+
+        // Social media elements
+        const socialMediaLimits = {
+            twitter: 280,
+            facebook: 63206,
+            instagram: 2200,
+            linkedin: 3000
+        };
+
+        // Update counts on input
+        textInput.addEventListener('input', updateCounts);
+
+        function updateCounts() {
+            const text = textInput.value;
+            
+            // Word count
+            const words = text.trim() === '' ? 0 : text.trim().split(/\s+/).length;
+            wordCountEl.textContent = words.toLocaleString();
+            
+            // Character counts
+            const charsWithSpaces = text.length;
+            const charsNoSpaces = text.replace(/\s/g, '').length;
+            charCountWithSpacesEl.textContent = charsWithSpaces.toLocaleString();
+            charCountNoSpacesEl.textContent = charsNoSpaces.toLocaleString();
+            
+            // Sentence count (improved regex)
+            const sentences = text.trim() === '' ? 0 : text.split(/[.!?]+/).filter(s => s.trim().length > 0).length;
+            sentenceCountEl.textContent = sentences;
+            
+            // Paragraph count
+            const paragraphs = text.trim() === '' ? 0 : text.split(/\n\n+/).filter(p => p.trim().length > 0).length;
+            paragraphCountEl.textContent = paragraphs;
+            
+            // Reading time (average 200 words per minute)
+            const readingTime = Math.ceil(words / 200);
+            readingTimeEl.textContent = readingTime;
+            
+            // Update social media limits
+            updateSocialMediaBars(charsWithSpaces);
+            
+            // Update top keywords
+            updateTopKeywords(text);
+        }
+
+        function updateSocialMediaBars(charCount) {
+            // Twitter
+            const twitterPercent = Math.min((charCount / socialMediaLimits.twitter) * 100, 100);
+            document.getElementById('twitterBar').style.width = twitterPercent + '%';
+            document.getElementById('twitterCount').textContent = `${charCount} / ${socialMediaLimits.twitter}`;
+            if (charCount > socialMediaLimits.twitter) {
+                document.getElementById('twitterBar').style.background = '#e74c3c';
+            } else {
+                document.getElementById('twitterBar').style.background = '#1DA1F2';
+            }
+            
+            // Facebook
+            const facebookPercent = Math.min((charCount / socialMediaLimits.facebook) * 100, 100);
+            document.getElementById('facebookBar').style.width = facebookPercent + '%';
+            document.getElementById('facebookCount').textContent = `${charCount} / ${socialMediaLimits.facebook.toLocaleString()}`;
+            
+            // Instagram
+            const instagramPercent = Math.min((charCount / socialMediaLimits.instagram) * 100, 100);
+            document.getElementById('instagramBar').style.width = instagramPercent + '%';
+            document.getElementById('instagramCount').textContent = `${charCount} / ${socialMediaLimits.instagram.toLocaleString()}`;
+            if (charCount > socialMediaLimits.instagram) {
+                document.getElementById('instagramBar').style.background = '#e74c3c';
+            } else {
+                document.getElementById('instagramBar').style.background = '#E1306C';
+            }
+            
+            // LinkedIn
+            const linkedinPercent = Math.min((charCount / socialMediaLimits.linkedin) * 100, 100);
+            document.getElementById('linkedinBar').style.width = linkedinPercent + '%';
+            document.getElementById('linkedinCount').textContent = `${charCount} / ${socialMediaLimits.linkedin.toLocaleString()}`;
+            if (charCount > socialMediaLimits.linkedin) {
+                document.getElementById('linkedinBar').style.background = '#e74c3c';
+            } else {
+                document.getElementById('linkedinBar').style.background = '#0077B5';
+            }
+        }
+
+        function updateTopKeywords(text) {
+            if (text.trim() === '') {
+                document.getElementById('topKeywords').innerHTML = '<span style="color: #666;">Start typing to see most used words...</span>';
+                return;
+            }
+            
+            // Extract words (2+ characters, alphanumeric)
+            const words = text.toLowerCase().match(/\b[a-z0-9]{2,}\b/g) || [];
+            
+            // Count occurrences
+            const wordCount = {};
+            words.forEach(word => {
+                // Skip common stop words
+                const stopWords = ['the', 'and', 'for', 'are', 'but', 'not', 'you', 'all', 'can', 'her', 'was', 'one', 'our', 'out', 'day', 'had', 'has', 'his', 'how', 'its', 'may', 'new', 'now', 'old', 'see', 'two', 'way', 'who', 'boy', 'did', 'get', 'him', 'let', 'put', 'say', 'she', 'too', 'use'];
+                if (!stopWords.includes(word)) {
+                    wordCount[word] = (wordCount[word] || 0) + 1;
+                }
+            });
+            
+            // Sort by frequency
+            const sortedWords = Object.entries(wordCount)
+                .sort((a, b) => b[1] - a[1])
+                .slice(0, 10);
+            
+            // Display keywords
+            if (sortedWords.length > 0) {
+                const keywordHTML = sortedWords.map(([word, count]) => {
+                    const size = Math.min(20 + (count * 2), 32);
+                    return `<span style="background: #3498db; color: white; padding: 5px 12px; border-radius: 20px; font-size: ${size}px;">${word} (${count})</span>`;
+                }).join('');
+                document.getElementById('topKeywords').innerHTML = keywordHTML;
+            }
+        }
+
+        function copyText() {
+            const text = textInput.value;
+            if (text.trim() === '') {
+                showNotification('Nothing to copy!', 'error');
+                return;
+            }
+            
+            textInput.select();
+            textInput.setSelectionRange(0, 99999); // For mobile
+            
+            try {
+                document.execCommand('copy');
+                showNotification('Text copied to clipboard!', 'success');
+            } catch (err) {
+                showNotification('Failed to copy', 'error');
+            }
+        }
+
+        function clearText() {
+            textInput.value = '';
+            updateCounts();
+            textInput.focus();
+        }
+
+        function downloadStats() {
+            const text = textInput.value;
+            if (text.trim() === '') {
+                showNotification('No text to analyze!', 'error');
+                return;
+            }
+            
+            const stats = `Text Statistics Report
+Generated by FreeTextConvert.com
+Date: ${new Date().toLocaleString()}
+
+=== BASIC STATISTICS ===
+Words: ${wordCountEl.textContent}
+Characters (with spaces): ${charCountWithSpacesEl.textContent}
+Characters (no spaces): ${charCountNoSpacesEl.textContent}
+Sentences: ${sentenceCountEl.textContent}
+Paragraphs: ${paragraphCountEl.textContent}
+Estimated Reading Time: ${readingTimeEl.textContent} minutes
+
+=== SOCIAL MEDIA COMPATIBILITY ===
+Twitter/X: ${document.getElementById('twitterCount').textContent}
+Facebook: ${document.getElementById('facebookCount').textContent}
+Instagram: ${document.getElementById('instagramCount').textContent}
+LinkedIn: ${document.getElementById('linkedinCount').textContent}
+
+=== YOUR TEXT ===
+${text}`;
+            
+            // Create and download file
+            const blob = new Blob([stats], { type: 'text/plain' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'text-statistics.txt';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            window.URL.revokeObjectURL(url);
+            
+            showNotification('Statistics downloaded!', 'success');
+        }
+
+        function showNotification(message, type) {
+            const existing = document.querySelector('.copy-notification');
+            if (existing) {
+                existing.remove();
+            }
+            
+            const notification = document.createElement('div');
+            notification.className = 'copy-notification';
+            notification.textContent = message;
+            
+            if (type === 'error') {
+                notification.style.backgroundColor = '#e74c3c';
+            }
+            
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.classList.add('show');
+            }, 10);
+            
+            setTimeout(() => {
+                notification.classList.remove('show');
+                setTimeout(() => {
+                    notification.remove();
+                }, 300);
+            }, 3000);
+        }
+    </script>
+</body>
+</html>
