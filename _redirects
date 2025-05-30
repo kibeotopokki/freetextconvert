@@ -1,7 +1,0 @@
-# Clean URL redirects - NO loops!
-/blog.html /blog 301!
-/blog/convert-text-case-online.html /blog/convert-text-case-online 301!
-
-# Force trailing slashes OFF (important!)
-/blog/ /blog 301!
-/blog/convert-text-case-online/ /blog/convert-text-case-online 301!
