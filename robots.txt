@@ -1,3 +1,6 @@
 User-agent: *
 Allow: /
+Disallow: /blog.html
+Disallow: /blog/convert-text-case-online.html
+
 Sitemap: https://freetextconvert.com/sitemap.xml
