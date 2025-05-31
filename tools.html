@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Free Text Tools Collection - All Text Converters & Formatters | Free Text Convert</title>
+    <meta name="description" content="Browse our complete collection of free online text tools. Case converters, word counters, line break removers, find and replace, and more text formatting utilities.">
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📝</text></svg>">
+    <link rel="canonical" href="https://freetextconvert.com/tools">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-792NQ00CEV"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-792NQ00CEV');
+    </script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Free Text Convert</h1>
+            <p class="tagline">Simple, fast, and free text transformation tools</p>
+            <nav style="margin-top: 15px; text-align: center;">
+                <a href="/" style="margin-right: 20px; color: #3498db; text-decoration: none;">Home</a>
+                <a href="/tools" style="margin-right: 20px; color: #3498db; text-decoration: none;">All Tools</a>
+                <a href="/blog" style="color: #3498db; text-decoration: none;">Blog</a>
+            </nav>
+        </header>
+
+        <main>
+            <div style="text-align: center; margin: 40px 0;">
+                <h2 style="font-size: 2.5em; color: #2c3e50; margin-bottom: 10px;">All Text Tools</h2>
+                <p style="font-size: 1.2em; color: #666;">Free online tools to format, convert, and transform your text instantly</p>
+            </div>
+
+            <!-- Search/Filter Bar -->
+            <div style="max-width: 600px; margin: 0 auto 40px;">
+                <input 
+                    type="text" 
+                    id="toolSearch" 
+                    placeholder="Search tools... (e.g., 'case', 'word count', 'pdf')"
+                    style="width: 100%; padding: 15px 20px; font-size: 18px; border: 2px solid #3498db; border-radius: 50px; outline: none;"
+                    onkeyup="filterTools()"
+                >
+            </div>
+
+            <!-- Tools Grid -->
+            <div id="toolsGrid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 25px; margin-bottom: 50px;">
+                
+                <!-- Case Converter -->
+                <div class="tool-item" data-keywords="case converter uppercase lowercase title camelcase pascalcase snake kebab" style="background: white; border-radius: 10px; padding: 25px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); transition: transform 0.3s;">
+                    <div style="display: flex; align-items: center; margin-bottom: 15px;">
+                        <span style="font-size: 40px; margin-right: 15px;">🔤</span>
+                        <h3 style="margin: 0; color: #2c3e50;">Case Converter</h3>
+                    </div>
+                    <p style="color: #666; margin-bottom: 20px; line-height: 1.6;">
+                        Convert text between UPPERCASE, lowercase, Title Case, camelCase, PascalCase, snake_case, and kebab-case instantly.
+                    </p>
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <span style="color: #999; font-size: 14px;">⚡ Most Popular</span>
+                        <a href="/" class="btn btn-primary" style="text-decoration: none;">
+                            Open Tool →
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Word Counter -->
+                <div class="tool-item" data-keywords="word counter character count reading time social media limits twitter facebook" style="background: white; border-radius: 10px; padding: 25px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); transition: transform 0.3s;">
+                    <div style="display: flex; align-items: center; margin-bottom: 15px;">
+                        <span style="font-size: 40px; margin-right: 15px;">📊</span>
+                        <h3 style="margin: 0; color: #2c3e50;">Word Counter</h3>
+                    </div>
+                    <p style="color: #666; margin-bottom: 20px; line-height: 1.6;">
+                        Count words, characters, sentences, and paragraphs. Check social media limits for Twitter, Facebook, Instagram, and LinkedIn.
+                    </p>
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <span style="color: #999; font-size: 14px;">📱 Social Media Ready</span>
+                        <a href="/word-counter" class="btn btn-primary" style="text-decoration: none;">
+                            Open Tool →
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Line Break Remover -->
+                <div class="tool-item" data-keywords="line break remover pdf copy paste formatting cleanup email" style="background: white; border-radius: 10px; padding: 25px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); transition: transform 0.3s;">
+                    <div style="display: flex; align-items: center; margin-bottom: 15px;">
+                        <span style="font-size: 40px; margin-right: 15px;">📄</span>
+                        <h3 style="margin: 0; color: #2c3e50;">Line Break Remover</h3>
+                    </div>
+                    <p style="color: #666; margin-bottom: 20px; line-height: 1.6;">
+                        Remove unwanted line breaks from PDF copies, emails, and documents. Fix text formatting with multiple options.
+                    </p>
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <span style="color: #999; font-size: 14px;">🔧 PDF Helper</span>
+                        <a href="/line-break-remover" class="btn btn-primary" style="text-decoration: none;">
+                            Open Tool →
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Find and Replace -->
+                <div class="tool-item" data-keywords="find replace search bulk edit regex pattern text manipulation" style="background: white; border-radius: 10px; padding: 25px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); transition: transform 0.3s;">
+                    <div style="display: flex; align-items: center; margin-bottom: 15px;">
+                        <span style="font-size: 40px; margin-right: 15px;">🔍</span>
+                        <h3 style="margin: 0; color: #2c3e50;">Find and Replace</h3>
+                    </div>
+                    <p style="color: #666; margin-bottom: 20px; line-height: 1.6;">
+                        Search and replace text with advanced options. Supports bulk replacements, regex patterns, and case preservation.
+                    </p>
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <span style="color: #27ae60; font-size: 14px; font-weight: bold;">✨ NEW</span>
+                        <a href="/find-replace" class="btn btn-primary" style="text-decoration: none;">
+                            Open Tool →
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Coming Soon Tools -->
+                <div class="tool-item coming-soon" data-keywords="duplicate remover remove duplicates lines list unique" style="background: #f8f9fa; border-radius: 10px; padding: 25px; border: 2px dashed #ddd; transition: transform 0.3s;">
+                    <div style="display: flex; align-items: center; margin-bottom: 15px;">
+                        <span style="font-size: 40px; margin-right: 15px; opacity: 0.5;">🗂️</span>
+                        <h3 style="margin: 0; color: #999;">Remove Duplicates</h3>
+                    </div>
+                    <p style="color: #999; margin-bottom: 20px; line-height: 1.6;">
+                        Remove duplicate lines from lists, clean up data, and get unique values only.
+                    </p>
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <span style="color: #999; font-size: 14px;">🚧 Coming Soon</span>
+                        <button class="btn" style="background: #eee; color: #999; cursor: not-allowed;" disabled>
+                            Coming Soon
+                        </button>
+                    </div>
+                </div>
+
+                <div class="tool-item coming-soon" data-keywords="text reverse flip backwards mirror" style="background: #f8f9fa; border-radius: 10px; padding: 25px; border: 2px dashed #ddd; transition: transform 0.3s;">
+                    <div style="display: flex; align-items: center; margin-bottom: 15px;">
+                        <span style="font-size: 40px; margin-right: 15px; opacity: 0.5;">🔄</span>
+                        <h3 style="margin: 0; color: #999;">Text Reverser</h3>
+                    </div>
+                    <p style="color: #999; margin-bottom: 20px; line-height: 1.6;">
+                        Reverse text, flip words, or mirror entire sentences. Fun tool for creative text effects.
+                    </p>
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <span style="color: #999; font-size: 14px;">🚧 Coming Soon</span>
+                        <button class="btn" style="background: #eee; color: #999; cursor: not-allowed;" disabled>
+                            Coming Soon
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Stats Section -->
+            <div style="background: #3498db; color: white; padding: 40px; border-radius: 10px; text-align: center; margin: 50px 0;">
+                <h3 style="font-size: 2em; margin-bottom: 20px;">Growing Collection of Text Tools</h3>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 30px; max-width: 600px; margin: 0 auto;">
+                    <div>
+                        <div style="font-size: 3em; font-weight: bold;">4</div>
+                        <div style="opacity: 0.9;">Active Tools</div>
+                    </div>
+                    <div>
+                        <div style="font-size: 3em; font-weight: bold;">10+</div>
+                        <div style="opacity: 0.9;">Coming Soon</div>
+                    </div>
+                    <div>
+                        <div style="font-size: 3em; font-weight: bold;">100%</div>
+                        <div style="opacity: 0.9;">Free Forever</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Feature Grid -->
+            <div style="margin: 50px 0;">
+                <h3 style="text-align: center; font-size: 2em; margin-bottom: 30px; color: #2c3e50;">Why Choose Free Text Convert?</h3>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px;">
+                    <div style="text-align: center;">
+                        <div style="font-size: 50px; margin-bottom: 15px;">⚡</div>
+                        <h4 style="margin-bottom: 10px;">Lightning Fast</h4>
+                        <p style="color: #666;">All tools work instantly in your browser. No uploads, no waiting.</p>
+                    </div>
+                    <div style="text-align: center;">
+                        <div style="font-size: 50px; margin-bottom: 15px;">🔒</div>
+                        <h4 style="margin-bottom: 10px;">100% Private</h4>
+                        <p style="color: #666;">Your text never leaves your browser. Complete privacy guaranteed.</p>
+                    </div>
+                    <div style="text-align: center;">
+                        <div style="font-size: 50px; margin-bottom: 15px;">📱</div>
+                        <h4 style="margin-bottom: 10px;">Works Everywhere</h4>
+                        <p style="color: #666;">Mobile, tablet, or desktop. No apps to download.</p>
+                    </div>
+                    <div style="text-align: center;">
+                        <div style="font-size: 50px; margin-bottom: 15px;">💰</div>
+                        <h4 style="margin-bottom: 10px;">Forever Free</h4>
+                        <p style="color: #666;">No signup, no credit card, no limits. Just free tools.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Request Tool Section -->
+            <div style="background: #f8f9fa; padding: 40px; border-radius: 10px; text-align: center; margin: 50px 0;">
+                <h3 style="font-size: 1.8em; margin-bottom: 15px;">Need a Specific Text Tool?</h3>
+                <p style="color: #666; margin-bottom: 20px;">We're building new tools based on user requests. Tell us what you need!</p>
+                <a href="https://twitter.com/ChitnoPanh" target="_blank" class="btn btn-primary" style="font-size: 18px; padding: 12px 30px; text-decoration: none;">
+                    Request a Tool on Twitter →
+                </a>
+            </div>
+        </main>
+
+        <footer>
+            <p>&copy; 2025 FreeTextConvert.com - More tools coming soon!</p>
+        </footer>
+    </div>
+
+    <script>
+        // Filter tools based on search
+        function filterTools() {
+            const searchTerm = document.getElementById('toolSearch').value.toLowerCase();
+            const tools = document.querySelectorAll('.tool-item');
+            
+            tools.forEach(tool => {
+                const keywords = tool.getAttribute('data-keywords').toLowerCase();
+                const title = tool.querySelector('h3').textContent.toLowerCase();
+                const description = tool.querySelector('p').textContent.toLowerCase();
+                
+                if (keywords.includes(searchTerm) || title.includes(searchTerm) || description.includes(searchTerm)) {
+                    tool.style.display = 'block';
+                } else {
+                    tool.style.display = 'none';
+                }
+            });
+            
+            // Show message if no results
+            const visibleTools = document.querySelectorAll('.tool-item[style="display: block;"], .tool-item:not([style*="display"])');
+            if (visibleTools.length === 0) {
+                // You could add a "no results" message here
+            }
+        }
+
+        // Add hover effects
+        document.querySelectorAll('.tool-item:not(.coming-soon)').forEach(item => {
+            item.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-5px)';
+                this.style.boxShadow = '0 5px 20px rgba(0,0,0,0.15)';
+            });
+            
+            item.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0)';
+                this.style.boxShadow = '0 2px 10px rgba(0,0,0,0.1)';
+            });
+        });
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

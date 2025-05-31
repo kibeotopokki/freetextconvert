@@ -1,0 +1,3 @@
+# Only redirect the OLD .html URLs to new clean URLs
+/blog.html /blog 301
+/blog/convert-text-case-online.html /blog/convert-text-case-online 301

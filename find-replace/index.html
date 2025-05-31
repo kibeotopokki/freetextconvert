@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Find and Replace Text Online - Bulk Text Replacement Tool | Free Text Convert</title>
+    <meta name="description" content="Free online find and replace tool. Search and replace multiple words or phrases in your text instantly. Supports case sensitivity, whole words, and regex patterns.">
+    <link rel="stylesheet" href="../style.css">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📝</text></svg>">
+    <link rel="canonical" href="https://freetextconvert.com/find-replace">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-792NQ00CEV"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-792NQ00CEV');
+    </script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Free Text Convert</h1>
+            <p class="tagline">Simple, fast, and free text transformation tools</p>
+            <nav style="margin-top: 15px; text-align: center;">
+                <a href="/" style="margin-right: 20px; color: #3498db; text-decoration: none;">Tools</a>
+                <a href="/blog" style="color: #3498db; text-decoration: none;">Blog</a>
+            </nav>
+        </header>
+
+        <main>
+            <div class="tool-card">
+                <h2>Find and Replace</h2>
+                <p style="text-align: center; color: #666; margin-bottom: 20px;">
+                    Search and replace text, words, or patterns instantly with advanced options
+                </p>
+                
+                <div class="input-section">
+                    <label for="input">Your text:</label>
+                    <textarea 
+                        id="input" 
+                        placeholder="Paste your text here..."
+                        rows="10"
+                    ></textarea>
+                    <div class="char-count">
+                        Characters: <span id="inputCharCount">0</span> | Replacements: <span id="replaceCount">0</span>
+                    </div>
+                </div>
+
+                <!-- Find and Replace Controls -->
+                <div style="background: #f8f9fa; padding: 20px; border-radius: 10px; margin: 25px 0;">
+                    <h3 style="margin-top: 0; margin-bottom: 20px;">Find and Replace Settings</h3>
+                    
+                    <!-- Single Replacement -->
+                    <div style="background: white; padding: 15px; border-radius: 5px; margin-bottom: 20px;">
+                        <h4 style="margin-top: 0;">Quick Replace</h4>
+                        <div style="display: grid; gap: 10px;">
+                            <div>
+                                <label for="findText" style="display: block; margin-bottom: 5px;">Find:</label>
+                                <input 
+                                    type="text" 
+                                    id="findText" 
+                                    placeholder="Text to find..."
+                                    style="width: 100%; padding: 10px; border: 2px solid #ddd; border-radius: 5px; font-size: 16px;"
+                                >
+                            </div>
+                            <div>
+                                <label for="replaceText" style="display: block; margin-bottom: 5px;">Replace with:</label>
+                                <input 
+                                    type="text" 
+                                    id="replaceText" 
+                                    placeholder="Text to replace with..."
+                                    style="width: 100%; padding: 10px; border: 2px solid #ddd; border-radius: 5px; font-size: 16px;"
+                                >
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Multiple Replacements -->
+                    <div style="background: white; padding: 15px; border-radius: 5px; margin-bottom: 20px;">
+                        <h4 style="margin-top: 0;">Bulk Replace (Multiple at once)</h4>
+                        <p style="font-size: 14px; color: #666; margin-bottom: 10px;">Add multiple find/replace pairs:</p>
+                        <div id="bulkPairs">
+                            <div class="bulk-pair" style="display: grid; grid-template-columns: 1fr 1fr auto; gap: 10px; margin-bottom: 10px;">
+                                <input type="text" placeholder="Find..." class="bulk-find" style="padding: 8px; border: 1px solid #ddd; border-radius: 3px;">
+                                <input type="text" placeholder="Replace with..." class="bulk-replace" style="padding: 8px; border: 1px solid #ddd; border-radius: 3px;">
+                                <button onclick="removePair(this)" class="btn btn-secondary" style="padding: 8px 15px;">×</button>
+                            </div>
+                        </div>
+                        <button onclick="addPair()" class="btn" style="margin-top: 10px;">+ Add Another Pair</button>
+                    </div>
+
+                    <!-- Options -->
+                    <div style="background: white; padding: 15px; border-radius: 5px;">
+                        <h4 style="margin-top: 0; margin-bottom: 15px;">Options</h4>
+                        <div style="display: grid; gap: 10px;">
+                            <label style="display: flex; align-items: center; cursor: pointer;">
+                                <input type="checkbox" id="caseSensitive" style="margin-right: 10px;">
+                                <span>Case sensitive</span>
+                            </label>
+                            <label style="display: flex; align-items: center; cursor: pointer;">
+                                <input type="checkbox" id="wholeWord" style="margin-right: 10px;">
+                                <span>Whole words only</span>
+                            </label>
+                            <label style="display: flex; align-items: center; cursor: pointer;">
+                                <input type="checkbox" id="useRegex" style="margin-right: 10px;">
+                                <span>Use regular expressions (advanced)</span>
+                            </label>
+                            <label style="display: flex; align-items: center; cursor: pointer;">
+                                <input type="checkbox" id="preserveCase" style="margin-right: 10px;">
+                                <span>Preserve case (smart replacement)</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Action Buttons -->
+                <div style="text-align: center; margin: 20px 0;">
+                    <button onclick="findAndReplace()" class="btn btn-primary" style="font-size: 18px; padding: 15px 40px;">
+                        🔄 Find and Replace
+                    </button>
+                    <button onclick="previewReplacements()" class="btn" style="font-size: 16px; padding: 15px 30px; margin-left: 10px; background-color: #f39c12;">
+                        👁️ Preview Changes
+                    </button>
+                </div>
+
+                <div class="output-section">
+                    <label for="output">Result:</label>
+                    <textarea 
+                        id="output" 
+                        readonly 
+                        placeholder="Your processed text will appear here..."
+                        rows="10"
+                    ></textarea>
+                    <div class="char-count">
+                        Characters: <span id="outputCharCount">0</span>
+                    </div>
+                </div>
+
+                <div class="action-buttons">
+                    <button onclick="copyToClipboard()" class="btn btn-primary">
+                        📋 Copy Result
+                    </button>
+                    <button onclick="downloadText()" class="btn" style="background-color: #2ecc71; color: white;">
+                        💾 Download as TXT
+                    </button>
+                    <button onclick="swapTexts()" class="btn" style="background-color: #e74c3c; color: white;">
+                        🔁 Use Result as Input
+                    </button>
+                    <button onclick="clearAll()" class="btn btn-secondary">
+                        🗑️ Clear All
+                    </button>
+                </div>
+
+                <!-- Common Use Cases -->
+                <div style="margin-top: 40px; padding: 20px; background: #f8f9fa; border-radius: 10px;">
+                    <h3 style="margin-top: 0;">Common Find & Replace Examples:</h3>
+                    <div style="display: grid; gap: 10px; margin-top: 15px;">
+                        <button onclick="loadExample('spaces')" class="btn" style="text-align: left; padding: 12px;">
+                            <strong>Remove Extra Spaces:</strong> Replace multiple spaces with single space
+                        </button>
+                        <button onclick="loadExample('linebreaks')" class="btn" style="text-align: left; padding: 12px;">
+                            <strong>Remove Line Breaks:</strong> Replace line breaks with spaces
+                        </button>
+                        <button onclick="loadExample('quotes')" class="btn" style="text-align: left; padding: 12px;">
+                            <strong>Smart Quotes:</strong> Replace straight quotes with curly quotes
+                        </button>
+                        <button onclick="loadExample('anonymize')" class="btn" style="text-align: left; padding: 12px;">
+                            <strong>Anonymize Names:</strong> Replace names with [REDACTED]
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SEO Content -->
+            <div style="margin-top: 40px; padding: 20px;">
+                <h3>About the Find and Replace Tool</h3>
+                <p>Our free online find and replace tool helps you search and replace text, words, or patterns in your content instantly. Perfect for bulk editing, data cleaning, and text formatting tasks.</p>
+                
+                <h4>Features:</h4>
+                <ul style="margin: 15px 0; padding-left: 30px;">
+                    <li>Single or bulk find and replace operations</li>
+                    <li>Case sensitive and whole word options</li>
+                    <li>Regular expression support for advanced patterns</li>
+                    <li>Smart case preservation</li>
+                    <li>Preview changes before applying</li>
+                    <li>Multiple find/replace pairs at once</li>
+                </ul>
+                
+                <p>Whether you're cleaning up data, formatting documents, or doing bulk text edits, this tool saves hours of manual work.</p>
+            </div>
+        </main>
+
+        <footer>
+            <p>&copy; 2025 FreeTextConvert.com - More tools coming soon!</p>
+        </footer>
+    </div>
+
+    <script>
+        // Update character counts
+        document.getElementById('input').addEventListener('input', function() {
+            document.getElementById('inputCharCount').textContent = this.value.length;
+        });
+
+        // Add a new bulk pair
+        function addPair() {
+            const container = document.getElementById('bulkPairs');
+            const newPair = document.createElement('div');
+            newPair.className = 'bulk-pair';
+            newPair.style = 'display: grid; grid-template-columns: 1fr 1fr auto; gap: 10px; margin-bottom: 10px;';
+            newPair.innerHTML = `
+                <input type="text" placeholder="Find..." class="bulk-find" style="padding: 8px; border: 1px solid #ddd; border-radius: 3px;">
+                <input type="text" placeholder="Replace with..." class="bulk-replace" style="padding: 8px; border: 1px solid #ddd; border-radius: 3px;">
+                <button onclick="removePair(this)" class="btn btn-secondary" style="padding: 8px 15px;">×</button>
+            `;
+            container.appendChild(newPair);
+        }
+
+        // Remove a bulk pair
+        function removePair(button) {
+            const pairs = document.querySelectorAll('.bulk-pair');
+            if (pairs.length > 1) {
+                button.parentElement.remove();
+            }
+        }
+
+        // Main find and replace function
+        function findAndReplace() {
+            let text = document.getElementById('input').value;
+            const caseSensitive = document.getElementById('caseSensitive').checked;
+            const wholeWord = document.getElementById('wholeWord').checked;
+            const useRegex = document.getElementById('useRegex').checked;
+            const preserveCase = document.getElementById('preserveCase').checked;
+            
+            let replacementCount = 0;
+            
+            // Single replacement
+            const findText = document.getElementById('findText').value;
+            const replaceText = document.getElementById('replaceText').value;
+            
+            if (findText) {
+                const result = performReplace(text, findText, replaceText, caseSensitive, wholeWord, useRegex, preserveCase);
+                text = result.text;
+                replacementCount += result.count;
+            }
+            
+            // Bulk replacements
+            const bulkPairs = document.querySelectorAll('.bulk-pair');
+            bulkPairs.forEach(pair => {
+                const find = pair.querySelector('.bulk-find').value;
+                const replace = pair.querySelector('.bulk-replace').value;
+                if (find) {
+                    const result = performReplace(text, find, replace, caseSensitive, wholeWord, useRegex, preserveCase);
+                    text = result.text;
+                    replacementCount += result.count;
+                }
+            });
+            
+            // Update output
+            document.getElementById('output').value = text;
+            document.getElementById('outputCharCount').textContent = text.length;
+            document.getElementById('replaceCount').textContent = replacementCount;
+            
+            if (replacementCount > 0) {
+                showNotification(`Replaced ${replacementCount} occurrence${replacementCount > 1 ? 's' : ''}!`, 'success');
+            } else {
+                showNotification('No matches found!', 'error');
+            }
+        }
+
+        // Perform individual replacement
+        function performReplace(text, find, replace, caseSensitive, wholeWord, useRegex, preserveCase) {
+            let count = 0;
+            let result = text;
+            
+            if (useRegex) {
+                try {
+                    const flags = caseSensitive ? 'g' : 'gi';
+                    const regex = new RegExp(find, flags);
+                    const matches = text.match(regex);
+                    count = matches ? matches.length : 0;
+                    result = text.replace(regex, replace);
+                } catch (e) {
+                    showNotification('Invalid regular expression!', 'error');
+                    return { text: text, count: 0 };
+                }
+            } else {
+                let searchPattern = find;
+                if (wholeWord) {
+                    searchPattern = `\\b${escapeRegExp(find)}\\b`;
+                } else {
+                    searchPattern = escapeRegExp(find);
+                }
+                
+                const flags = caseSensitive ? 'g' : 'gi';
+                const regex = new RegExp(searchPattern, flags);
+                
+                if (preserveCase && !caseSensitive) {
+                    result = text.replace(regex, function(match) {
+                        count++;
+                        return matchCase(match, replace);
+                    });
+                } else {
+                    const matches = text.match(regex);
+                    count = matches ? matches.length : 0;
+                    result = text.replace(regex, replace);
+                }
+            }
+            
+            return { text: result, count: count };
+        }
+
+        // Escape special regex characters
+        function escapeRegExp(string) {
+            return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+        }
+
+        // Match case for smart replacement
+        function matchCase(source, target) {
+            if (source === source.toUpperCase()) {
+                return target.toUpperCase();
+            } else if (source[0] === source[0].toUpperCase()) {
+                return target[0].toUpperCase() + target.slice(1).toLowerCase();
+            } else {
+                return target.toLowerCase();
+            }
+        }
+
+        // Preview replacements
+        function previewReplacements() {
+            const input = document.getElementById('input').value;
+            if (!input) {
+                showNotification('Please enter some text first!', 'error');
+                return;
+            }
+            
+            // Temporarily store current output
+            const currentOutput = document.getElementById('output').value;
+            
+            // Perform replacement
+            findAndReplace();
+            
+            // Highlight changes (simple version - just show notification)
+            const newOutput = document.getElementById('output').value;
+            if (currentOutput !== newOutput) {
+                showNotification('Preview generated! Check the result box.', 'success');
+            }
+        }
+
+        // Load example
+        function loadExample(type) {
+            const findEl = document.getElementById('findText');
+            const replaceEl = document.getElementById('replaceText');
+            
+            switch(type) {
+                case 'spaces':
+                    findEl.value = '  +';
+                    replaceEl.value = ' ';
+                    document.getElementById('useRegex').checked = true;
+                    showNotification('Example loaded: Remove extra spaces', 'success');
+                    break;
+                case 'linebreaks':
+                    findEl.value = '\\n';
+                    replaceEl.value = ' ';
+                    document.getElementById('useRegex').checked = true;
+                    showNotification('Example loaded: Remove line breaks', 'success');
+                    break;
+                case 'quotes':
+                    // Clear single, add to bulk
+                    findEl.value = '';
+                    replaceEl.value = '';
+                    const pairs = document.getElementById('bulkPairs');
+                    pairs.innerHTML = '';
+                    
+                    // Add quote pairs
+                   const quotePairs = [
+                    ['"', '"'],
+                    ['"', '"'],
+                    ["'", "'"],
+                    ["'", "'"],
+];
+                    
+                    quotePairs.forEach(([find, replace], index) => {
+                        if (index > 0) addPair();
+                        const lastPair = pairs.lastElementChild;
+                        lastPair.querySelector('.bulk-find').value = find;
+                        lastPair.querySelector('.bulk-replace').value = replace;
+                    });
+                    
+                    showNotification('Example loaded: Smart quotes', 'success');
+                    break;
+                case 'anonymize':
+                    findEl.value = '\\b[A-Z][a-z]+ [A-Z][a-z]+\\b';
+                    replaceEl.value = '[REDACTED]';
+                    document.getElementById('useRegex').checked = true;
+                    showNotification('Example loaded: Anonymize names', 'success');
+                    break;
+            }
+        }
+
+        // Copy to clipboard
+        function copyToClipboard() {
+            const output = document.getElementById('output');
+            
+            if (output.value === '') {
+                showNotification('Nothing to copy!', 'error');
+                return;
+            }
+            
+            output.select();
+            output.setSelectionRange(0, 99999);
+            
+            try {
+                document.execCommand('copy');
+                showNotification('Copied to clipboard!', 'success');
+            } catch (err) {
+                showNotification('Failed to copy', 'error');
+            }
+        }
+
+        // Download text
+        function downloadText() {
+            const output = document.getElementById('output').value;
+            
+            if (output === '') {
+                showNotification('Nothing to download!', 'error');
+                return;
+            }
+            
+            const blob = new Blob([output], { type: 'text/plain' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'find-replace-result.txt';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            window.URL.revokeObjectURL(url);
+            
+            showNotification('Text downloaded!', 'success');
+        }
+
+        // Swap input and output
+        function swapTexts() {
+            const input = document.getElementById('input');
+            const output = document.getElementById('output');
+            
+            if (output.value === '') {
+                showNotification('No result to swap!', 'error');
+                return;
+            }
+            
+            input.value = output.value;
+            output.value = '';
+            
+            // Update counts
+            document.getElementById('inputCharCount').textContent = input.value.length;
+            document.getElementById('outputCharCount').textContent = '0';
+            document.getElementById('replaceCount').textContent = '0';
+            
+            showNotification('Result moved to input!', 'success');
+        }
+
+        // Clear all
+        function clearAll() {
+            document.getElementById('input').value = '';
+            document.getElementById('output').value = '';
+            document.getElementById('findText').value = '';
+            document.getElementById('replaceText').value = '';
+            document.getElementById('inputCharCount').textContent = '0';
+            document.getElementById('outputCharCount').textContent = '0';
+            document.getElementById('replaceCount').textContent = '0';
+            
+            // Reset bulk pairs to one
+            const container = document.getElementById('bulkPairs');
+            container.innerHTML = `
+                <div class="bulk-pair" style="display: grid; grid-template-columns: 1fr 1fr auto; gap: 10px; margin-bottom: 10px;">
+                    <input type="text" placeholder="Find..." class="bulk-find" style="padding: 8px; border: 1px solid #ddd; border-radius: 3px;">
+                    <input type="text" placeholder="Replace with..." class="bulk-replace" style="padding: 8px; border: 1px solid #ddd; border-radius: 3px;">
+                    <button onclick="removePair(this)" class="btn btn-secondary" style="padding: 8px 15px;">×</button>
+                </div>
+            `;
+            
+            // Reset checkboxes
+            document.getElementById('caseSensitive').checked = false;
+            document.getElementById('wholeWord').checked = false;
+            document.getElementById('useRegex').checked = false;
+            document.getElementById('preserveCase').checked = false;
+            
+            document.getElementById('input').focus();
+        }
+
+        // Show notification
+        function showNotification(message, type) {
+            const existing = document.querySelector('.copy-notification');
+            if (existing) {
+                existing.remove();
+            }
+            
+            const notification = document.createElement('div');
+            notification.className = 'copy-notification';
+            notification.textContent = message;
+            
+            if (type === 'error') {
+                notification.style.backgroundColor = '#e74c3c';
+            } else {
+                notification.style.backgroundColor = '#2ecc71';
+            }
+            
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.classList.add('show');
+            }, 10);
+            
+            setTimeout(() => {
+                notification.classList.remove('show');
+                setTimeout(() => {
+                    notification.remove();
+                }, 300);
+            }, 3000);
+        }
+    </script>
+</body>
+</html>
