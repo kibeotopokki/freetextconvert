@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Remove Duplicate Lines - Duplicate Text Remover Online | Free Text Convert</title>
+    <meta name="description" content="Remove duplicate lines from text instantly. Clean lists, remove repeated entries, and get unique values only. Perfect for data cleaning and list management.">
+    <link rel="stylesheet" href="../style.css">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📝</text></svg>">
+    <link rel="canonical" href="https://freetextconvert.com/remove-duplicates">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Free Text Convert</h1>
+            <p class="tagline">Simple, fast, and free text transformation tools</p>
+            <nav style="margin-top: 15px; text-align: center;">
+                <a href="/" style="margin-right: 20px; color: #3498db; text-decoration: none;">Home</a>
+                <a href="/tools" style="margin-right: 20px; color: #3498db; text-decoration: none;">All Tools</a>
+                <a href="/blog" style="color: #3498db; text-decoration: none;">Blog</a>
+            </nav>
+        </header>
+
+        <main>
+            <div class="tool-card">
+                <h2>Remove Duplicate Lines</h2>
+                <p style="text-align: center; color: #666; margin-bottom: 20px;">
+                    Remove duplicate lines, clean up lists, and get unique values from your text
+                </p>
+                
+                <div class="input-section">
+                    <label for="input">Enter text with duplicate lines:</label>
+                    <textarea 
+                        id="input" 
+                        placeholder="Paste your list here...
+apple
+banana
+apple
+orange
+banana
+grape"
+                        rows="10"
+                    ></textarea>
+                    <div class="char-count">
+                        Lines: <span id="inputLineCount">0</span> | Unique: <span id="uniqueCount">0</span> | Duplicates: <span id="duplicateCount">0</span>
+                    </div>
+                </div>
+
+                <!-- Options -->
+                <div style="background: #f8f9fa; padding: 20px; border-radius: 10px; margin: 25px 0;">
+                    <h3 style="margin-top: 0; margin-bottom: 15px;">Removal Options:</h3>
+                    
+                    <div style="display: grid; gap: 15px;">
+                        <label style="display: flex; align-items: center; cursor: pointer;">
+                            <input type="radio" name="removeOption" value="keepFirst" checked style="margin-right: 10px;">
+                            <div>
+                                <strong>Keep first occurrence</strong>
+                                <div style="font-size: 14px; color: #666;">Removes duplicate lines, keeps the first instance</div>
+                            </div>
+                        </label>
+                        
+                        <label style="display: flex; align-items: center; cursor: pointer;">
+                            <input type="radio" name="removeOption" value="keepLast" style="margin-right: 10px;">
+                            <div>
+                                <strong>Keep last occurrence</strong>
+                                <div style="font-size: 14px; color: #666;">Removes duplicate lines, keeps the last instance</div>
+                            </div>
+                        </label>
+                        
+                        <label style="display: flex; align-items: center; cursor: pointer;">
+                            <input type="radio" name="removeOption" value="removeAll" style="margin-right: 10px;">
+                            <div>
+                                <strong>Remove all duplicates</strong>
+                                <div style="font-size: 14px; color: #666;">Removes all lines that appear more than once</div>
+                            </div>
+                        </label>
+
+                        <label style="display: flex; align-items: center; cursor: pointer;">
+                            <input type="radio" name="removeOption" value="showDuplicates" style="margin-right: 10px;">
+                            <div>
+                                <strong>Show only duplicates</strong>
+                                <div style="font-size: 14px; color: #666;">Display only the lines that are duplicated</div>
+                            </div>
+                        </label>
+                    </div>
+                    
+                    <div style="margin-top: 20px; padding-top: 20px; border-top: 1px solid #ddd;">
+                        <h4 style="margin-bottom: 10px;">Additional Options:</h4>
+                        <label style="display: flex; align-items: center; margin-bottom: 10px;">
+                            <input type="checkbox" id="caseSensitive" style="margin-right: 10px;">
+                            Case sensitive comparison
+                        </label>
+                        <label style="display: flex; align-items: center; margin-bottom: 10px;">
+                            <input type="checkbox" id="trimWhitespace" checked style="margin-right: 10px;">
+                            Trim whitespace from lines
+                        </label>
+                        <label style="display: flex; align-items: center; margin-bottom: 10px;">
+                            <input type="checkbox" id="ignoreEmpty" checked style="margin-right: 10px;">
+                            Ignore empty lines
+                        </label>
+                        <label style="display: flex; align-items: center;">
+                            <input type="checkbox" id="sortResult" style="margin-right: 10px;">
+                            Sort results alphabetically
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Process Button -->
+                <div style="text-align: center; margin: 20px 0;">
+                    <button onclick="removeDuplicates()" class="btn btn-primary" style="font-size: 18px; padding: 15px 40px;">
+                        🧹 Remove Duplicates
+                    </button>
+                </div>
+
+                <div class="output-section">
+                    <label for="output">Result:</label>
+                    <textarea 
+                        id="output" 
+                        readonly 
+                        placeholder="Unique lines will appear here..."
+                        rows="10"
+                    ></textarea>
+                    <div class="char-count">
+                        Lines: <span id="outputLineCount">0</span>
+                    </div>
+                </div>
+
+                <div class="action-buttons">
+                    <button onclick="copyToClipboard()" class="btn btn-primary">
+                        📋 Copy Result
+                    </button>
+                    <button onclick="downloadText()" class="btn" style="background-color: #2ecc71; color: white;">
+                        💾 Download as TXT
+                    </button>
+                    <button onclick="showStats()" class="btn" style="background-color: #f39c12; color: white;">
+                        📊 Show Statistics
+                    </button>
+                    <button onclick="clearAll()" class="btn btn-secondary">
+                        🗑️ Clear All
+                    </button>
+                </div>
+
+                <!-- Common Use Cases -->
+                <div style="margin-top: 40px; padding: 20px; background: #f8f9fa; border-radius: 10px;">
+                    <h3 style="margin-top: 0;">Common Use Cases:</h3>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; margin-top: 15px;">
+                        <div style="padding: 15px; background: white; border-radius: 5px;">
+                            <strong>📊 Data Cleaning</strong>
+                            <p style="margin: 5px 0 0 0; font-size: 14px; color: #666;">Remove duplicate entries from CSV data or spreadsheets</p>
+                        </div>
+                        <div style="padding: 15px; background: white; border-radius: 5px;">
+                            <strong>📧 Email Lists</strong>
+                            <p style="margin: 5px 0 0 0; font-size: 14px; color: #666;">Clean mailing lists by removing duplicate addresses</p>
+                        </div>
+                        <div style="padding: 15px; background: white; border-radius: 5px;">
+                            <strong>🔑 Keyword Research</strong>
+                            <p style="margin: 5px 0 0 0; font-size: 14px; color: #666;">Get unique keywords from your research lists</p>
+                        </div>
+                        <div style="padding: 15px; background: white; border-radius: 5px;">
+                            <strong>📝 Content Management</strong>
+                            <p style="margin: 5px 0 0 0; font-size: 14px; color: #666;">Find and remove duplicate URLs or titles</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Example Data -->
+                <div style="margin-top: 20px; text-align: center;">
+                    <button onclick="loadExample()" class="btn" style="background-color: #3498db; color: white;">
+                        Load Example Data
+                    </button>
+                </div>
+            </div>
+
+            <!-- SEO Content -->
+            <div style="margin-top: 40px; padding: 20px;">
+                <h3>About the Remove Duplicates Tool</h3>
+                <p>Our free online duplicate line remover helps you clean up lists, remove repeated entries, and extract unique values from any text. Perfect for data cleaning, list management, and content organization.</p>
+                
+                <h4>Features:</h4>
+                <ul style="margin: 15px 0; padding-left: 30px;">
+                    <li>Remove duplicate lines while preserving order</li>
+                    <li>Keep first or last occurrence of duplicates</li>
+                    <li>Show only duplicate entries for analysis</li>
+                    <li>Case sensitive or insensitive comparison</li>
+                    <li>Optional alphabetical sorting</li>
+                    <li>Detailed statistics about your data</li>
+                </ul>
+                
+                <p>Whether you're cleaning email lists, organizing data, or managing content, this tool saves hours of manual work by instantly identifying and removing duplicate entries.</p>
+            </div>
+        </main>
+
+        <footer>
+            <p>&copy; 2025 FreeTextConvert.com - More tools coming soon!</p>
+        </footer>
+    </div>
+
+    <!-- Statistics Modal -->
+    <div id="statsModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 1000;">
+        <div style="background: white; max-width: 500px; margin: 50px auto; padding: 30px; border-radius: 10px;">
+            <h3>Duplicate Analysis Statistics</h3>
+            <div id="statsContent" style="margin: 20px 0;"></div>
+            <button onclick="closeStats()" class="btn btn-primary">Close</button>
+        </div>
+    </div>
+
+    <script>
+        // Update counts on input
+        document.getElementById('input').addEventListener('input', updateCounts);
+
+        function updateCounts() {
+            const input = document.getElementById('input').value;
+            const lines = input.split('\n').filter(line => 
+                document.getElementById('ignoreEmpty').checked ? line.trim() !== '' : true
+            );
+            
+            const trimmed = document.getElementById('trimWhitespace').checked;
+            const caseSensitive = document.getElementById('caseSensitive').checked;
+            
+            const processedLines = lines.map(line => {
+                let processed = trimmed ? line.trim() : line;
+                return caseSensitive ? processed : processed.toLowerCase();
+            });
+            
+            const uniqueLines = [...new Set(processedLines)];
+            const duplicateCount = lines.length - uniqueLines.length;
+            
+            document.getElementById('inputLineCount').textContent = lines.length;
+            document.getElementById('uniqueCount').textContent = uniqueLines.length;
+            document.getElementById('duplicateCount').textContent = duplicateCount;
+        }
+
+        function removeDuplicates() {
+            const input = document.getElementById('input').value;
+            const removeOption = document.querySelector('input[name="removeOption"]:checked').value;
+            const caseSensitive = document.getElementById('caseSensitive').checked;
+            const trimWhitespace = document.getElementById('trimWhitespace').checked;
+            const ignoreEmpty = document.getElementById('ignoreEmpty').checked;
+            const sortResult = document.getElementById('sortResult').checked;
+            
+            // Split into lines and filter empty if needed
+            let lines = input.split('\n');
+            if (ignoreEmpty) {
+                lines = lines.filter(line => line.trim() !== '');
+            }
+            
+            // Process lines based on options
+            const processLine = (line) => {
+                if (trimWhitespace) line = line.trim();
+                return line;
+            };
+            
+            const compareLine = (line) => {
+                let processed = processLine(line);
+                return caseSensitive ? processed : processed.toLowerCase();
+            };
+            
+            let result = [];
+            
+            switch(removeOption) {
+                case 'keepFirst':
+                    const seenFirst = new Set();
+                    result = lines.filter(line => {
+                        const key = compareLine(line);
+                        if (seenFirst.has(key)) return false;
+                        seenFirst.add(key);
+                        return true;
+                    });
+                    break;
+                    
+                case 'keepLast':
+                    const seenLast = new Map();
+                    lines.forEach((line, index) => {
+                        const key = compareLine(line);
+                        seenLast.set(key, { line, index });
+                    });
+                    result = Array.from(seenLast.values())
+                        .sort((a, b) => a.index - b.index)
+                        .map(item => item.line);
+                    break;
+                    
+                case 'removeAll':
+                    const counts = new Map();
+                    lines.forEach(line => {
+                        const key = compareLine(line);
+                        counts.set(key, (counts.get(key) || 0) + 1);
+                    });
+                    result = lines.filter(line => {
+                        const key = compareLine(line);
+                        return counts.get(key) === 1;
+                    });
+                    break;
+                    
+                case 'showDuplicates':
+                    const duplicateCounts = new Map();
+                    const duplicateLines = new Map();
+                    lines.forEach(line => {
+                        const key = compareLine(line);
+                        duplicateCounts.set(key, (duplicateCounts.get(key) || 0) + 1);
+                        if (!duplicateLines.has(key)) {
+                            duplicateLines.set(key, line);
+                        }
+                    });
+                    result = Array.from(duplicateLines.entries())
+                        .filter(([key, line]) => duplicateCounts.get(key) > 1)
+                        .map(([key, line]) => line);
+                    break;
+            }
+            
+            // Process final lines
+            result = result.map(processLine);
+            
+            // Sort if requested
+            if (sortResult) {
+                result.sort((a, b) => {
+                    const compareA = caseSensitive ? a : a.toLowerCase();
+                    const compareB = caseSensitive ? b : b.toLowerCase();
+                    return compareA.localeCompare(compareB);
+                });
+            }
+            
+            // Update output
+            const output = result.join('\n');
+            document.getElementById('output').value = output;
+            document.getElementById('outputLineCount').textContent = result.length;
+            
+            // Show notification
+            const removed = lines.length - result.length;
+            if (removeOption === 'showDuplicates') {
+                showNotification(`Found ${result.length} duplicate entries!`, 'success');
+            } else {
+                showNotification(`Removed ${removed} duplicate lines!`, 'success');
+            }
+        }
+
+        function showStats() {
+            const input = document.getElementById('input').value;
+            const lines = input.split('\n').filter(line => line.trim() !== '');
+            
+            const caseSensitive = document.getElementById('caseSensitive').checked;
+            const counts = new Map();
+            
+            lines.forEach(line => {
+                const key = caseSensitive ? line.trim() : line.trim().toLowerCase();
+                counts.set(key, (counts.get(key) || 0) + 1);
+            });
+            
+            // Sort by frequency
+            const sorted = Array.from(counts.entries()).sort((a, b) => b[1] - a[1]);
+            
+            let statsHtml = `
+                <p><strong>Total lines:</strong> ${lines.length}</p>
+                <p><strong>Unique lines:</strong> ${counts.size}</p>
+                <p><strong>Duplicate lines:</strong> ${lines.length - counts.size}</p>
+                <hr>
+                <h4>Most Frequent Items:</h4>
+                <div style="max-height: 300px; overflow-y: auto;">
+            `;
+            
+            sorted.slice(0, 20).forEach(([line, count]) => {
+                if (count > 1) {
+                    statsHtml += `<div style="margin: 5px 0; padding: 5px; background: #f8f9fa; border-radius: 3px;">
+                        <strong>${count}x</strong> ${line}
+                    </div>`;
+                }
+            });
+            
+            statsHtml += '</div>';
+            
+            document.getElementById('statsContent').innerHTML = statsHtml;
+            document.getElementById('statsModal').style.display = 'block';
+        }
+
+        function closeStats() {
+            document.getElementById('statsModal').style.display = 'none';
+        }
+
+        function loadExample() {
+            const exampleData = `apple
+banana
+orange
+apple
+grape
+banana
+kiwi
+apple
+mango
+orange
+strawberry
+banana
+kiwi`;
+            document.getElementById('input').value = exampleData;
+            updateCounts();
+            showNotification('Example data loaded!', 'success');
+        }
+
+        function copyToClipboard() {
+            const output = document.getElementById('output');
+            
+            if (output.value === '') {
+                showNotification('Nothing to copy!', 'error');
+                return;
+            }
+            
+            output.select();
+            output.setSelectionRange(0, 99999);
+            
+            try {
+                document.execCommand('copy');
+                showNotification('Copied to clipboard!', 'success');
+            } catch (err) {
+                showNotification('Failed to copy', 'error');
+            }
+        }
+
+        function downloadText() {
+            const output = document.getElementById('output').value;
+            
+            if (output === '') {
+                showNotification('Nothing to download!', 'error');
+                return;
+            }
+            
+            const blob = new Blob([output], { type: 'text/plain' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'unique-lines.txt';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            window.URL.revokeObjectURL(url);
+            
+            showNotification('Text downloaded!', 'success');
+        }
+
+        function clearAll() {
+            document.getElementById('input').value = '';
+            document.getElementById('output').value = '';
+            updateCounts();
+            document.getElementById('outputLineCount').textContent = '0';
+            document.getElementById('input').focus();
+        }
+
+        function showNotification(message, type) {
+            const existing = document.querySelector('.copy-notification');
+            if (existing) {
+                existing.remove();
+            }
+            
+            const notification = document.createElement('div');
+            notification.className = 'copy-notification';
+            notification.textContent = message;
+            
+            if (type === 'error') {
+                notification.style.backgroundColor = '#e74c3c';
+            } else {
+                notification.style.backgroundColor = '#2ecc71';
+            }
+            
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.classList.add('show');
+            }, 10);
+            
+            setTimeout(() => {
+                notification.classList.remove('show');
+                setTimeout(() => {
+                    notification.remove();
+                }, 300);
+            }, 3000);
+        }
+
+        // Initialize counts
+        updateCounts();
+    </script>
+</body>
+</html>
