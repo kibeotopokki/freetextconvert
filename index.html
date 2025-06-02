@@ -195,19 +195,21 @@
                 </div>
 
                 <!-- Email Subscribe Section -->
-               <form name="newsletter" method="POST" data-netlify="true" style="display: flex; max-width: 400px; margin: 0 auto;">
+               <form name="newsletter" method="POST" action="/success" style="display: flex; max-width: 400px; margin: 0 auto;">
+                    <input type="hidden" name="form-name" value="newsletter" />
                     <input 
                         type="email" 
                         name="email" 
                         placeholder="your@email.com" 
                         required
-                        style="flex: 1; padding: 15px; border: 1px solid #ddd; border-radius: 5px 0 0 5px;">
+                        style="flex: 1; padding: 15px; border: 1px solid #ddd; border-radius: 5px 0 0 5px;"
+                    >
                     <button 
                         type="submit"
-                        style="padding: 15px 30px; background: #2ecc71; color: white; border: none; border-radius: 0 5px 5px 0; cursor: pointer;">
-                            Get Updates
+                        style="padding: 15px 30px; background: #2ecc71; color: white; border: none; border-radius: 0 5px 5px 0; cursor: pointer;"
+                >
+                        Get Updates
                     </button>
-                    <input type="hidden" name="form-name" value="newsletter">
                 </form>
 
 
@@ -224,5 +226,9 @@
     <a href="/blog">Blog</a>
     <a href="/blog/convert-text-case-online">Text Case Article</a>
 </div>
+    <!-- Netlify Forms Bot Detection - Add this at the bottom of index.html -->
+        <form name="newsletter" netlify netlify-honeypot="bot-field" hidden>
+            <input type="email" name="email" />
+        </form>
 </body>
 </html>
