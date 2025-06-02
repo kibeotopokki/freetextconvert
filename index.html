@@ -195,11 +195,20 @@
                 </div>
 
                 <!-- Email Subscribe Section -->
-               <form action="https://app.kit.com/forms/8129850/subscriptions" method="post" data-sv-form="8129850" data-uid="8129850" data-format="inline" data-version="5" data-options='{"settings":{"after_subscribe":{"action":"message","success_message":"Success! Now check your email to confirm.","redirect_url":""},"analytics":{"google":null,"facebook":null,"segment":null,"pinterest":null,"sparkloop":null,"googletagmanager":null},"modal":{"trigger":"timer","scroll_percentage":null,"timer":5,"devices":"all","show_once_every":15},"powered_by":{"show":false,"url":""},"recaptcha":{"enabled":false},"return_visitor":{"action":"show","custom_content":""},"slide_in":{"display_in":"bottom_right","trigger":"timer","scroll_percentage":null,"timer":5,"devices":"all","show_once_every":15},"sticky_bar":{"display_in":"top","trigger":"timer","scroll_percentage":null,"timer":5,"devices":"all","show_once_every":15}},"version":"5"}'>
-                    <input name="email_address" placeholder="Your email address" required type="email" />
-                    <button data-element="submit">Subscribe</button>
+               <form name="newsletter" method="POST" data-netlify="true" style="display: flex; max-width: 400px; margin: 0 auto;">
+                    <input 
+                        type="email" 
+                        name="email" 
+                        placeholder="your@email.com" 
+                        required
+                        style="flex: 1; padding: 15px; border: 1px solid #ddd; border-radius: 5px 0 0 5px;">
+                    <button 
+                        type="submit"
+                        style="padding: 15px 30px; background: #2ecc71; color: white; border: none; border-radius: 0 5px 5px 0; cursor: pointer;">
+                            Get Updates
+                    </button>
+                    <input type="hidden" name="form-name" value="newsletter">
                 </form>
-                <script src="https://f.kit.com/ckjs/ck.5.js"></script>
 
 
         </main>
