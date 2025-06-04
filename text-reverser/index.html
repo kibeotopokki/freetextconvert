@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Text Reverser - Reverse Text, Words, Lines | Free Text Convert</title>
+    <meta name="description" content="Reverse text instantly with multiple options - reverse characters, words, lines, or flip text upside down. Perfect for creating unique effects or solving puzzles.">
+    <link rel="stylesheet" href="../style.css">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📝</text></svg>">
+    
+    <!-- Schema Markup -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Text Reverser Tool",
+        "description": "Free online text reverser with multiple reversal options",
+        "url": "https://freetextconvert.com/text-reverser",
+        "applicationCategory": "UtilityApplication",
+        "operatingSystem": "Any",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+        }
+    }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1><a href="/" style="text-decoration: none; color: inherit;">Free Text Convert</a></h1>
+            <p class="tagline">Simple, fast, and free text transformation tools</p>
+            <nav style="margin-top: 15px; text-align: center;">
+                <a href="/" style="margin-right: 20px; color: #3498db; text-decoration: none;">Home</a>
+                <a href="/tools" style="margin-right: 20px; color: #3498db; text-decoration: none;">All Tools</a>
+                <a href="/blog" style="color: #3498db; text-decoration: none;">Blog</a>
+            </nav>
+        </header>
+
+        <main>
+            <div class="tool-card">
+                <h2>Text Reverser</h2>
+                <p style="text-align: center; color: #666; margin-bottom: 30px;">
+                    Reverse text, words, or lines instantly with multiple options
+                </p>
+
+                <div class="input-section">
+                    <label for="input">Enter your text:</label>
+                    <textarea 
+                        id="input" 
+                        placeholder="Type or paste your text here to reverse it..."
+                        rows="8"
+                        style="margin-bottom: 10px;"
+                    ></textarea>
+                    <div class="char-count">
+                        Characters: <span id="charCount">0</span>
+                    </div>
+                </div>
+
+                <div style="margin: 25px 0;">
+                    <h3 style="margin-bottom: 15px;">Reverse Options:</h3>
+                    <div class="button-grid" style="grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));">
+                        <button onclick="reverseText('characters')" class="btn" title="Reverse entire text character by character">
+                            ← Reverse Characters
+                        </button>
+                        <button onclick="reverseText('words')" class="btn" title="Reverse word order but keep words intact">
+                            ↔️ Reverse Words
+                        </button>
+                        <button onclick="reverseText('lines')" class="btn" title="Reverse line order">
+                            ↕️ Reverse Lines
+                        </button>
+                        <button onclick="reverseText('wordsInLines')" class="btn" title="Reverse words within each line">
+                            ⟷ Words per Line
+                        </button>
+                        <button onclick="reverseText('lettersInWords')" class="btn" title="Reverse letters in each word">
+                            🔤 Letters in Words
+                        </button>
+                        <button onclick="reverseText('upsideDown')" class="btn" title="Flip text upside down">
+                            🙃 Upside Down
+                        </button>
+                    </div>
+                </div>
+
+                <div class="output-section">
+                    <label for="output">Reversed text:</label>
+                    <textarea 
+                        id="output" 
+                        readonly 
+                        placeholder="Your reversed text will appear here..."
+                        rows="8"
+                    ></textarea>
+                </div>
+
+                <div class="action-buttons">
+                    <button onclick="copyToClipboard()" class="btn btn-primary">
+                        📋 Copy Result
+                    </button>
+                    <button onclick="clearAll()" class="btn btn-secondary">
+                        🗑️ Clear All
+                    </button>
+                    <button onclick="swapText()" class="btn btn-secondary">
+                        🔄 Swap Text
+                    </button>
+                </div>
+
+                <!-- Examples Section -->
+                <div style="margin-top: 40px; padding: 20px; background: #f8f9fa; border-radius: 10px;">
+                    <h3>Common Use Cases:</h3>
+                    <ul style="line-height: 1.8;">
+                        <li><strong>Reverse Characters:</strong> "Hello World" → "dlroW olleH"</li>
+                        <li><strong>Reverse Words:</strong> "Hello World" → "World Hello"</li>
+                        <li><strong>Reverse Lines:</strong> Reorder paragraphs or list items</li>
+                        <li><strong>Letters in Words:</strong> "Hello World" → "olleH dlroW"</li>
+                        <li><strong>Upside Down:</strong> "Hello" → "oןןǝH" (fun effect!)</li>
+                    </ul>
+                </div>
+
+                <!-- Pro Tips -->
+                <div style="background: #e8f4f8; padding: 20px; margin: 30px 0; border-radius: 10px; border-left: 4px solid #3498db;">
+                    <h3>💡 Pro Tips</h3>
+                    <ul style="margin: 10px 0; line-height: 1.8;">
+                        <li>Use "Reverse Characters" for creating mirror text effects</li>
+                        <li>Use "Reverse Words" to check palindrome sentences</li>
+                        <li>Use "Upside Down" for fun social media posts</li>
+                        <li>Great for creating puzzles or encoding messages</li>
+                    </ul>
+                </div>
+
+                <!-- Related Tools -->
+                <div style="text-align: center; margin-top: 40px; padding: 30px; background: #f0f8ff; border-radius: 10px;">
+                    <h3>Try Our Other Tools</h3>
+                    <p style="margin: 20px 0;">
+                        <a href="/case-converter" style="margin: 0 10px;">Case Converter</a> •
+                        <a href="/word-counter" style="margin: 0 10px;">Word Counter</a> •
+                        <a href="/find-replace" style="margin: 0 10px;">Find & Replace</a>
+                    </p>
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            <p>&copy; 2025 FreeTextConvert.com - More tools being added weekly!</p>
+        </footer>
+    </div>
+
+    <script>
+        // Character counter
+        document.getElementById('input').addEventListener('input', function() {
+            const charCount = this.value.length;
+            document.getElementById('charCount').textContent = charCount;
+        });
+
+        // Upside down character map
+        const upsideDownMap = {
+            'a': 'ɐ', 'b': 'q', 'c': 'ɔ', 'd': 'p', 'e': 'ǝ', 'f': 'ɟ', 'g': 'ƃ', 'h': 'ɥ', 'i': 'ı',
+            'j': 'ɾ', 'k': 'ʞ', 'l': 'ן', 'm': 'ɯ', 'n': 'u', 'o': 'o', 'p': 'd', 'q': 'b', 'r': 'ɹ',
+            's': 's', 't': 'ʇ', 'u': 'n', 'v': 'ʌ', 'w': 'ʍ', 'x': 'x', 'y': 'ʎ', 'z': 'z',
+            'A': '∀', 'B': 'B', 'C': 'Ɔ', 'D': 'D', 'E': 'Ǝ', 'F': 'Ⅎ', 'G': 'פ', 'H': 'H', 'I': 'I',
+            'J': 'ſ', 'K': 'K', 'L': '˥', 'M': 'W', 'N': 'N', 'O': 'O', 'P': 'Ԁ', 'Q': 'Q', 'R': 'R',
+            'S': 'S', 'T': '┴', 'U': '∩', 'V': 'Λ', 'W': 'M', 'X': 'X', 'Y': '⅄', 'Z': 'Z',
+            '0': '0', '1': 'Ɩ', '2': 'ᄅ', '3': 'Ɛ', '4': 'ㄣ', '5': 'ϛ', '6': '9', '7': 'ㄥ', '8': '8', '9': '6',
+            '.': '˙', ',': '\'', '\'': ',', '"': ',,', '`': ',', '?': '¿', '!': '¡',
+            '[': ']', ']': '[', '(': ')', ')': '(', '{': '}', '}': '{',
+            '<': '>', '>': '<', '&': '⅋', '_': '‾', ';': '؛'
+        };
+
+        function reverseText(type) {
+            const input = document.getElementById('input').value;
+            let output = '';
+
+            if (!input) {
+                showNotification('Please enter some text first!', 'error');
+                return;
+            }
+
+            switch(type) {
+                case 'characters':
+                    // Reverse entire text character by character
+                    output = input.split('').reverse().join('');
+                    break;
+                
+                case 'words':
+                    // Reverse word order but keep words intact
+                    output = input.split(/\s+/).reverse().join(' ');
+                    break;
+                
+                case 'lines':
+                    // Reverse line order
+                    output = input.split('\n').reverse().join('\n');
+                    break;
+                
+                case 'wordsInLines':
+                    // Reverse words within each line
+                    output = input.split('\n').map(line => 
+                        line.split(/\s+/).reverse().join(' ')
+                    ).join('\n');
+                    break;
+                
+                case 'lettersInWords':
+                    // Reverse letters in each word but keep word order
+                    output = input.split(/(\s+)/).map(part => 
+                        /\s+/.test(part) ? part : part.split('').reverse().join('')
+                    ).join('');
+                    break;
+                
+                case 'upsideDown':
+                    // Flip text upside down and reverse
+                    output = input.split('').reverse().map(char => 
+                        upsideDownMap[char] || char
+                    ).join('');
+                    break;
+            }
+
+            document.getElementById('output').value = output;
+            showNotification('Text reversed successfully!', 'success');
+        }
+
+        function copyToClipboard() {
+            const output = document.getElementById('output');
+            
+            if (output.value === '') {
+                showNotification('Nothing to copy!', 'error');
+                return;
+            }
+
+            output.select();
+            output.setSelectionRange(0, 99999);
+
+            try {
+                document.execCommand('copy');
+                showNotification('Copied to clipboard!', 'success');
+            } catch (err) {
+                showNotification('Failed to copy', 'error');
+            }
+        }
+
+        function clearAll() {
+            document.getElementById('input').value = '';
+            document.getElementById('output').value = '';
+            document.getElementById('charCount').textContent = '0';
+        }
+
+        function swapText() {
+            const input = document.getElementById('input');
+            const output = document.getElementById('output');
+            
+            if (output.value === '') {
+                showNotification('No output to swap!', 'error');
+                return;
+            }
+
+            const temp = input.value;
+            input.value = output.value;
+            output.value = temp;
+            
+            // Update character count
+            document.getElementById('charCount').textContent = input.value.length;
+            showNotification('Text swapped!', 'success');
+        }
+
+        function showNotification(message, type) {
+            // Remove existing notification if any
+            const existing = document.querySelector('.copy-notification');
+            if (existing) {
+                existing.remove();
+            }
+
+            // Create new notification
+            const notification = document.createElement('div');
+            notification.className = 'copy-notification';
+            notification.textContent = message;
+            
+            if (type === 'error') {
+                notification.style.backgroundColor = '#e74c3c';
+            }
+            
+            document.body.appendChild(notification);
+
+            // Show notification
+            setTimeout(() => {
+                notification.classList.add('show');
+            }, 10);
+
+            // Hide after 3 seconds
+            setTimeout(() => {
+                notification.classList.remove('show');
+                setTimeout(() => {
+                    notification.remove();
+                }, 300);
+            }, 3000);
+        }
+    </script>
+</body>
+</html>
