@@ -1,3 +1,5 @@
-# Only redirect the OLD .html URLs to new clean URLs
-/blog.html /blog 301
-/blog/convert-text-case-online.html /blog/convert-text-case-online 301
+# Redirect www to non-www
+https://www.freetextconvert.com/* https://freetextconvert.com/:splat 301!
+http://www.freetextconvert.com/* https://freetextconvert.com/:splat 301!
+
+# Your other redirects below (if any)
