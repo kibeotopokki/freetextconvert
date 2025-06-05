@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sort Lines - Alphabetically, Numerically, By Length | Free Text Convert</title>
+    <meta name="description" content="Sort lines of text alphabetically (A-Z or Z-A), numerically, by length, or randomly. Perfect for organizing lists, data, and content. Free online tool.">
+    <link rel="stylesheet" href="../style.css">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📝</text></svg>">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-792NQ00CEV"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-792NQ00CEV');
+    </script>
+    <!-- Schema Markup -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Sort Lines Tool",
+        "description": "Free online tool to sort lines alphabetically, numerically, or by length",
+        "url": "https://freetextconvert.com/sort-lines",
+        "applicationCategory": "UtilityApplication",
+        "operatingSystem": "Any",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+        }
+    }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1><a href="/" style="text-decoration: none; color: inherit;">Free Text Convert</a></h1>
+            <p class="tagline">Simple, fast, and free text transformation tools</p>
+            <nav style="margin-top: 15px; text-align: center;">
+                <a href="/" style="margin-right: 20px; color: #3498db; text-decoration: none;">Home</a>
+                <a href="/tools" style="margin-right: 20px; color: #3498db; text-decoration: none;">All Tools</a>
+                <a href="/blog" style="color: #3498db; text-decoration: none;">Blog</a>
+            </nav>
+        </header>
+
+        <main>
+            <div class="tool-card">
+                <h2>Sort Lines</h2>
+                <p style="text-align: center; color: #666; margin-bottom: 30px;">
+                    Sort lines of text alphabetically, numerically, by length, or randomly
+                </p>
+
+                <div class="input-section">
+                    <label for="input">Enter your list (one item per line):</label>
+                    <textarea 
+                        id="input" 
+                        placeholder="Enter your list here...&#10;One item per line&#10;To be sorted"
+                        rows="10"
+                        style="margin-bottom: 10px;"
+                    ></textarea>
+                    <div style="display: flex; justify-content: space-between; color: #666; font-size: 14px;">
+                        <span>Lines: <span id="lineCount">0</span></span>
+                        <span>Characters: <span id="charCount">0</span></span>
+                    </div>
+                </div>
+
+                <div style="margin: 25px 0;">
+                    <h3 style="margin-bottom: 15px;">Sort Options:</h3>
+                    <div class="button-grid" style="grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));">
+                        <button onclick="sortLines('alpha-asc')" class="btn" title="Sort A to Z">
+                            ↓ A-Z
+                        </button>
+                        <button onclick="sortLines('alpha-desc')" class="btn" title="Sort Z to A">
+                            ↑ Z-A
+                        </button>
+                        <button onclick="sortLines('num-asc')" class="btn" title="Sort numbers low to high">
+                            ↓ 1-9
+                        </button>
+                        <button onclick="sortLines('num-desc')" class="btn" title="Sort numbers high to low">
+                            ↑ 9-1
+                        </button>
+                        <button onclick="sortLines('length-asc')" class="btn" title="Sort by length, shortest first">
+                            ↓ Length
+                        </button>
+                        <button onclick="sortLines('length-desc')" class="btn" title="Sort by length, longest first">
+                            ↑ Length
+                        </button>
+                        <button onclick="sortLines('random')" class="btn" title="Randomize order">
+                            🔀 Random
+                        </button>
+                        <button onclick="sortLines('reverse')" class="btn" title="Reverse current order">
+                            ⇅ Reverse
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Additional Options -->
+                <div style="background: #f8f9fa; padding: 20px; border-radius: 10px; margin: 20px 0;">
+                    <h4 style="margin-top: 0;">Additional Options:</h4>
+                    <label style="display: block; margin: 10px 0;">
+                        <input type="checkbox" id="caseSensitive" style="margin-right: 8px;">
+                        Case sensitive sorting
+                    </label>
+                    <label style="display: block; margin: 10px 0;">
+                        <input type="checkbox" id="removeEmpty" checked style="margin-right: 8px;">
+                        Remove empty lines
+                    </label>
+                    <label style="display: block; margin: 10px 0;">
+                        <input type="checkbox" id="removeDuplicates" style="margin-right: 8px;">
+                        Remove duplicate lines
+                    </label>
+                    <label style="display: block; margin: 10px 0;">
+                        <input type="checkbox" id="trimSpaces" checked style="margin-right: 8px;">
+                        Trim spaces from lines
+                    </label>
+                </div>
+
+                <div class="output-section">
+                    <label for="output">Sorted result:</label>
+                    <textarea 
+                        id="output" 
+                        readonly 
+                        placeholder="Your sorted list will appear here..."
+                        rows="10"
+                    ></textarea>
+                    <div style="color: #666; font-size: 14px; margin-top: 5px;">
+                        <span id="resultInfo"></span>
+                    </div>
+                </div>
+
+                <div class="action-buttons">
+                    <button onclick="copyToClipboard()" class="btn btn-primary">
+                        📋 Copy Result
+                    </button>
+                    <button onclick="downloadResult()" class="btn btn-secondary">
+                        💾 Download
+                    </button>
+                    <button onclick="clearAll()" class="btn btn-secondary">
+                        🗑️ Clear All
+                    </button>
+                </div>
+
+                <!-- Common Examples -->
+                <div style="margin-top: 40px; padding: 20px; background: #f8f9fa; border-radius: 10px;">
+                    <h3>Common Use Cases:</h3>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 15px;">
+                        <div>
+                            <h4>Alphabetical Sorting:</h4>
+                            <ul style="margin: 10px 0; line-height: 1.6;">
+                                <li>Sort names in a list</li>
+                                <li>Organize keywords</li>
+                                <li>Alphabetize bibliography</li>
+                                <li>Sort product names</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4>Numerical Sorting:</h4>
+                            <ul style="margin: 10px 0; line-height: 1.6;">
+                                <li>Order prices or values</li>
+                                <li>Sort ID numbers</li>
+                                <li>Arrange dates</li>
+                                <li>Rank scores</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pro Tips -->
+                <div style="background: #e8f4f8; padding: 20px; margin: 30px 0; border-radius: 10px; border-left: 4px solid #3498db;">
+                    <h3>💡 Pro Tips</h3>
+                    <ul style="margin: 10px 0; line-height: 1.8;">
+                        <li>Use "Remove duplicates" option to clean lists while sorting</li>
+                        <li>Numerical sort recognizes numbers at the start of lines</li>
+                        <li>Length sort is great for organizing data by importance</li>
+                        <li>Random sort is perfect for raffles or randomizing order</li>
+                    </ul>
+                </div>
+
+                <!-- Related Tools -->
+                <div style="text-align: center; margin-top: 40px; padding: 30px; background: #f0f8ff; border-radius: 10px;">
+                    <h3>Perfect Combination With:</h3>
+                    <p style="margin: 20px 0;">
+                        <a href="/remove-duplicates" style="margin: 0 10px;">Remove Duplicates</a> •
+                        <a href="/find-replace" style="margin: 0 10px;">Find & Replace</a> •
+                        <a href="/case-converter" style="margin: 0 10px;">Case Converter</a>
+                    </p>
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            <p>&copy; 2025 FreeTextConvert.com - Your productivity toolkit!</p>
+        </footer>
+    </div>
+
+    <script>
+        // Update counters
+        document.getElementById('input').addEventListener('input', function() {
+            const text = this.value;
+            const lines = text.split('\n').filter(line => line.trim() !== '');
+            document.getElementById('charCount').textContent = text.length;
+            document.getElementById('lineCount').textContent = lines.length;
+        });
+
+        function sortLines(sortType) {
+            const input = document.getElementById('input').value;
+            
+            if (!input.trim()) {
+                showNotification('Please enter some text to sort!', 'error');
+                return;
+            }
+
+            let lines = input.split('\n');
+            
+            // Apply options
+            const removeEmpty = document.getElementById('removeEmpty').checked;
+            const removeDuplicates = document.getElementById('removeDuplicates').checked;
+            const trimSpaces = document.getElementById('trimSpaces').checked;
+            const caseSensitive = document.getElementById('caseSensitive').checked;
+            
+            // Trim spaces if option is checked
+            if (trimSpaces) {
+                lines = lines.map(line => line.trim());
+            }
+            
+            // Remove empty lines if option is checked
+            if (removeEmpty) {
+                lines = lines.filter(line => line !== '');
+            }
+            
+            // Remove duplicates if option is checked
+            if (removeDuplicates) {
+                lines = [...new Set(lines)];
+            }
+            
+            // Sort based on type
+            switch(sortType) {
+                case 'alpha-asc':
+                    lines.sort((a, b) => {
+                        if (!caseSensitive) {
+                            a = a.toLowerCase();
+                            b = b.toLowerCase();
+                        }
+                        return a.localeCompare(b);
+                    });
+                    break;
+                    
+                case 'alpha-desc':
+                    lines.sort((a, b) => {
+                        if (!caseSensitive) {
+                            a = a.toLowerCase();
+                            b = b.toLowerCase();
+                        }
+                        return b.localeCompare(a);
+                    });
+                    break;
+                    
+                case 'num-asc':
+                    lines.sort((a, b) => {
+                        const numA = parseFloat(a) || 0;
+                        const numB = parseFloat(b) || 0;
+                        return numA - numB;
+                    });
+                    break;
+                    
+                case 'num-desc':
+                    lines.sort((a, b) => {
+                        const numA = parseFloat(a) || 0;
+                        const numB = parseFloat(b) || 0;
+                        return numB - numA;
+                    });
+                    break;
+                    
+                case 'length-asc':
+                    lines.sort((a, b) => a.length - b.length);
+                    break;
+                    
+                case 'length-desc':
+                    lines.sort((a, b) => b.length - a.length);
+                    break;
+                    
+                case 'random':
+                    for (let i = lines.length - 1; i > 0; i--) {
+                        const j = Math.floor(Math.random() * (i + 1));
+                        [lines[i], lines[j]] = [lines[j], lines[i]];
+                    }
+                    break;
+                    
+                case 'reverse':
+                    lines.reverse();
+                    break;
+            }
+            
+            const output = lines.join('\n');
+            document.getElementById('output').value = output;
+            
+            // Update result info
+            const resultInfo = `Sorted ${lines.length} lines`;
+            document.getElementById('resultInfo').textContent = resultInfo;
+            
+            showNotification('Lines sorted successfully!', 'success');
+        }
+
+        function copyToClipboard() {
+            const output = document.getElementById('output');
+            
+            if (output.value === '') {
+                showNotification('Nothing to copy!', 'error');
+                return;
+            }
+
+            output.select();
+            output.setSelectionRange(0, 99999);
+
+            try {
+                document.execCommand('copy');
+                showNotification('Copied to clipboard!', 'success');
+            } catch (err) {
+                showNotification('Failed to copy', 'error');
+            }
+        }
+
+        function downloadResult() {
+            const output = document.getElementById('output').value;
+            
+            if (!output) {
+                showNotification('Nothing to download!', 'error');
+                return;
+            }
+            
+            const blob = new Blob([output], { type: 'text/plain' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'sorted-lines.txt';
+            document.body.appendChild(a);
+            a.click();
+            window.URL.revokeObjectURL(url);
+            document.body.removeChild(a);
+            
+            showNotification('Downloaded successfully!', 'success');
+        }
+
+        function clearAll() {
+            document.getElementById('input').value = '';
+            document.getElementById('output').value = '';
+            document.getElementById('charCount').textContent = '0';
+            document.getElementById('lineCount').textContent = '0';
+            document.getElementById('resultInfo').textContent = '';
+        }
+
+        function showNotification(message, type) {
+            // Remove existing notification if any
+            const existing = document.querySelector('.copy-notification');
+            if (existing) {
+                existing.remove();
+            }
+
+            // Create new notification
+            const notification = document.createElement('div');
+            notification.className = 'copy-notification';
+            notification.textContent = message;
+            
+            if (type === 'error') {
+                notification.style.backgroundColor = '#e74c3c';
+            }
+            
+            document.body.appendChild(notification);
+
+            // Show notification
+            setTimeout(() => {
+                notification.classList.add('show');
+            }, 10);
+
+            // Hide after 3 seconds
+            setTimeout(() => {
+                notification.classList.remove('show');
+                setTimeout(() => {
+                    notification.remove();
+                }, 300);
+            }, 3000);
+        }
+    </script>
+</body>
+</html>
