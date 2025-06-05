@@ -180,7 +180,117 @@ footer {
     transform: translateY(0);
 }
 
+/* Blog specific styles */
+article h3 a:hover {
+    color: #3498db !important;
+    text-decoration: underline !important;
+}
 
+nav a {
+    text-decoration: none;
+    font-weight: 500;
+}
+
+nav a:hover {
+    text-decoration: underline;
+}
+
+/* Fix bullet point spacing */
+ul {
+    padding-left: 40px; /* Increase space from left edge */
+    margin: 15px 0; /* Add space above and below lists */
+}
+
+ul li {
+    margin-bottom: 8px; /* Space between bullet points */
+    line-height: 1.8; /* Make lines easier to read */
+}
+
+/* Also fix ordered lists (numbered lists) */
+ol {
+    padding-left: 40px;
+    margin: 15px 0;
+}
+
+ol li {
+    margin-bottom: 8px;
+    line-height: 1.8;
+}
+
+/* Better intro paragraph styling */
+article > div > p:first-of-type {
+    font-size: 1.15em;
+    line-height: 2.0;
+    color: #555;
+    margin-bottom: 30px;
+    padding: 25px;
+    background: #f8f9fa;
+    border-left: 4px solid #3498db;
+    border-radius: 5px;
+}
+
+/* Table of Contents styling */
+article h2:first-of-type {
+    margin-top: 40px;
+    margin-bottom: 25px;
+    padding-bottom: 15px;
+    border-bottom: 2px solid #eee;
+}
+
+/* TOC list improvements */
+article ul:first-of-type {
+    background: #f8f9fa;
+    padding: 25px 25px 25px 40px;
+    border-radius: 8px;
+    margin: 30px 0;
+}
+
+article ul:first-of-type li {
+    margin-bottom: 15px;
+    line-height: 1.6;
+}
+
+/* Better content width for readability */
+article > div {
+    max-width: 750px;  /* Optimal reading width */
+    margin: 0 auto;
+}
+
+/* Add more space around headings */
+article h2 {
+    margin-top: 50px;
+    margin-bottom: 25px;
+    color: #2c3e50;
+    position: relative;
+    padding-top: 20px;
+}
+
+/* Visual separator before main sections */
+article h2:not(:first-of-type)::before {
+    content: "";
+    display: block;
+    width: 50px;
+    height: 3px;
+    background: #3498db;
+    margin-bottom: 20px;
+}
+
+/* Better paragraph spacing */
+article p {
+    margin-bottom: 24px;
+    line-height: 1.9;
+    color: #333;
+}
+
+/* Highlight important first lines */
+article p strong:first-child {
+    color: #2c3e50;
+    font-size: 1.05em;
+}
+
+        /* Import your main stylesheet */
+        @import url('../style.css');
+        
         /* Enhanced Blog Post Styles */
         .blog-container {
             max-width: 1200px;
@@ -422,4 +532,4 @@ footer {
                 font-size: 1.5em;
             }
         }
-    
+   
