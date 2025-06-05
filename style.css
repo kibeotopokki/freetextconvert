@@ -216,3 +216,50 @@ ol li {
     margin-bottom: 8px;
     line-height: 1.8;
 }
+
+/* Better Blog Readability */
+article p {
+    line-height: 1.9;  /* More breathing room between lines */
+    margin-bottom: 20px;  /* More space between paragraphs */
+}
+
+article ul, article ol {
+    line-height: 2.0;  /* Even more space for lists */
+    margin: 25px 0;  /* Space above and below lists */
+}
+
+article li {
+    margin-bottom: 12px;  /* Space between list items */
+}
+
+article h2 {
+    margin-top: 40px;  /* More space before headings */
+    margin-bottom: 20px;
+}
+
+article h3 {
+    margin-top: 30px;
+    margin-bottom: 15px;
+}
+
+/* FAQ Section Specific */
+article h3 + p {
+    margin-top: 10px;  /* Space between FAQ question and answer */
+}
+
+/* Code blocks and examples */
+article pre, article .example-box {
+    margin: 25px 0;
+}
+
+/* Better mobile spacing */
+@media (max-width: 600px) {
+    article {
+        font-size: 16px;  /* Slightly larger on mobile */
+    }
+    
+    article p {
+        line-height: 1.8;
+        margin-bottom: 18px;
+    }
+}
