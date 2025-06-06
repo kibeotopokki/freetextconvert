@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSV to JSON Converter - Convert CSV Data to JSON Format | Free Text Convert</title>
+    <meta name="description" content="Convert CSV to JSON online. Transform spreadsheet data into JSON arrays or objects. Supports custom headers, data types, and nested structures. Free CSV to JSON converter.">
+    <link rel="stylesheet" href="../style.css">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📝</text></svg>">
+    
+    <!-- Schema Markup -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "CSV to JSON Converter",
+        "description": "Free online tool to convert CSV data to JSON format",
+        "url": "https://freetextconvert.com/csv-to-json",
+        "applicationCategory": "DeveloperApplication",
+        "operatingSystem": "Any",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+        }
+    }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1><a href="/" style="text-decoration: none; color: inherit;">Free Text Convert</a></h1>
+            <p class="tagline">Simple, fast, and free text transformation tools</p>
+            <nav style="margin-top: 15px; text-align: center;">
+                <a href="/" style="margin-right: 20px; color: #3498db; text-decoration: none;">Home</a>
+                <a href="/tools" style="margin-right: 20px; color: #3498db; text-decoration: none;">All Tools</a>
+                <a href="/blog" style="color: #3498db; text-decoration: none;">Blog</a>
+            </nav>
+        </header>
+
+        <main>
+            <div class="tool-card">
+                <h2>CSV to JSON Converter</h2>
+                <p style="text-align: center; color: #666; margin-bottom: 30px;">
+                    Convert CSV data to JSON format with customizable options
+                </p>
+
+                <div class="input-section">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                        <label for="input">Enter CSV data:</label>
+                        <div>
+                            <button onclick="loadExample('simple')" class="btn" style="padding: 5px 15px; font-size: 14px;">
+                                Simple Example
+                            </button>
+                            <button onclick="loadExample('complex')" class="btn" style="padding: 5px 15px; font-size: 14px;">
+                                Complex Example
+                            </button>
+                        </div>
+                    </div>
+                    <textarea 
+                        id="input" 
+                        placeholder="name,age,city&#10;John Doe,30,New York&#10;Jane Smith,25,Los Angeles"
+                        rows="10"
+                        style="margin-bottom: 10px; font-family: 'Courier New', monospace;"
+                        spellcheck="false"
+                    ></textarea>
+                    <div style="display: flex; justify-content: space-between; color: #666; font-size: 14px;">
+                        <span>Rows: <span id="rowCount">0</span></span>
+                        <span>Columns: <span id="colCount">0</span></span>
+                    </div>
+                </div>
+
+                <!-- Options -->
+                <div style="background: #f8f9fa; padding: 20px; border-radius: 10px; margin: 20px 0;">
+                    <h4 style="margin-top: 0;">Conversion Options:</h4>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                        <div>
+                            <label style="display: block; margin-bottom: 10px;">
+                                <input type="checkbox" id="hasHeaders" checked style="margin-right: 8px;">
+                                First row contains headers
+                            </label>
+                            <label style="display: block; margin-bottom: 10px;">
+                                <input type="checkbox" id="parseNumbers" checked style="margin-right: 8px;">
+                                Parse numbers automatically
+                            </label>
+                            <label style="display: block; margin-bottom: 10px;">
+                                <input type="checkbox" id="trimValues" checked style="margin-right: 8px;">
+                                Trim whitespace from values
+                            </label>
+                        </div>
+                        <div>
+                            <label style="display: block; margin-bottom: 10px;">
+                                Output Format:
+                                <select id="outputFormat" style="margin-left: 10px; padding: 5px;">
+                                    <option value="array">Array of Objects</option>
+                                    <option value="object">Object with Arrays</option>
+                                    <option value="matrix">2D Array</option>
+                                </select>
+                            </label>
+                            <label style="display: block; margin-bottom: 10px;">
+                                Delimiter:
+                                <select id="delimiter" style="margin-left: 10px; padding: 5px;">
+                                    <option value=",">Comma (,)</option>
+                                    <option value=";">Semicolon (;)</option>
+                                    <option value="\t">Tab</option>
+                                    <option value="|">Pipe (|)</option>
+                                </select>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="text-align: center; margin: 20px 0;">
+                    <button onclick="convertCSV()" class="btn btn-primary" style="padding: 12px 30px; font-size: 16px;">
+                        🔄 Convert to JSON
+                    </button>
+                </div>
+
+                <div class="output-section">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                        <label for="output">JSON Output:</label>
+                        <span id="outputInfo" style="color: #27ae60; font-size: 14px;"></span>
+                    </div>
+                    <textarea 
+                        id="output" 
+                        readonly 
+                        placeholder="Your JSON output will appear here..."
+                        rows="12"
+                        style="font-family: 'Courier New', monospace; font-size: 14px; background: #f8f9fa;"
+                        spellcheck="false"
+                    ></textarea>
+                </div>
+
+                <div class="action-buttons">
+                    <button onclick="copyToClipboard()" class="btn btn-primary">
+                        📋 Copy JSON
+                    </button>
+                    <button onclick="downloadJSON()" class="btn btn-secondary">
+                        💾 Download JSON
+                    </button>
+                    <button onclick="clearAll()" class="btn btn-secondary">
+                        🗑️ Clear All
+                    </button>
+                </div>
+
+                <!-- Format Examples -->
+                <div style="margin-top: 40px; padding: 20px; background: #f8f9fa; border-radius: 10px;">
+                    <h3>Output Format Examples:</h3>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; margin-top: 15px;">
+                        <div>
+                            <h4>Array of Objects</h4>
+                            <pre style="background: white; padding: 10px; border-radius: 5px; font-size: 12px;">[
+  {
+    "name": "John",
+    "age": 30
+  },
+  {
+    "name": "Jane",
+    "age": 25
+  }
+]</pre>
+                        </div>
+                        <div>
+                            <h4>Object with Arrays</h4>
+                            <pre style="background: white; padding: 10px; border-radius: 5px; font-size: 12px;">{
+  "name": ["John", "Jane"],
+  "age": [30, 25]
+}</pre>
+                        </div>
+                        <div>
+                            <h4>2D Array</h4>
+                            <pre style="background: white; padding: 10px; border-radius: 5px; font-size: 12px;">[
+  ["name", "age"],
+  ["John", 30],
+  ["Jane", 25]
+]</pre>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pro Tips -->
+                <div style="background: #e8f4f8; padding: 20px; margin: 30px 0; border-radius: 10px; border-left: 4px solid #3498db;">
+                    <h3>💡 Pro Tips</h3>
+                    <ul style="margin: 10px 0; line-height: 1.8;">
+                        <li>Excel/Google Sheets data works perfectly - just copy and paste!</li>
+                        <li>Use "Array of Objects" for most APIs and databases</li>
+                        <li>Enable "Parse numbers" to convert numeric strings automatically</li>
+                        <li>The tool handles quoted values and escaped characters</li>
+                    </ul>
+                </div>
+
+                <!-- Related Tools -->
+                <div style="text-align: center; margin-top: 40px; padding: 30px; background: #f0f8ff; border-radius: 10px;">
+                    <h3>Related Tools</h3>
+                    <p style="margin: 20px 0;">
+                        <a href="/json-formatter" style="margin: 0 10px;">JSON Formatter</a> •
+                        <span style="color: #999;">JSON to CSV (Coming Soon)</span> •
+                        <a href="/remove-duplicates" style="margin: 0 10px;">Remove Duplicates</a>
+                    </p>
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            <p>&copy; 2025 FreeTextConvert.com - Rest well, tomorrow we conquer! 🚀</p>
+        </footer>
+    </div>
+
+    <script>
+        // Example data
+        const examples = {
+            simple: `name,age,city
+John Doe,30,New York
+Jane Smith,25,Los Angeles
+Bob Johnson,35,Chicago`,
+            complex: `product_id,product_name,price,quantity,category,in_stock
+1001,Laptop Pro,1299.99,50,Electronics,true
+1002,Wireless Mouse,29.99,200,Accessories,true
+1003,USB-C Cable,15.99,0,Accessories,false
+1004,Monitor 4K,599.99,25,Electronics,true
+1005,Keyboard Mechanical,89.99,75,Accessories,true`
+        };
+
+        function loadExample(type) {
+            document.getElementById('input').value = examples[type];
+            updateStats();
+        }
+
+        function updateStats() {
+            const input = document.getElementById('input').value.trim();
+            if (!input) {
+                document.getElementById('rowCount').textContent = '0';
+                document.getElementById('colCount').textContent = '0';
+                return;
+            }
+
+            const rows = input.split('\n').filter(row => row.trim());
+            const delimiter = document.getElementById('delimiter').value;
+            const cols = rows[0] ? rows[0].split(delimiter).length : 0;
+
+            document.getElementById('rowCount').textContent = rows.length;
+            document.getElementById('colCount').textContent = cols;
+        }
+
+        function parseCSV(text, delimiter = ',') {
+            const rows = [];
+            const lines = text.trim().split('\n');
+            
+            for (let line of lines) {
+                if (!line.trim()) continue;
+                
+                const row = [];
+                let current = '';
+                let inQuotes = false;
+                
+                for (let i = 0; i < line.length; i++) {
+                    const char = line[i];
+                    const nextChar = line[i + 1];
+                    
+                    if (char === '"') {
+                        if (inQuotes && nextChar === '"') {
+                            current += '"';
+                            i++;
+                        } else {
+                            inQuotes = !inQuotes;
+                        }
+                    } else if (char === delimiter && !inQuotes) {
+                        row.push(current);
+                        current = '';
+                    } else {
+                        current += char;
+                    }
+                }
+                
+                row.push(current);
+                rows.push(row);
+            }
+            
+            return rows;
+        }
+
+        function convertCSV() {
+            const input = document.getElementById('input').value.trim();
+            
+            if (!input) {
+                showNotification('Please enter CSV data!', 'error');
+                return;
+            }
+
+            const delimiter = document.getElementById('delimiter').value;
+            const hasHeaders = document.getElementById('hasHeaders').checked;
+            const parseNumbers = document.getElementById('parseNumbers').checked;
+            const trimValues = document.getElementById('trimValues').checked;
+            const outputFormat = document.getElementById('outputFormat').value;
+
+            try {
+                const rows = parseCSV(input, delimiter);
+                
+                if (rows.length === 0) {
+                    showNotification('No valid CSV data found!', 'error');
+                    return;
+                }
+
+                // Process values
+                const processedRows = rows.map(row => 
+                    row.map(value => {
+                        if (trimValues) {
+                            value = value.trim();
+                        }
+                        
+                        if (parseNumbers && value !== '') {
+                            // Check for boolean
+                            if (value.toLowerCase() === 'true') return true;
+                            if (value.toLowerCase() === 'false') return false;
+                            
+                            // Check for number
+                            const num = Number(value);
+                            if (!isNaN(num) && value !== '') {
+                                return num;
+                            }
+                        }
+                        
+                        return value;
+                    })
+                );
+
+                let result;
+                
+                if (outputFormat === 'array') {
+                    // Array of Objects
+                    if (hasHeaders && processedRows.length > 1) {
+                        const headers = processedRows[0];
+                        result = processedRows.slice(1).map(row => {
+                            const obj = {};
+                            headers.forEach((header, index) => {
+                                obj[header] = row[index] !== undefined ? row[index] : null;
+                            });
+                            return obj;
+                        });
+                    } else {
+                        result = processedRows;
+                    }
+                } else if (outputFormat === 'object') {
+                    // Object with Arrays
+                    if (hasHeaders && processedRows.length > 1) {
+                        const headers = processedRows[0];
+                        result = {};
+                        headers.forEach((header, index) => {
+                            result[header] = processedRows.slice(1).map(row => 
+                                row[index] !== undefined ? row[index] : null
+                            );
+                        });
+                    } else {
+                        result = { data: processedRows };
+                    }
+                } else {
+                    // 2D Array
+                    result = processedRows;
+                }
+
+                const jsonOutput = JSON.stringify(result, null, 2);
+                document.getElementById('output').value = jsonOutput;
+                
+                const recordCount = hasHeaders ? processedRows.length - 1 : processedRows.length;
+                document.getElementById('outputInfo').textContent = `✓ Converted ${recordCount} records`;
+                
+                showNotification('CSV converted to JSON successfully!', 'success');
+            } catch (error) {
+                showNotification('Error converting CSV: ' + error.message, 'error');
+            }
+        }
+
+        function copyToClipboard() {
+            const output = document.getElementById('output');
+            
+            if (!output.value) {
+                showNotification('Nothing to copy!', 'error');
+                return;
+            }
+
+            output.select();
+            output.setSelectionRange(0, 99999);
+
+            try {
+                document.execCommand('copy');
+                showNotification('Copied to clipboard!', 'success');
+            } catch (err) {
+                showNotification('Failed to copy', 'error');
+            }
+        }
+
+        function downloadJSON() {
+            const output = document.getElementById('output').value;
+            
+            if (!output) {
+                showNotification('Nothing to download!', 'error');
+                return;
+            }
+            
+            const blob = new Blob([output], { type: 'application/json' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'converted-data.json';
+            document.body.appendChild(a);
+            a.click();
+            window.URL.revokeObjectURL(url);
+            document.body.removeChild(a);
+            
+            showNotification('Downloaded successfully!', 'success');
+        }
+
+        function clearAll() {
+            document.getElementById('input').value = '';
+            document.getElementById('output').value = '';
+            document.getElementById('outputInfo').textContent = '';
+            updateStats();
+        }
+
+        function showNotification(message, type) {
+            const existing = document.querySelector('.copy-notification');
+            if (existing) {
+                existing.remove();
+            }
+
+            const notification = document.createElement('div');
+            notification.className = 'copy-notification';
+            notification.textContent = message;
+            
+            if (type === 'error') {
+                notification.style.backgroundColor = '#e74c3c';
+            } else if (type === 'warning') {
+                notification.style.backgroundColor = '#f39c12';
+            }
+            
+            document.body.appendChild(notification);
+
+            setTimeout(() => {
+                notification.classList.add('show');
+            }, 10);
+
+            setTimeout(() => {
+                notification.classList.remove('show');
+                setTimeout(() => {
+                    notification.remove();
+                }, 300);
+            }, 3000);
+        }
+
+        // Update stats on input
+        document.getElementById('input').addEventListener('input', updateStats);
+    </script>
+</body>
+</html>
