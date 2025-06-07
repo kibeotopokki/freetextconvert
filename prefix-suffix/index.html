@@ -1,0 +1,1027 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prefix/Suffix Master - Add or Remove Text from Each Line | Free Text Convert</title>
+    <meta name="description" content="Add or remove prefixes and suffixes from each line of text. Perfect for adding bullets, numbers, quotes, or cleaning up lists. Free online tool.">
+    <link rel="canonical" href="https://freetextconvert.com/prefix-suffix">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📝</text></svg>">
+    
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-792NQ00CEV"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-792NQ00CEV');
+    </script>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f5f5f5;
+        }
+
+        header {
+            background-color: white;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #2c3e50;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: #555;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #3498db;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 1rem;
+            font-size: 2.5rem;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+        }
+
+        .tool-container {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .mode-selector {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .mode-btn {
+            flex: 1;
+            min-width: 150px;
+            padding: 1rem;
+            border: 2px solid #e0e0e0;
+            background: white;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: center;
+        }
+
+        .mode-btn:hover {
+            border-color: #3498db;
+            transform: translateY(-2px);
+        }
+
+        .mode-btn.active {
+            background: #3498db;
+            color: white;
+            border-color: #3498db;
+        }
+
+        .mode-btn h3 {
+            margin: 0 0 0.5rem 0;
+            font-size: 1.1rem;
+        }
+
+        .mode-btn p {
+            margin: 0;
+            font-size: 0.85rem;
+            opacity: 0.8;
+        }
+
+        .options-panel {
+            display: none;
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+            background: #f8f9fa;
+            border-radius: 8px;
+        }
+
+        .options-panel.active {
+            display: block;
+        }
+
+        .option-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .option-group:last-child {
+            margin-bottom: 0;
+        }
+
+        .option-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: #555;
+        }
+
+        .option-group input[type="text"] {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+            font-family: 'Courier New', monospace;
+        }
+
+        .option-group input[type="checkbox"] {
+            margin-right: 0.5rem;
+        }
+
+        .quick-presets {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            margin-top: 0.5rem;
+        }
+
+        .preset-btn {
+            padding: 0.5rem 1rem;
+            border: 1px solid #ddd;
+            background: white;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            transition: all 0.3s;
+        }
+
+        .preset-btn:hover {
+            background: #e3f2fd;
+            border-color: #3498db;
+        }
+
+        .text-areas {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .text-area-wrapper {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .text-area-wrapper h3 {
+            margin-bottom: 0.5rem;
+            color: #555;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        textarea {
+            width: 100%;
+            min-height: 300px;
+            padding: 1rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.95rem;
+            resize: vertical;
+        }
+
+        textarea:focus {
+            outline: none;
+            border-color: #3498db;
+        }
+
+        .char-count {
+            font-size: 0.85rem;
+            color: #666;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 0.75rem 2rem;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-primary {
+            background: #3498db;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #2980b9;
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: #95a5a6;
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background: #7f8c8d;
+        }
+
+        .btn-success {
+            background: #27ae60;
+            color: white;
+        }
+
+        .btn-success:hover {
+            background: #229954;
+        }
+
+        .examples-section {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .examples-section h2 {
+            color: #2c3e50;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .example-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .example-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            border: 1px solid #e0e0e0;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .example-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .example-card h3 {
+            color: #3498db;
+            margin-bottom: 0.5rem;
+        }
+
+        .example-card .example-text {
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+            color: #666;
+            margin: 0.5rem 0;
+            padding: 0.5rem;
+            background: #f5f5f5;
+            border-radius: 4px;
+        }
+
+        .notification {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: #27ae60;
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 5px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            display: none;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .notification.show {
+            display: flex;
+            animation: slideIn 0.3s ease;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(100%);
+            }
+            to {
+                transform: translateX(0);
+            }
+        }
+
+        .info-section {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .info-section h2 {
+            color: #2c3e50;
+            margin: 2rem 0 1rem;
+        }
+
+        .info-section h3 {
+            color: #34495e;
+            margin: 1.5rem 0 0.75rem;
+        }
+
+        .info-section ul {
+            margin-left: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .info-section li {
+            margin-bottom: 0.5rem;
+        }
+
+        .related-tools {
+            background: #ecf0f1;
+            padding: 2rem;
+            border-radius: 10px;
+            margin-top: 3rem;
+            text-align: center;
+        }
+
+        .related-tools h3 {
+            color: #2c3e50;
+            margin-bottom: 1rem;
+        }
+
+        .tool-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .tool-card {
+            background: white;
+            padding: 1rem;
+            border-radius: 5px;
+            text-decoration: none;
+            color: #333;
+            transition: transform 0.3s;
+        }
+
+        .tool-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        footer {
+            background: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 4rem;
+        }
+
+        footer a {
+            color: #3498db;
+            text-decoration: none;
+        }
+
+        @media (max-width: 768px) {
+            .text-areas {
+                grid-template-columns: 1fr;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+
+            .mode-selector {
+                flex-direction: column;
+            }
+
+            .mode-btn {
+                min-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="/" class="logo">📝 Free Text Convert</a>
+            <div class="nav-links">
+                <a href="/">Home</a>
+                <a href="/tools">All Tools</a>
+                <a href="/blog">Blog</a>
+            </div>
+        </nav>
+    </header>
+
+    <div class="container">
+        <h1>Prefix/Suffix Master</h1>
+        <p class="subtitle">Add or remove text from the beginning or end of each line - The most useful tool ever!</p>
+
+        <div class="tool-container">
+            <div class="mode-selector">
+                <button class="mode-btn active" onclick="selectMode('add')">
+                    <h3>➕ Add Mode</h3>
+                    <p>Add prefix/suffix to lines</p>
+                </button>
+                <button class="mode-btn" onclick="selectMode('remove')">
+                    <h3>➖ Remove Mode</h3>
+                    <p>Remove prefix/suffix from lines</p>
+                </button>
+                <button class="mode-btn" onclick="selectMode('number')">
+                    <h3>🔢 Number Lines</h3>
+                    <p>Add line numbers</p>
+                </button>
+                <button class="mode-btn" onclick="selectMode('strip-numbers')">
+                    <h3>🚫 Strip Numbers</h3>
+                    <p>Remove line numbers</p>
+                </button>
+            </div>
+
+            <!-- Add Mode Options -->
+            <div class="options-panel active" id="add-options">
+                <div class="option-group">
+                    <label>Prefix (text to add at the beginning):</label>
+                    <input type="text" id="add-prefix" placeholder="e.g., • or - or > ">
+                    <div class="quick-presets">
+                        <button class="preset-btn" onclick="setPrefix('• ')">• Bullet</button>
+                        <button class="preset-btn" onclick="setPrefix('- ')">- Dash</button>
+                        <button class="preset-btn" onclick="setPrefix('> ')">› Quote</button>
+                        <button class="preset-btn" onclick="setPrefix('* ')">* Asterisk</button>
+                        <button class="preset-btn" onclick="setPrefix('→ ')">→ Arrow</button>
+                        <button class="preset-btn" onclick="setPrefix('[ ] ')">[ ] Checkbox</button>
+                    </div>
+                </div>
+                <div class="option-group">
+                    <label>Suffix (text to add at the end):</label>
+                    <input type="text" id="add-suffix" placeholder="e.g., ; or , or .">
+                    <div class="quick-presets">
+                        <button class="preset-btn" onclick="setSuffix(';')">; Semicolon</button>
+                        <button class="preset-btn" onclick="setSuffix(',')">‚ Comma</button>
+                        <button class="preset-btn" onclick="setSuffix('.')">. Period</button>
+                        <button class="preset-btn" onclick="setSuffix('&quot;')">&#34; Quote</button>
+                    </div>
+                </div>
+                <div class="option-group">
+                    <label>
+                        <input type="checkbox" id="skip-empty-add">
+                        Skip empty lines
+                    </label>
+                </div>
+            </div>
+
+            <!-- Remove Mode Options -->
+            <div class="options-panel" id="remove-options">
+                <div class="option-group">
+                    <label>Prefix to remove:</label>
+                    <input type="text" id="remove-prefix" placeholder="e.g., • or - or line numbers">
+                </div>
+                <div class="option-group">
+                    <label>Suffix to remove:</label>
+                    <input type="text" id="remove-suffix" placeholder="e.g., ; or , or trailing text">
+                </div>
+                <div class="option-group">
+                    <label>
+                        <input type="checkbox" id="trim-spaces">
+                        Also trim extra spaces
+                    </label>
+                </div>
+            </div>
+
+            <!-- Number Lines Options -->
+            <div class="options-panel" id="number-options">
+                <div class="option-group">
+                    <label>Numbering format:</label>
+                    <select id="number-format" style="width: 100%; padding: 0.75rem; border: 1px solid #ddd; border-radius: 5px;">
+                        <option value="1. ">1. 2. 3. (with period)</option>
+                        <option value="1) ">1) 2) 3) (with parenthesis)</option>
+                        <option value="1: ">1: 2: 3: (with colon)</option>
+                        <option value="01. ">01. 02. 03. (padded)</option>
+                        <option value="[1] ">[1] [2] [3] (brackets)</option>
+                    </select>
+                </div>
+                <div class="option-group">
+                    <label>
+                        <input type="checkbox" id="skip-empty-number">
+                        Skip empty lines
+                    </label>
+                </div>
+            </div>
+
+            <!-- Strip Numbers Options -->
+            <div class="options-panel" id="strip-numbers-options">
+                <div class="option-group">
+                    <label>Remove pattern:</label>
+                    <select id="strip-pattern" style="width: 100%; padding: 0.75rem; border: 1px solid #ddd; border-radius: 5px;">
+                        <option value="any">Any number pattern</option>
+                        <option value="dots">1. 2. 3. format</option>
+                        <option value="parens">1) 2) 3) format</option>
+                        <option value="brackets">[1] [2] [3] format</option>
+                        <option value="custom">Custom pattern</option>
+                    </select>
+                </div>
+                <div class="option-group" id="custom-pattern-group" style="display: none;">
+                    <label>Custom pattern to remove:</label>
+                    <input type="text" id="custom-pattern" placeholder="e.g., Line ">
+                </div>
+                <div class="option-group">
+                    <label>
+                        <input type="checkbox" id="strip-trim" checked>
+                        Trim extra spaces after removal
+                    </label>
+                </div>
+            </div>
+
+            <div class="text-areas">
+                <div class="text-area-wrapper">
+                    <h3>Input Text <span class="char-count" id="input-count">0 lines</span></h3>
+                    <textarea id="input" placeholder="Enter or paste your text here...
+Each line will be processed separately"></textarea>
+                </div>
+                <div class="text-area-wrapper">
+                    <h3>Output <span class="char-count" id="output-count">0 lines</span></h3>
+                    <textarea id="output" readonly placeholder="Modified text will appear here..."></textarea>
+                </div>
+            </div>
+
+            <div class="action-buttons">
+                <button class="btn btn-primary" onclick="processText()">
+                    <span>🔄</span> Process Text
+                </button>
+                <button class="btn btn-secondary" onclick="clearAll()">
+                    <span>🗑️</span> Clear All
+                </button>
+                <button class="btn btn-success" onclick="copyOutput()">
+                    <span>📋</span> Copy Output
+                </button>
+            </div>
+        </div>
+
+        <div class="examples-section">
+            <h2>Quick Examples - Click to Try!</h2>
+            <div class="example-grid">
+                <div class="example-card" onclick="loadExample('bullets')">
+                    <h3>Add Bullets</h3>
+                    <div class="example-text">
+                        Apple<br>
+                        Banana<br>
+                        Cherry
+                    </div>
+                    <p>→ Becomes bulleted list</p>
+                </div>
+                <div class="example-card" onclick="loadExample('quotes')">
+                    <h3>Add Quotes</h3>
+                    <div class="example-text">
+                        Hello World<br>
+                        Test String<br>
+                        Example Text
+                    </div>
+                    <p>→ Wraps in quotes</p>
+                </div>
+                <div class="example-card" onclick="loadExample('numbers')">
+                    <h3>Number Lines</h3>
+                    <div class="example-text">
+                        First item<br>
+                        Second item<br>
+                        Third item
+                    </div>
+                    <p>→ Adds line numbers</p>
+                </div>
+                <div class="example-card" onclick="loadExample('remove')">
+                    <h3>Remove Prefixes</h3>
+                    <div class="example-text">
+                        1. First line<br>
+                        2. Second line<br>
+                        3. Third line
+                    </div>
+                    <p>→ Strips numbers</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="info-section">
+            <h2>What is the Prefix/Suffix Tool?</h2>
+            <p>The Prefix/Suffix Master is a powerful text manipulation tool that allows you to add or remove text from the beginning (prefix) or end (suffix) of each line in your text. It's perfect for formatting lists, cleaning up data, or preparing text for various applications.</p>
+
+            <h3>Key Features</h3>
+            <ul>
+                <li><strong>Add Mode:</strong> Insert any text at the start or end of each line</li>
+                <li><strong>Remove Mode:</strong> Strip unwanted prefixes or suffixes from your text</li>
+                <li><strong>Number Lines:</strong> Automatically add sequential numbers to your lines</li>
+                <li><strong>Strip Numbers:</strong> Remove existing line numbers or numbering patterns</li>
+                <li><strong>Quick Presets:</strong> One-click buttons for common formatting needs</li>
+                <li><strong>Flexible Options:</strong> Skip empty lines, trim spaces, and more</li>
+            </ul>
+
+            <h3>Common Use Cases</h3>
+            <ul>
+                <li><strong>Creating Lists:</strong> Add bullets, dashes, or numbers to plain text</li>
+                <li><strong>Code Formatting:</strong> Add indentation or remove line numbers from code snippets</li>
+                <li><strong>Data Preparation:</strong> Add quotes for SQL/CSV, or remove unwanted characters</li>
+                <li><strong>Email Lists:</strong> Add commas or semicolons between addresses</li>
+                <li><strong>Documentation:</strong> Format text for markdown, wikis, or other markup languages</li>
+                <li><strong>Cleaning Pasted Text:</strong> Remove numbers or symbols from copied content</li>
+            </ul>
+
+            <h3>Pro Tips</h3>
+            <ul>
+                <li>Use the "Skip empty lines" option to maintain paragraph structure</li>
+                <li>Combine prefix and suffix for powerful formatting (e.g., ["prefix", "suffix"])</li>
+                <li>The strip numbers feature works with various numbering formats automatically</li>
+                <li>You can use special characters like tabs (\t) in your prefix/suffix</li>
+                <li>Process your text multiple times for complex transformations</li>
+            </ul>
+
+            <h2>How to Use This Tool</h2>
+            <ol>
+                <li>Choose your mode: Add, Remove, Number Lines, or Strip Numbers</li>
+                <li>Configure your options (prefix/suffix text, formatting preferences)</li>
+                <li>Paste or type your text in the input area</li>
+                <li>Click "Process Text" to see the results instantly</li>
+                <li>Copy the output or continue editing as needed</li>
+            </ol>
+
+            <h2>Why Use Our Prefix/Suffix Tool?</h2>
+            <p>Unlike basic find-and-replace tools, our Prefix/Suffix Master is specifically designed for line-by-line text manipulation. It's faster than manual editing, more precise than regular expressions for simple tasks, and includes helpful presets for common formatting needs. Whether you're a developer, writer, or data analyst, this tool saves time and reduces errors in text formatting tasks.</p>
+
+            <div class="related-tools">
+                <h3>Related Text Tools</h3>
+                <div class="tool-grid">
+                    <a href="/find-replace" class="tool-card">
+                        <h4>🔍 Find & Replace</h4>
+                        <p>Advanced text replacement</p>
+                    </a>
+                    <a href="/remove-duplicates" class="tool-card">
+                        <h4>🧹 Remove Duplicates</h4>
+                        <p>Clean up repeated lines</p>
+                    </a>
+                    <a href="/sort-lines" class="tool-card">
+                        <h4>📊 Sort Lines</h4>
+                        <p>Alphabetical & custom sorting</p>
+                    </a>
+                    <a href="/line-breaks" class="tool-card">
+                        <h4>📄 Line Break Remover</h4>
+                        <p>Fix text formatting</p>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Free Text Convert - Your go-to platform for text manipulation tools</p>
+        <p><a href="/privacy">Privacy Policy</a> | <a href="/contact">Contact</a></p>
+    </footer>
+
+    <div class="notification" id="notification">
+        <span>✓</span>
+        <span id="notification-text">Text copied to clipboard!</span>
+    </div>
+
+    <script>
+        let currentMode = 'add';
+
+        function selectMode(mode) {
+            currentMode = mode;
+            
+            // Update button states
+            document.querySelectorAll('.mode-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.closest('.mode-btn').classList.add('active');
+            
+            // Show/hide option panels
+            document.querySelectorAll('.options-panel').forEach(panel => {
+                panel.classList.remove('active');
+            });
+            document.getElementById(mode + '-options').classList.add('active');
+            
+            // Clear output when switching modes
+            document.getElementById('output').value = '';
+            updateCounts();
+        }
+
+        function setPrefix(value) {
+            document.getElementById('add-prefix').value = value;
+        }
+
+        function setSuffix(value) {
+            document.getElementById('add-suffix').value = value;
+        }
+
+        function processText() {
+            const input = document.getElementById('input').value;
+            if (!input.trim()) {
+                showNotification('Please enter some text to process', 'error');
+                return;
+            }
+            
+            const lines = input.split('\n');
+            let processedLines = [];
+            
+            switch(currentMode) {
+                case 'add':
+                    processedLines = processAddMode(lines);
+                    break;
+                case 'remove':
+                    processedLines = processRemoveMode(lines);
+                    break;
+                case 'number':
+                    processedLines = processNumberMode(lines);
+                    break;
+                case 'strip-numbers':
+                    processedLines = processStripNumbersMode(lines);
+                    break;
+            }
+            
+            document.getElementById('output').value = processedLines.join('\n');
+            updateCounts();
+            showNotification('Text processed successfully!');
+        }
+
+        function processAddMode(lines) {
+            const prefix = document.getElementById('add-prefix').value;
+            const suffix = document.getElementById('add-suffix').value;
+            const skipEmpty = document.getElementById('skip-empty-add').checked;
+            
+            return lines.map(line => {
+                if (skipEmpty && line.trim() === '') {
+                    return line;
+                }
+                return prefix + line + suffix;
+            });
+        }
+
+        function processRemoveMode(lines) {
+            const prefix = document.getElementById('remove-prefix').value;
+            const suffix = document.getElementById('remove-suffix').value;
+            const trimSpaces = document.getElementById('trim-spaces').checked;
+            
+            return lines.map(line => {
+                let processed = line;
+                
+                if (prefix && processed.startsWith(prefix)) {
+                    processed = processed.substring(prefix.length);
+                }
+                
+                if (suffix && processed.endsWith(suffix)) {
+                    processed = processed.substring(0, processed.length - suffix.length);
+                }
+                
+                if (trimSpaces) {
+                    processed = processed.trim();
+                }
+                
+                return processed;
+            });
+        }
+
+        function processNumberMode(lines) {
+            const format = document.getElementById('number-format').value;
+            const skipEmpty = document.getElementById('skip-empty-number').checked;
+            let counter = 1;
+            
+            return lines.map(line => {
+                if (skipEmpty && line.trim() === '') {
+                    return line;
+                }
+                
+                let number;
+                if (format.includes('01')) {
+                    number = String(counter).padStart(2, '0');
+                } else {
+                    number = counter;
+                }
+                
+                const formatted = format.replace(/\d+/, number);
+                counter++;
+                return formatted + line;
+            });
+        }
+
+        function processStripNumbersMode(lines) {
+            const pattern = document.getElementById('strip-pattern').value;
+            const customPattern = document.getElementById('custom-pattern').value;
+            const trimSpaces = document.getElementById('strip-trim').checked;
+            
+            return lines.map(line => {
+                let processed = line;
+                
+                switch(pattern) {
+                    case 'any':
+                        // Remove any common numbering pattern at the start
+                        processed = processed.replace(/^(\d+[\.\)\]:]?\s*|\[\d+\]\s*)/g, '');
+                        break;
+                    case 'dots':
+                        processed = processed.replace(/^\d+\.\s*/, '');
+                        break;
+                    case 'parens':
+                        processed = processed.replace(/^\d+\)\s*/, '');
+                        break;
+                    case 'brackets':
+                        processed = processed.replace(/^\[\d+\]\s*/, '');
+                        break;
+                    case 'custom':
+                        if (customPattern) {
+                            if (processed.startsWith(customPattern)) {
+                                processed = processed.substring(customPattern.length);
+                            }
+                        }
+                        break;
+                }
+                
+                if (trimSpaces) {
+                    processed = processed.trim();
+                }
+                
+                return processed;
+            });
+        }
+
+        function loadExample(type) {
+            const examples = {
+                bullets: {
+                    mode: 'add',
+                    input: 'Apple\nBanana\nCherry\nDate\nElderberry',
+                    prefix: '• ',
+                    suffix: ''
+                },
+                quotes: {
+                    mode: 'add',
+                    input: 'Hello World\nTest String\nExample Text\nSample Data\nDemo Content',
+                    prefix: '"',
+                    suffix: '"'
+                },
+                numbers: {
+                    mode: 'number',
+                    input: 'First item\nSecond item\nThird item\nFourth item\nFifth item',
+                    format: '1. '
+                },
+                remove: {
+                    mode: 'strip-numbers',
+                    input: '1. First line\n2. Second line\n3. Third line\n4. Fourth line\n5. Fifth line',
+                    pattern: 'dots'
+                }
+            };
+            
+            const example = examples[type];
+            
+            // Select the appropriate mode
+            document.querySelectorAll('.mode-btn').forEach((btn, index) => {
+                btn.classList.remove('active');
+                if (btn.textContent.toLowerCase().includes(example.mode) || 
+                    (example.mode === 'number' && index === 2) ||
+                    (example.mode === 'strip-numbers' && index === 3)) {
+                    btn.classList.add('active');
+                }
+            });
+            
+            // Show appropriate options panel
+            document.querySelectorAll('.options-panel').forEach(panel => {
+                panel.classList.remove('active');
+            });
+            document.getElementById(example.mode + '-options').classList.add('active');
+            currentMode = example.mode;
+            
+            // Set input
+            document.getElementById('input').value = example.input;
+            
+            // Set options based on example
+            if (example.prefix !== undefined) {
+                document.getElementById('add-prefix').value = example.prefix;
+            }
+            if (example.suffix !== undefined) {
+                document.getElementById('add-suffix').value = example.suffix;
+            }
+            if (example.format) {
+                document.getElementById('number-format').value = example.format;
+            }
+            if (example.pattern) {
+                document.getElementById('strip-pattern').value = example.pattern;
+            }
+            
+            // Process the text
+            processText();
+        }
+
+        function clearAll() {
+            document.getElementById('input').value = '';
+            document.getElementById('output').value = '';
+            updateCounts();
+        }
+
+        function copyOutput() {
+            const output = document.getElementById('output');
+            if (!output.value) {
+                showNotification('No output to copy!', 'error');
+                return;
+            }
+            
+            output.select();
+            document.execCommand('copy');
+            showNotification('Output copied to clipboard!');
+        }
+
+        function updateCounts() {
+            const input = document.getElementById('input').value;
+            const output = document.getElementById('output').value;
+            
+            const inputLines = input ? input.split('\n').length : 0;
+            const outputLines = output ? output.split('\n').length : 0;
+            
+            document.getElementById('input-count').textContent = `${inputLines} line${inputLines !== 1 ? 's' : ''}`;
+            document.getElementById('output-count').textContent = `${outputLines} line${outputLines !== 1 ? 's' : ''}`;
+        }
+
+        function showNotification(message, type = 'success') {
+            const notification = document.getElementById('notification');
+            const text = document.getElementById('notification-text');
+            
+            text.textContent = message;
+            notification.style.background = type === 'error' ? '#e74c3c' : '#27ae60';
+            notification.classList.add('show');
+            
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 3000);
+        }
+
+        // Update strip pattern visibility
+        document.getElementById('strip-pattern').addEventListener('change', function() {
+            const customGroup = document.getElementById('custom-pattern-group');
+            customGroup.style.display = this.value === 'custom' ? 'block' : 'none';
+        });
+
+        // Update counts on input
+        document.getElementById('input').addEventListener('input', updateCounts);
+        document.getElementById('output').addEventListener('input', updateCounts);
+
+        // Initialize counts
+        updateCounts();
+
+        // Process on Enter key (when Ctrl/Cmd is held)
+        document.getElementById('input').addEventListener('keydown', function(e) {
+            if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') {
+                e.preventDefault();
+                processText();
+            }
+        });
+    </script>
+</body>
+</html>
