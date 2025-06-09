@@ -17,6 +17,122 @@
 
         gtag('config', 'G-792NQ00CEV');
     </script>
+
+    <style>
+        /* Mobile-First Responsive Styles */
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px !important;
+            }
+
+            .tool-card {
+                padding: 20px 15px !important;
+                margin: 15px 0 !important;
+            }
+
+            .tool-card h2 {
+                font-size: 1.8rem !important;
+                margin-bottom: 15px !important;
+            }
+
+            .tool-card p {
+                font-size: 1rem !important;
+                line-height: 1.6 !important;
+                padding: 0 10px !important;
+            }
+
+            /* Center the content div */
+            .tool-card > div[style*="text-align: center"] {
+                padding: 20px 10px !important;
+            }
+
+            /* Make buttons responsive */
+            .btn.btn-primary {
+                display: inline-block !important;
+                width: auto !important;
+                max-width: 90% !important;
+                margin: 0 auto !important;
+                padding: 15px 30px !important;
+                font-size: 1.1rem !important;
+                white-space: nowrap !important;
+            }
+
+            /* Features box */
+            .tool-card > div[style*="background: #f8f9fa"] {
+                padding: 15px !important;
+                margin: 15px -15px -20px -15px !important;
+                border-radius: 0 0 5px 5px !important;
+            }
+
+            /* Button grid for case converter */
+            .button-grid {
+                grid-template-columns: repeat(2, 1fr) !important;
+                gap: 10px !important;
+                padding: 0 10px !important;
+            }
+
+            .button-grid .btn {
+                font-size: 0.9rem !important;
+                padding: 12px 8px !important;
+            }
+
+            /* Form styling */
+            form[name="newsletter"] {
+                flex-direction: column !important;
+                padding: 0 20px !important;
+            }
+
+            form[name="newsletter"] input[type="email"] {
+                border-radius: 5px !important;
+                margin-bottom: 10px !important;
+                font-size: 16px !important; /* Prevents zoom on iOS */
+            }
+
+            form[name="newsletter"] button {
+                border-radius: 5px !important;
+                width: 100% !important;
+                font-size: 16px !important;
+            }
+
+            /* Footer badge */
+            footer img {
+                max-width: 120px !important;
+            }
+
+            /* Navigation */
+            nav {
+                font-size: 0.9rem !important;
+            }
+
+            nav a {
+                margin-right: 15px !important;
+            }
+        }
+
+        /* Ensure buttons are always centered */
+        .btn-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            padding: 20px 0;
+        }
+
+        /* Additional mobile optimizations */
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 1.8rem !important;
+            }
+
+            .tagline {
+                font-size: 0.9rem !important;
+            }
+
+            .tool-card h2 {
+                font-size: 1.5rem !important;
+            }
+        }
+    </style>
 </head>
 <body>
     <div class="container">
@@ -103,11 +219,8 @@
                 Count words, characters, and check social media limits instantly
                 </p>
     
-                <div style="text-align: center; padding: 40px;">
-                    <p style="font-size: 18px; color: #333; margin-bottom: 20px;">
-                    Need to count words or check if your post fits Twitter's limit?
-                    </p>
-                    <a href="/word-counter" class="btn btn-primary" style="font-size: 18px; padding: 15px 40px;">
+                <div class="btn-container">
+                    <a href="/word-counter" class="btn btn-primary">
                     Open Word Counter →
                     </a>
                 </div>
@@ -126,11 +239,8 @@
                 Remove unwanted line breaks from PDF copies and clean up text formatting
                 </p>
     
-                <div style="text-align: center; padding: 40px;">
-                    <p style="font-size: 18px; color: #333; margin-bottom: 20px;">
-                    Fix broken text from PDFs, emails, and documents instantly
-                    </p>
-                    <a href="/line-break-remover" class="btn btn-primary" style="font-size: 18px; padding: 15px 40px;">
+                <div class="btn-container">
+                    <a href="/line-break-remover" class="btn btn-primary">
                     Open Line Break Remover →
                     </a>
                 </div>
@@ -149,11 +259,8 @@
                     Search and replace text with advanced options including bulk replacements
                 </p>
     
-                <div style="text-align: center; padding: 40px;">
-                    <p style="font-size: 18px; color: #333; margin-bottom: 20px;">
-                        Perfect for bulk text editing, data cleaning, and pattern replacements
-                    </p>
-                    <a href="/find-replace" class="btn btn-primary" style="font-size: 18px; padding: 15px 40px;">
+                <div class="btn-container">
+                    <a href="/find-replace" class="btn btn-primary">
                         Open Find & Replace →
                     </a>
                 </div>
@@ -172,11 +279,8 @@
                     Clean up lists by removing duplicate entries and get unique values instantly
                 </p>
     
-                <div style="text-align: center; padding: 40px;">
-                    <p style="font-size: 18px; color: #333; margin-bottom: 20px;">
-                        Perfect for cleaning email lists, keywords, and data
-                    </p>
-                    <a href="/remove-duplicates" class="btn btn-primary" style="font-size: 18px; padding: 15px 40px;">
+                <div class="btn-container">
+                    <a href="/remove-duplicates" class="btn btn-primary">
                         Open Duplicate Remover →
                     </a>
                 </div>
@@ -194,11 +298,8 @@
                     <p style="text-align: center; color: #666; margin-bottom: 20px;">
                         Reverse text, words, or lines with multiple options including upside-down text
                     </p>
-                <div style="text-align: center; padding: 40px;">
-                    <p style="font-size: 18px; color: #333; margin-bottom: 20px;">
-                        Perfect for creating mirror text, puzzles, or unique social media posts
-                    </p>
-                    <a href="/text-reverser" class="btn btn-primary" style="font-size: 18px; padding: 15px 40px;">
+                <div class="btn-container">
+                    <a href="/text-reverser" class="btn btn-primary">
                         Open Text Reverser →
                     </a>
                 </div>
@@ -215,11 +316,8 @@
                     <p style="text-align: center; color: #666; margin-bottom: 20px;">
                         Sort lists alphabetically, numerically, by length, or randomly
                     </p>
-                <div style="text-align: center; padding: 40px;">
-                    <p style="font-size: 18px; color: #333; margin-bottom: 20px;">
-                         Organize any list with multiple sorting options and filters
-                    </p>
-                    <a href="/sort-lines" class="btn btn-primary" style="font-size: 18px; padding: 15px 40px;">
+                <div class="btn-container">
+                    <a href="/sort-lines" class="btn btn-primary">
                         Open Sort Lines →
                     </a>
                 </div>
@@ -236,11 +334,8 @@
                     <p style="text-align: center; color: #666; margin-bottom: 20px;">
                         Format, validate, and beautify JSON with syntax highlighting and error detection
                     </p>
-                <div style="text-align: center; padding: 40px;">
-                    <p style="font-size: 18px; color: #333; margin-bottom: 20px;">
-                        Perfect for API development, debugging, and configuration files
-                    </p>
-                    <a href="/json-formatter" class="btn btn-primary" style="font-size: 18px; padding: 15px 40px;">
+                <div class="btn-container">
+                    <a href="/json-formatter" class="btn btn-primary">
                         Open JSON Formatter →
                     </a>
                 </div>
@@ -255,11 +350,8 @@
                     <p style="text-align: center; color: #666; margin-bottom: 20px;">
                         Convert CSV data to JSON with multiple output formats and automatic type detection
                     </p>
-                <div style="text-align: center; padding: 40px;">
-                    <p style="font-size: 18px; color: #333; margin-bottom: 20px;">
-                        Transform spreadsheet data into API-ready JSON instantly
-                    </p>
-                    <a href="/csv-to-json" class="btn btn-primary" style="font-size: 18px; padding: 15px 40px;">
+                <div class="btn-container">
+                    <a href="/csv-to-json" class="btn btn-primary">
                         Open CSV to JSON →
                     </a>
                 </div>
@@ -270,23 +362,38 @@
                 </div>
             </div>
 
-            <!-- Prefix/Suffix Master Tool -->
+            <!-- NEW: Prefix/Suffix Master Tool -->
             <div class="tool-card" style="margin-top: 30px;">
                 <h2>Prefix/Suffix Master</h2>
                     <p style="text-align: center; color: #666; margin-bottom: 20px;">
                         Add or remove text from the beginning or end of each line - The most useful tool ever!
                     </p>
-                <div style="text-align: center; padding: 40px;">
-                    <p style="font-size: 18px; color: #333; margin-bottom: 20px;">
-                        Perfect for adding bullets, numbers, quotes, or cleaning up lists
-                    </p>
-                    <a href="/prefix-suffix" class="btn btn-primary" style="font-size: 18px; padding: 15px 40px;">
+                <div class="btn-container">
+                    <a href="/prefix-suffix" class="btn btn-primary">
                         Open Prefix/Suffix Master →
                     </a>
                 </div>
                 <div style="background: #f8f9fa; padding: 20px; border-radius: 5px; margin-top: 20px;">
                     <p style="margin: 0; color: #666;">
                         <strong>Features:</strong> Add prefixes • Add suffixes • Number lines • Strip numbers • Quick presets
+                    </p>
+                </div>
+            </div>
+
+            <!-- JSON to CSV Converter -->
+            <div class="tool-card" style="margin-top: 30px;">
+                <h2>JSON to CSV Converter</h2>
+                    <p style="text-align: center; color: #666; margin-bottom: 20px;">
+                        Transform JSON data to CSV format for Excel, Google Sheets, and databases
+                    </p>
+                <div class="btn-container">
+                    <a href="/json-to-csv" class="btn btn-primary">
+                        Open JSON to CSV →
+                    </a>
+                </div>
+                <div style="background: #f8f9fa; padding: 20px; border-radius: 5px; margin-top: 20px;">
+                    <p style="margin: 0; color: #666;">
+                        <strong>Features:</strong> Flatten nested objects • Multiple delimiters • Download .csv • Table preview • Handle arrays
                     </p>
                 </div>
             </div>
