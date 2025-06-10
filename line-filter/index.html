@@ -1,0 +1,1153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Line Filter Pro - Remove or Keep Lines by Pattern | Free Text Convert</title>
+    <meta name="description" content="Filter text lines by pattern. Remove lines containing specific text or keep only matching lines. Supports regex, case sensitivity, and multiple filters.">
+    <link rel="canonical" href="https://freetextconvert.com/line-filter">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📝</text></svg>">
+    
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-792NQ00CEV"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-792NQ00CEV');
+    </script>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f5f5f5;
+        }
+
+        header {
+            background-color: white;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #2c3e50;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: #555;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #3498db;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 1rem;
+            font-size: 2.5rem;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+        }
+
+        .tool-container {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .filter-controls {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .filter-mode {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .mode-btn {
+            flex: 1;
+            min-width: 150px;
+            padding: 1rem;
+            border: 2px solid #e0e0e0;
+            background: white;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: center;
+        }
+
+        .mode-btn:hover {
+            border-color: #3498db;
+            transform: translateY(-2px);
+        }
+
+        .mode-btn.active {
+            background: #3498db;
+            color: white;
+            border-color: #3498db;
+        }
+
+        .mode-btn h3 {
+            margin: 0 0 0.5rem 0;
+            font-size: 1.1rem;
+        }
+
+        .mode-btn p {
+            margin: 0;
+            font-size: 0.85rem;
+            opacity: 0.8;
+        }
+
+        .filter-input-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .filter-input-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: #555;
+        }
+
+        .filter-input {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+            font-family: 'Courier New', monospace;
+        }
+
+        .filter-options {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+            margin-bottom: 1rem;
+        }
+
+        .option-group {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .option-group input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+        }
+
+        .option-group label {
+            cursor: pointer;
+        }
+
+        .filter-logic {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid #e0e0e0;
+        }
+
+        .logic-btn {
+            padding: 0.5rem 1rem;
+            border: 1px solid #ddd;
+            background: white;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .logic-btn.active {
+            background: #3498db;
+            color: white;
+            border-color: #3498db;
+        }
+
+        .add-filter-btn {
+            padding: 0.5rem 1rem;
+            border: 1px solid #3498db;
+            background: white;
+            color: #3498db;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-left: auto;
+        }
+
+        .add-filter-btn:hover {
+            background: #3498db;
+            color: white;
+        }
+
+        .filter-item {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+            margin-bottom: 1rem;
+            padding: 1rem;
+            background: #f0f0f0;
+            border-radius: 5px;
+        }
+
+        .filter-item input {
+            flex: 1;
+        }
+
+        .remove-filter-btn {
+            padding: 0.5rem;
+            background: #e74c3c;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.8rem;
+        }
+
+        .text-areas {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .text-area-wrapper {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .text-area-wrapper h3 {
+            margin-bottom: 0.5rem;
+            color: #555;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        textarea {
+            width: 100%;
+            min-height: 400px;
+            padding: 1rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.95rem;
+            resize: vertical;
+        }
+
+        textarea:focus {
+            outline: none;
+            border-color: #3498db;
+        }
+
+        .line-count {
+            font-size: 0.85rem;
+            color: #666;
+        }
+
+        .stats-panel {
+            background: #e8f5e9;
+            padding: 1rem;
+            border-radius: 5px;
+            margin-bottom: 1rem;
+            display: none;
+        }
+
+        .stats-panel.show {
+            display: block;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            text-align: center;
+        }
+
+        .stat-item {
+            padding: 0.5rem;
+        }
+
+        .stat-value {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #27ae60;
+        }
+
+        .stat-label {
+            font-size: 0.85rem;
+            color: #666;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 0.75rem 2rem;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-primary {
+            background: #3498db;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #2980b9;
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: #95a5a6;
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background: #7f8c8d;
+        }
+
+        .btn-success {
+            background: #27ae60;
+            color: white;
+        }
+
+        .btn-success:hover {
+            background: #229954;
+        }
+
+        .examples-section {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .examples-section h2 {
+            color: #2c3e50;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .example-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .example-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            border: 1px solid #e0e0e0;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .example-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .example-card h3 {
+            color: #3498db;
+            margin-bottom: 0.5rem;
+        }
+
+        .example-card .example-text {
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+            color: #666;
+            margin: 0.5rem 0;
+            padding: 0.5rem;
+            background: #f5f5f5;
+            border-radius: 4px;
+        }
+
+        .notification {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: #27ae60;
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 5px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            display: none;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .notification.show {
+            display: flex;
+            animation: slideIn 0.3s ease;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(100%);
+            }
+            to {
+                transform: translateX(0);
+            }
+        }
+
+        .info-section {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .info-section h2 {
+            color: #2c3e50;
+            margin: 2rem 0 1rem;
+        }
+
+        .info-section h3 {
+            color: #34495e;
+            margin: 1.5rem 0 0.75rem;
+        }
+
+        .info-section ul {
+            margin-left: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .info-section li {
+            margin-bottom: 0.5rem;
+        }
+
+        .info-section code {
+            background: #f0f0f0;
+            padding: 0.2rem 0.4rem;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+        }
+
+        .related-tools {
+            background: #ecf0f1;
+            padding: 2rem;
+            border-radius: 10px;
+            margin-top: 3rem;
+            text-align: center;
+        }
+
+        .related-tools h3 {
+            color: #2c3e50;
+            margin-bottom: 1rem;
+        }
+
+        .tool-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .tool-card {
+            background: white;
+            padding: 1rem;
+            border-radius: 5px;
+            text-decoration: none;
+            color: #333;
+            transition: transform 0.3s;
+        }
+
+        .tool-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        footer {
+            background: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 4rem;
+        }
+
+        footer a {
+            color: #3498db;
+            text-decoration: none;
+        }
+
+        @media (max-width: 768px) {
+            .text-areas {
+                grid-template-columns: 1fr;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+
+            .filter-mode {
+                flex-direction: column;
+            }
+
+            .mode-btn {
+                min-width: 100%;
+            }
+
+            .filter-options {
+                flex-direction: column;
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="/" class="logo">📝 Free Text Convert</a>
+            <div class="nav-links">
+                <a href="/">Home</a>
+                <a href="/tools">All Tools</a>
+                <a href="/blog">Blog</a>
+            </div>
+        </nav>
+    </header>
+
+    <div class="container">
+        <h1>Line Filter Pro</h1>
+        <p class="subtitle">Remove or keep lines by pattern - The ultimate text filtering tool</p>
+
+        <div class="tool-container">
+            <div class="filter-controls">
+                <div class="filter-mode">
+                    <button class="mode-btn active" onclick="setMode('remove')">
+                        <h3>🚫 Remove Lines</h3>
+                        <p>Delete matching lines</p>
+                    </button>
+                    <button class="mode-btn" onclick="setMode('keep')">
+                        <h3>✅ Keep Lines</h3>
+                        <p>Keep only matching lines</p>
+                    </button>
+                    <button class="mode-btn" onclick="setMode('extract')">
+                        <h3>📋 Extract Matches</h3>
+                        <p>Extract matching text</p>
+                    </button>
+                </div>
+
+                <div id="filters-container">
+                    <div class="filter-item" data-filter-id="1">
+                        <div class="filter-input-group" style="flex: 1;">
+                            <input type="text" class="filter-input" placeholder="Enter text or pattern to filter..." id="filter-1">
+                        </div>
+                        <button class="remove-filter-btn" onclick="removeFilter(1)" style="display: none;">Remove</button>
+                    </div>
+                </div>
+
+                <div class="filter-options">
+                    <div class="option-group">
+                        <input type="checkbox" id="case-sensitive">
+                        <label for="case-sensitive">Case sensitive</label>
+                    </div>
+                    <div class="option-group">
+                        <input type="checkbox" id="use-regex">
+                        <label for="use-regex">Use regex patterns</label>
+                    </div>
+                    <div class="option-group">
+                        <input type="checkbox" id="whole-words">
+                        <label for="whole-words">Whole words only</label>
+                    </div>
+                    <div class="option-group">
+                        <input type="checkbox" id="trim-empty">
+                        <label for="trim-empty">Remove empty lines</label>
+                    </div>
+                </div>
+
+                <div class="filter-logic" id="filter-logic" style="display: none;">
+                    <span style="font-weight: 600;">Multiple filters:</span>
+                    <button class="logic-btn active" onclick="setLogic('OR')">OR (any)</button>
+                    <button class="logic-btn" onclick="setLogic('AND')">AND (all)</button>
+                    <button class="add-filter-btn" onclick="addFilter()">+ Add Filter</button>
+                </div>
+            </div>
+
+            <div id="stats-panel" class="stats-panel">
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <div class="stat-value" id="lines-matched">0</div>
+                        <div class="stat-label">Lines Matched</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="lines-removed">0</div>
+                        <div class="stat-label">Lines Removed</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="lines-kept">0</div>
+                        <div class="stat-label">Lines Kept</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-areas">
+                <div class="text-area-wrapper">
+                    <h3>Input Text <span class="line-count" id="input-count">0 lines</span></h3>
+                    <textarea id="input" placeholder="Paste your text here...
+Each line will be checked against your filter pattern"></textarea>
+                </div>
+                <div class="text-area-wrapper">
+                    <h3>Filtered Output <span class="line-count" id="output-count">0 lines</span></h3>
+                    <textarea id="output" readonly placeholder="Filtered text will appear here..."></textarea>
+                </div>
+            </div>
+
+            <div class="action-buttons">
+                <button class="btn btn-primary" onclick="applyFilter()">
+                    <span>🔍</span> Apply Filter
+                </button>
+                <button class="btn btn-secondary" onclick="clearAll()">
+                    <span>🗑️</span> Clear All
+                </button>
+                <button class="btn btn-success" onclick="copyOutput()">
+                    <span>📋</span> Copy Output
+                </button>
+            </div>
+        </div>
+
+        <div class="examples-section">
+            <h2>Quick Examples - Click to Try!</h2>
+            <div class="example-grid">
+                <div class="example-card" onclick="loadExample('errors')">
+                    <h3>Remove Error Lines</h3>
+                    <div class="example-text">
+                        INFO: Process started<br>
+                        ERROR: Failed to connect<br>
+                        INFO: Retrying...<br>
+                        ERROR: Timeout
+                    </div>
+                    <p>Remove all ERROR lines</p>
+                </div>
+                <div class="example-card" onclick="loadExample('emails')">
+                    <h3>Extract Email Lines</h3>
+                    <div class="example-text">
+                        John Doe<br>
+                        john@example.com<br>
+                        Jane Smith<br>
+                        jane@example.com
+                    </div>
+                    <p>Keep only email addresses</p>
+                </div>
+                <div class="example-card" onclick="loadExample('numbers')">
+                    <h3>Filter Numeric Lines</h3>
+                    <div class="example-text">
+                        Product A<br>
+                        123.45<br>
+                        Product B<br>
+                        67.89
+                    </div>
+                    <p>Extract price lines</p>
+                </div>
+                <div class="example-card" onclick="loadExample('comments')">
+                    <h3>Remove Comments</h3>
+                    <div class="example-text">
+                        # This is a comment<br>
+                        active_user = true<br>
+                        // Another comment<br>
+                        max_size = 100
+                    </div>
+                    <p>Clean code comments</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="info-section">
+            <h2>What is Line Filter Pro?</h2>
+            <p>Line Filter Pro is a powerful text filtering tool that allows you to remove or keep lines based on specific patterns. Whether you're cleaning log files, extracting data, or processing lists, this tool makes it easy to filter text line by line.</p>
+
+            <h3>Key Features</h3>
+            <ul>
+                <li><strong>Remove Lines:</strong> Delete all lines containing specific text or patterns</li>
+                <li><strong>Keep Lines:</strong> Keep only lines that match your criteria</li>
+                <li><strong>Extract Matches:</strong> Pull out just the matching portions of text</li>
+                <li><strong>Multiple Filters:</strong> Combine filters with AND/OR logic</li>
+                <li><strong>Regex Support:</strong> Use powerful regular expressions for complex patterns</li>
+                <li><strong>Case Options:</strong> Case-sensitive or case-insensitive matching</li>
+            </ul>
+
+            <h3>Common Use Cases</h3>
+            <ul>
+                <li><strong>Log File Analysis:</strong> Remove debug messages, extract errors</li>
+                <li><strong>Data Cleaning:</strong> Filter out unwanted entries from lists</li>
+                <li><strong>Email Extraction:</strong> Find all lines containing email addresses</li>
+                <li><strong>Code Cleanup:</strong> Remove comments or specific code patterns</li>
+                <li><strong>CSV Processing:</strong> Filter rows based on column values</li>
+                <li><strong>URL Filtering:</strong> Extract or remove lines with URLs</li>
+            </ul>
+
+            <h3>Pattern Matching Options</h3>
+            <ul>
+                <li><strong>Simple Text:</strong> Match exact text anywhere in the line</li>
+                <li><strong>Whole Words:</strong> Match complete words only (e.g., "log" won't match "login")</li>
+                <li><strong>Regular Expressions:</strong> Use patterns like <code>^ERROR:</code> or <code>\d+\.\d+</code></li>
+                <li><strong>Multiple Patterns:</strong> Combine filters with OR (match any) or AND (match all)</li>
+            </ul>
+
+            <h3>Pro Tips</h3>
+            <ul>
+                <li>Use <code>^</code> in regex to match lines starting with a pattern</li>
+                <li>Use <code>$</code> to match patterns at the end of lines</li>
+                <li>Enable "Remove empty lines" to clean up the output</li>
+                <li>Combine multiple filters for complex filtering logic</li>
+                <li>Test with a small sample before processing large files</li>
+            </ul>
+
+            <h2>How to Use This Tool</h2>
+            <ol>
+                <li>Choose your filter mode: Remove, Keep, or Extract</li>
+                <li>Enter your filter pattern (text or regex)</li>
+                <li>Configure options (case sensitivity, whole words, etc.)</li>
+                <li>Paste or type your text in the input area</li>
+                <li>Click "Apply Filter" to process</li>
+                <li>Copy the filtered output</li>
+            </ol>
+
+            <div class="related-tools">
+                <h3>Related Text Tools</h3>
+                <div class="tool-grid">
+                    <a href="/remove-duplicates" class="tool-card">
+                        <h4>🧹 Remove Duplicates</h4>
+                        <p>Clean duplicate lines</p>
+                    </a>
+                    <a href="/sort-lines" class="tool-card">
+                        <h4>📊 Sort Lines</h4>
+                        <p>Organize your text</p>
+                    </a>
+                    <a href="/find-replace" class="tool-card">
+                        <h4>🔍 Find & Replace</h4>
+                        <p>Replace text patterns</p>
+                    </a>
+                    <a href="/prefix-suffix" class="tool-card">
+                        <h4>➕ Prefix/Suffix</h4>
+                        <p>Add text to lines</p>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 Free Text Convert - Your go-to platform for text manipulation tools</p>
+        <p><a href="/privacy">Privacy Policy</a> | <a href="/contact">Contact</a></p>
+    </footer>
+
+    <div class="notification" id="notification">
+        <span>✓</span>
+        <span id="notification-text">Text copied to clipboard!</span>
+    </div>
+
+    <script>
+        let currentMode = 'remove';
+        let filterLogic = 'OR';
+        let filterCount = 1;
+
+        function setMode(mode) {
+            currentMode = mode;
+            
+            // Update button states
+            document.querySelectorAll('.mode-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.closest('.mode-btn').classList.add('active');
+            
+            // Clear output when switching modes
+            document.getElementById('output').value = '';
+            updateCounts();
+            document.getElementById('stats-panel').classList.remove('show');
+        }
+
+        function setLogic(logic) {
+            filterLogic = logic;
+            
+            // Update button states
+            document.querySelectorAll('.logic-btn').forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.textContent.includes(logic)) {
+                    btn.classList.add('active');
+                }
+            });
+        }
+
+        function addFilter() {
+            filterCount++;
+            const container = document.getElementById('filters-container');
+            const filterDiv = document.createElement('div');
+            filterDiv.className = 'filter-item';
+            filterDiv.setAttribute('data-filter-id', filterCount);
+            
+            filterDiv.innerHTML = `
+                <div class="filter-input-group" style="flex: 1;">
+                    <input type="text" class="filter-input" placeholder="Enter text or pattern to filter..." id="filter-${filterCount}">
+                </div>
+                <button class="remove-filter-btn" onclick="removeFilter(${filterCount})">Remove</button>
+            `;
+            
+            container.appendChild(filterDiv);
+            document.getElementById('filter-logic').style.display = 'flex';
+            
+            // Update remove buttons visibility
+            updateRemoveButtons();
+        }
+
+        function removeFilter(id) {
+            const filterItem = document.querySelector(`[data-filter-id="${id}"]`);
+            if (filterItem) {
+                filterItem.remove();
+            }
+            
+            // Hide logic controls if only one filter remains
+            const remainingFilters = document.querySelectorAll('.filter-item').length;
+            if (remainingFilters <= 1) {
+                document.getElementById('filter-logic').style.display = 'none';
+            }
+            
+            updateRemoveButtons();
+        }
+
+        function updateRemoveButtons() {
+            const filters = document.querySelectorAll('.filter-item');
+            filters.forEach((filter, index) => {
+                const removeBtn = filter.querySelector('.remove-filter-btn');
+                if (removeBtn) {
+                    removeBtn.style.display = filters.length > 1 ? 'block' : 'none';
+                }
+            });
+        }
+
+        function escapeRegex(str) {
+            return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+        }
+
+        function createPattern(filterText) {
+            const useRegex = document.getElementById('use-regex').checked;
+            const wholeWords = document.getElementById('whole-words').checked;
+            const caseSensitive = document.getElementById('case-sensitive').checked;
+            
+            let pattern;
+            
+            if (useRegex) {
+                try {
+                    pattern = filterText;
+                } catch (e) {
+                    showNotification('Invalid regex pattern', 'error');
+                    return null;
+                }
+            } else {
+                pattern = escapeRegex(filterText);
+                if (wholeWords) {
+                    pattern = `\\b${pattern}\\b`;
+                }
+            }
+            
+            const flags = caseSensitive ? 'g' : 'gi';
+            
+            try {
+                return new RegExp(pattern, flags);
+            } catch (e) {
+                showNotification('Invalid pattern', 'error');
+                return null;
+            }
+        }
+
+        function applyFilter() {
+            const input = document.getElementById('input').value;
+            if (!input.trim()) {
+                showNotification('Please enter some text to filter', 'error');
+                return;
+            }
+            
+            // Get all filter values
+            const filters = [];
+            document.querySelectorAll('.filter-input').forEach(input => {
+                const value = input.value.trim();
+                if (value) {
+                    const pattern = createPattern(value);
+                    if (pattern) {
+                        filters.push(pattern);
+                    }
+                }
+            });
+            
+            if (filters.length === 0) {
+                showNotification('Please enter at least one filter pattern', 'error');
+                return;
+            }
+            
+            const lines = input.split('\n');
+            const trimEmpty = document.getElementById('trim-empty').checked;
+            
+            let matchedCount = 0;
+            let removedCount = 0;
+            let keptCount = 0;
+            
+            const processedLines = lines.filter(line => {
+                // Skip empty lines if trim option is enabled
+                if (trimEmpty && line.trim() === '') {
+                    removedCount++;
+                    return false;
+                }
+                
+                // Check if line matches any/all filters
+                let matches;
+                if (filterLogic === 'OR') {
+                    matches = filters.some(pattern => pattern.test(line));
+                } else {
+                    matches = filters.every(pattern => pattern.test(line));
+                }
+                
+                if (matches) {
+                    matchedCount++;
+                }
+                
+                // Apply mode logic
+                if (currentMode === 'remove') {
+                    if (matches) {
+                        removedCount++;
+                        return false;
+                    } else {
+                        keptCount++;
+                        return true;
+                    }
+                } else if (currentMode === 'keep') {
+                    if (matches) {
+                        keptCount++;
+                        return true;
+                    } else {
+                        removedCount++;
+                        return false;
+                    }
+                }
+                
+                return true;
+            });
+            
+            // Handle extract mode
+            let output;
+            if (currentMode === 'extract') {
+                const extractedParts = [];
+                lines.forEach(line => {
+                    filters.forEach(pattern => {
+                        const matches = line.match(pattern);
+                        if (matches) {
+                            extractedParts.push(...matches);
+                        }
+                    });
+                });
+                output = extractedParts.join('\n');
+                keptCount = extractedParts.length;
+                removedCount = lines.length - extractedParts.length;
+            } else {
+                output = processedLines.join('\n');
+            }
+            
+            document.getElementById('output').value = output;
+            
+            // Update stats
+            document.getElementById('lines-matched').textContent = matchedCount;
+            document.getElementById('lines-removed').textContent = removedCount;
+            document.getElementById('lines-kept').textContent = keptCount;
+            document.getElementById('stats-panel').classList.add('show');
+            
+            updateCounts();
+            showNotification('Filter applied successfully!');
+        }
+
+        function clearAll() {
+            document.getElementById('input').value = '';
+            document.getElementById('output').value = '';
+            document.querySelectorAll('.filter-input').forEach(input => {
+                input.value = '';
+            });
+            updateCounts();
+            document.getElementById('stats-panel').classList.remove('show');
+        }
+
+        function copyOutput() {
+            const output = document.getElementById('output');
+            if (!output.value) {
+                showNotification('No output to copy!', 'error');
+                return;
+            }
+            
+            output.select();
+            document.execCommand('copy');
+            showNotification('Output copied to clipboard!');
+        }
+
+        function updateCounts() {
+            const input = document.getElementById('input').value;
+            const output = document.getElementById('output').value;
+            
+            const inputLines = input ? input.split('\n').length : 0;
+            const outputLines = output ? output.split('\n').length : 0;
+            
+            document.getElementById('input-count').textContent = `${inputLines} line${inputLines !== 1 ? 's' : ''}`;
+            document.getElementById('output-count').textContent = `${outputLines} line${outputLines !== 1 ? 's' : ''}`;
+        }
+
+        function showNotification(message, type = 'success') {
+            const notification = document.getElementById('notification');
+            const text = document.getElementById('notification-text');
+            
+            text.textContent = message;
+            notification.style.background = type === 'error' ? '#e74c3c' : '#27ae60';
+            notification.classList.add('show');
+            
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 3000);
+        }
+
+        function loadExample(type) {
+            const examples = {
+                errors: {
+                    mode: 'remove',
+                    input: `INFO: Process started at 10:00 AM
+ERROR: Failed to connect to database
+INFO: Retrying connection...
+WARNING: Low memory detected
+ERROR: Timeout after 30 seconds
+INFO: Process completed with errors`,
+                    filter: 'ERROR:',
+                    options: { caseSensitive: false, useRegex: false, wholeWords: false }
+                },
+                emails: {
+                    mode: 'keep',
+                    input: `John Doe - Manager
+john.doe@example.com
+Phone: 555-0123
+Jane Smith - Developer
+jane.smith@example.com
+Address: 123 Main St
+Mike Johnson
+mike@example.org`,
+                    filter: '@',
+                    options: { caseSensitive: false, useRegex: false, wholeWords: false }
+                },
+                numbers: {
+                    mode: 'keep',
+                    input: `Product A - Premium Edition
+Price: $123.45
+Description: High-quality product
+Product B - Standard
+Price: $67.89
+In stock: Yes
+Product C
+Price: $234.56`,
+                    filter: '\\$\\d+\\.\\d+',
+                    options: { caseSensitive: false, useRegex: true, wholeWords: false }
+                },
+                comments: {
+                    mode: 'remove',
+                    input: `# Configuration file
+# Last updated: 2025-06-10
+active_user = true
+// Maximum file size in MB
+max_size = 100
+# Debug mode settings
+debug_mode = false
+// End of configuration`,
+                    filter: '^(#|//)',
+                    options: { caseSensitive: false, useRegex: true, wholeWords: false }
+                }
+            };
+            
+            const example = examples[type];
+            
+            // Set mode
+            setMode(example.mode);
+            
+            // Set input and filter
+            document.getElementById('input').value = example.input;
+            document.getElementById('filter-1').value = example.filter;
+            
+            // Set options
+            document.getElementById('case-sensitive').checked = example.options.caseSensitive;
+            document.getElementById('use-regex').checked = example.options.useRegex;
+            document.getElementById('whole-words').checked = example.options.wholeWords;
+            document.getElementById('trim-empty').checked = true;
+            
+            // Apply filter
+            applyFilter();
+        }
+
+        // Update counts on input
+        document.getElementById('input').addEventListener('input', updateCounts);
+        document.getElementById('output').addEventListener('input', updateCounts);
+
+        // Initialize counts
+        updateCounts();
+
+        // Process on Enter key (when Ctrl/Cmd is held)
+        document.addEventListener('keydown', function(e) {
+            if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') {
+                e.preventDefault();
+                applyFilter();
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>How to Filter Lines in Text: Remove or Keep Lines by Pattern | Free Text Convert</title>
+<meta name="description" content="Learn how to filter text lines by pattern. Remove lines containing specific text, keep only matching lines, or extract data using regex. Free online tool included.">
+<link rel="canonical" href="https://freetextconvert.com/blog/filter-text-lines-by-pattern">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📝</text></svg>">
+
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-792NQ00CEV"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-792NQ00CEV');
+</script>
+
+<!-- Schema Markup for Article -->
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "How to Filter Lines in Text: Remove or Keep Lines by Pattern",
+    "description": "Learn how to filter text lines by pattern. Remove lines containing specific text, keep only matching lines, or extract data using regex.",
+    "author": {
+        "@type": "Organization",
+        "name": "Free Text Convert"
+    },
+    "datePublished": "2025-06-10",
+    "dateModified": "2025-06-10",
+    "publisher": {
+        "@type": "Organization",
+        "name": "Free Text Convert",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "https://freetextconvert.com/logo.png"
+        }
+    }
+}
+</script>
+
+<!-- Enhanced Blog Styling -->
+<style>
+    /* Import your main stylesheet */
+    @import url('../style.css');
+
+    /* Enhanced Blog Post Styles */
+    .blog-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+    }
+
+    .blog-article {
+        max-width: 750px;
+        margin: 30px auto;
+        background: white;
+        border-radius: 10px;
+        box-shadow: 0 2px 20px rgba(0,0,0,0.08);
+        overflow: hidden;
+    }
+
+    .article-header {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 60px 40px;
+        text-align: center;
+    }
+
+    .article-header h1 {
+        font-size: 2.5em;
+        margin-bottom: 15px;
+        line-height: 1.3;
+        color: white;
+    }
+
+    .article-meta {
+        font-size: 0.9em;
+        opacity: 0.9;
+        color: white;
+    }
+
+    .article-content {
+        padding: 40px;
+    }
+
+    /* Intro paragraph styling */
+    .article-intro {
+        font-size: 1.15em;
+        line-height: 2.0;
+        margin: 0 0 40px 0;
+        padding: 30px;
+        background: #f8f9fa;
+        border-left: 4px solid #3498db;
+        border-radius: 8px;
+        position: relative;
+    }
+
+    .article-intro p {
+        margin: 0;
+        color: #444;
+    }
+
+    .article-intro strong {
+        color: #2c3e50;
+        font-size: 1.05em;
+    }
+
+    /* Table of Contents */
+    .table-of-contents {
+        background: #f8f9fa;
+        border: 1px solid #e9ecef;
+        border-radius: 10px;
+        padding: 30px;
+        margin: 40px 0;
+    }
+
+    .table-of-contents h2 {
+        margin-top: 0;
+        margin-bottom: 20px;
+        color: #2c3e50;
+        font-size: 1.4em;
+        border-bottom: 2px solid #e9ecef;
+        padding-bottom: 15px;
+    }
+
+    .table-of-contents ul {
+        list-style: none;
+        padding-left: 0;
+        margin: 0;
+    }
+
+    .table-of-contents li {
+        margin-bottom: 15px;
+        padding-left: 25px;
+        position: relative;
+    }
+
+    .table-of-contents li:before {
+        content: "→";
+        position: absolute;
+        left: 0;
+        color: #3498db;
+    }
+
+    .table-of-contents a {
+        color: #3498db;
+        text-decoration: none;
+        font-weight: 500;
+        transition: all 0.3s ease;
+    }
+
+    .table-of-contents a:hover {
+        color: #2c3e50;
+        padding-left: 5px;
+    }
+
+    /* Content typography */
+    .article-content h2 {
+        margin-top: 50px;
+        margin-bottom: 25px;
+        color: #2c3e50;
+        font-size: 1.8em;
+        position: relative;
+        padding-top: 20px;
+    }
+
+    .article-content h2:not(:first-child)::before {
+        content: "";
+        display: block;
+        width: 50px;
+        height: 3px;
+        background: #3498db;
+        margin-bottom: 20px;
+    }
+
+    .article-content h3 {
+        margin-top: 35px;
+        margin-bottom: 20px;
+        color: #34495e;
+        font-size: 1.4em;
+    }
+
+    .article-content p {
+        margin-bottom: 24px;
+        line-height: 1.9;
+        color: #333;
+        font-size: 1.05em;
+    }
+
+    .article-content ul,
+    .article-content ol {
+        margin: 25px 0;
+        padding-left: 30px;
+        line-height: 2.0;
+    }
+
+    .article-content li {
+        margin-bottom: 12px;
+    }
+
+    /* Special boxes */
+    .tip-box {
+        background: #e8f4f8;
+        border-left: 4px solid #3498db;
+        padding: 25px;
+        margin: 30px 0;
+        border-radius: 8px;
+    }
+
+    .tip-box h3 {
+        margin-top: 0;
+        color: #2c3e50;
+    }
+
+    .example-box {
+        background: #f0f0f0;
+        padding: 20px;
+        border-radius: 8px;
+        margin: 25px 0;
+        font-family: 'Courier New', monospace;
+        overflow-x: auto;
+        white-space: pre-wrap;
+    }
+
+    .code-inline {
+        background: #f0f0f0;
+        padding: 0.2rem 0.4rem;
+        border-radius: 3px;
+        font-family: 'Courier New', monospace;
+        font-size: 0.9em;
+    }
+
+    /* Call to Action */
+    .cta-box {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 40px;
+        margin: 50px -40px 40px -40px;
+        text-align: center;
+    }
+
+    .cta-box h3 {
+        color: white;
+        margin-bottom: 15px;
+        font-size: 1.8em;
+    }
+
+    .cta-box p {
+        color: white;
+        opacity: 0.95;
+        font-size: 1.1em;
+        margin-bottom: 20px;
+    }
+
+    .cta-box .btn {
+        background: white;
+        color: #667eea;
+        padding: 15px 30px;
+        text-decoration: none;
+        border-radius: 30px;
+        font-weight: bold;
+        display: inline-block;
+        margin-top: 15px;
+        transition: transform 0.3s ease;
+    }
+
+    .cta-box .btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    }
+
+    /* Related articles */
+    .related-articles {
+        border-top: 2px solid #eee;
+        margin-top: 50px;
+        padding-top: 40px;
+    }
+
+    .related-articles h3 {
+        color: #2c3e50;
+        margin-bottom: 20px;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+        .article-header {
+            padding: 40px 20px;
+        }
+
+        .article-header h1 {
+            font-size: 2em;
+        }
+
+        .article-content {
+            padding: 20px;
+        }
+
+        .cta-box {
+            margin: 40px -20px;
+            padding: 30px 20px;
+        }
+
+        .article-content h2 {
+            font-size: 1.5em;
+        }
+    }
+</style>
+
+</head>
+<body>
+<div class="blog-container">
+<header style="text-align: center; margin-bottom: 40px;">
+<h1><a href="/" style="text-decoration: none; color: #2c3e50;">Free Text Convert</a></h1>
+<p style="color: #666;">Simple, fast, and free text transformation tools</p>
+<nav style="margin-top: 15px;">
+<a href="/" style="margin-right: 20px; color: #3498db; text-decoration: none;">Home</a>
+<a href="/tools" style="margin-right: 20px; color: #3498db; text-decoration: none;">All Tools</a>
+<a href="/blog" style="color: #3498db; text-decoration: none;">Blog</a>
+</nav>
+</header>
+
+    <article class="blog-article">
+        <!-- Article Header with Gradient Background -->
+        <div class="article-header">
+            <h1>How to Filter Lines in Text: Remove or Keep Lines by Pattern</h1>
+            <div class="article-meta">
+                Published: June 10, 2025 | 8 min read | By Free Text Convert Team
+            </div>
+        </div>
+
+        <div class="article-content">
+            <!-- Article Introduction -->
+            <div class="article-intro">
+                <p>
+                    <strong>Ever spent hours manually deleting error lines from a log file or extracting email addresses from a messy contact list?</strong>
+                    Line filtering is one of the most requested yet underserved text manipulation features. Whether you need to 
+                    remove all lines containing "ERROR", keep only lines with email addresses, or extract specific patterns, 
+                    this guide shows you exactly how to filter text lines like a pro.
+                </p>
+            </div>
+
+            <!-- Table of Contents -->
+            <div class="table-of-contents">
+                <h2>Table of Contents</h2>
+                <ul>
+                    <li><a href="#what-is">What is Line Filtering?</a></li>
+                    <li><a href="#use-cases">15 Real-World Use Cases</a></li>
+                    <li><a href="#methods">Methods to Filter Text Lines</a></li>
+                    <li><a href="#patterns">Pattern Matching Techniques</a></li>
+                    <li><a href="#regex">Using Regular Expressions</a></li>
+                    <li><a href="#advanced">Advanced Filtering Strategies</a></li>
+                    <li><a href="#tool-guide">Using Our Line Filter Pro Tool</a></li>
+                    <li><a href="#faq">Frequently Asked Questions</a></li>
+                </ul>
+            </div>
+
+            <!-- Main Content Sections -->
+            <h2 id="what-is">What is Line Filtering?</h2>
+
+            <p>
+                Line filtering is the process of selectively removing or keeping lines from text based on specific criteria. 
+                Unlike find-and-replace operations that modify content within lines, line filtering works at the line level, 
+                completely removing or preserving entire lines that match your patterns.
+            </p>
+
+            <p>
+                Think of it as a smart sieve for your text - you define the rules, and it automatically separates 
+                the lines you want from those you don't.
+            </p>
+
+            <h3>Three Core Filtering Operations</h3>
+
+            <ul>
+                <li><strong>Remove Lines:</strong> Delete all lines that match your pattern</li>
+                <li><strong>Keep Lines:</strong> Keep only lines that match, removing everything else</li>
+                <li><strong>Extract Matches:</strong> Pull out just the matching portions from lines</li>
+            </ul>
+
+            <h2 id="use-cases">15 Real-World Use Cases</h2>
+
+            <h3>1. Log File Analysis</h3>
+            <p>Remove debug messages to focus on errors:</p>
+            <div class="example-box">
+Input:
+[DEBUG] Loading configuration
+[ERROR] Database connection failed
+[INFO] Retrying connection
+[ERROR] Timeout after 30 seconds
+
+Filter: Remove lines containing "[DEBUG]" or "[INFO]"
+Output:
+[ERROR] Database connection failed
+[ERROR] Timeout after 30 seconds
+            </div>
+
+            <h3>2. Email Extraction from Contact Lists</h3>
+            <p>Extract only lines containing email addresses:</p>
+            <div class="example-box">
+John Doe - Manager
+john.doe@company.com
+Phone: 555-0123
+jane@example.org
+
+Filter: Keep lines containing "@"
+Result: Only email lines remain
+            </div>
+
+            <h3>3. Remove Code Comments</h3>
+            <p>Clean up configuration files or scripts:</p>
+            <div class="example-box">
+# This is a comment
+active = true
+// Another comment
+max_size = 100
+
+Filter: Remove lines starting with "#" or "//"
+            </div>
+
+            <h3>4. Extract URLs from Text</h3>
+            <p>Find all lines containing web addresses for link auditing or migration.</p>
+
+            <h3>5. Filter CSV Data</h3>
+            <p>Remove rows where a specific column contains unwanted values.</p>
+
+            <h3>6. Clean Up Mailing Lists</h3>
+            <p>Remove lines with bounced email patterns like "noreply@" or "donotreply@".</p>
+
+            <h3>7. Extract Error Messages</h3>
+            <p>Keep only lines containing "ERROR:", "FATAL:", or "CRITICAL:" from system logs.</p>
+
+            <h3>8. Remove Empty Lines</h3>
+            <p>Clean up text with excessive blank lines between paragraphs.</p>
+
+            <h3>9. Filter by Line Length</h3>
+            <p>Remove lines shorter than X characters (useful for cleaning OCR output).</p>
+
+            <h3>10. Extract Numeric Data</h3>
+            <p>Keep only lines containing prices, measurements, or other numeric patterns.</p>
+
+            <h3>11. Remove Headers/Footers</h3>
+            <p>Delete recurring page headers or footers from document conversions.</p>
+
+            <h3>12. Filter Server Access Logs</h3>
+            <p>Extract only 404 errors or specific IP addresses from web server logs.</p>
+
+            <h3>13. Clean Social Media Exports</h3>
+            <p>Remove lines with specific hashtags or mentions.</p>
+
+            <h3>14. Extract SQL Queries</h3>
+            <p>Keep only lines starting with SELECT, INSERT, UPDATE, or DELETE.</p>
+
+            <h3>15. Filter Test Results</h3>
+            <p>Remove all "PASSED" tests to focus on failures.</p>
+
+            <h2 id="methods">Methods to Filter Text Lines</h2>
+
+            <h3>Method 1: Online Tools (Fastest)</h3>
+            <p>
+                Our <a href="/line-filter">Line Filter Pro</a> tool provides instant filtering with these advantages:
+            </p>
+            <ul>
+                <li>No coding required</li>
+                <li>Multiple filter support with AND/OR logic</li>
+                <li>Real-time preview and statistics</li>
+                <li>Regex pattern support</li>
+                <li>Works with large files</li>
+            </ul>
+
+            <h3>Method 2: Command Line (grep/findstr)</h3>
+            <p>For Linux/Mac users:</p>
+            <div class="example-box">
+# Keep lines containing "ERROR"
+grep "ERROR" input.txt > output.txt
+
+# Remove lines containing "DEBUG"
+grep -v "DEBUG" input.txt > output.txt
+
+# Case-insensitive search
+grep -i "error" input.txt
+
+# Use regex patterns
+grep -E "^(ERROR|WARN):" input.txt
+            </div>
+
+            <p>For Windows users:</p>
+            <div class="example-box">
+# Keep lines containing "ERROR"
+findstr "ERROR" input.txt > output.txt
+
+# Remove lines containing "DEBUG"
+findstr /V "DEBUG" input.txt > output.txt
+            </div>
+
+            <h3>Method 3: Text Editors</h3>
+            <p>Most advanced editors support line filtering:</p>
+            <ul>
+                <li><strong>VS Code:</strong> Use Find (Ctrl+F) with regex, then "Find All" and delete</li>
+                <li><strong>Sublime Text:</strong> Edit → Permute Lines → Unique</li>
+                <li><strong>Notepad++:</strong> Search → Mark → Bookmark lines, then Remove Bookmarked</li>
+                <li><strong>Vim:</strong> <span class="code-inline">:g/pattern/d</span> to delete matching lines</li>
+            </ul>
+
+            <h3>Method 4: Programming Languages</h3>
+            <p>Python example:</p>
+            <div class="example-box">
+# Keep lines containing pattern
+with open('input.txt', 'r') as f:
+    lines = [line for line in f if 'ERROR' in line]
+
+# Remove lines containing pattern
+with open('input.txt', 'r') as f:
+    lines = [line for line in f if 'DEBUG' not in line]
+
+# Write filtered lines
+with open('output.txt', 'w') as f:
+    f.writelines(lines)
+            </div>
+
+            <h2 id="patterns">Pattern Matching Techniques</h2>
+
+            <h3>Simple Text Matching</h3>
+            <p>
+                The most basic form - matches exact text anywhere in the line:
+            </p>
+            <ul>
+                <li><strong>"error"</strong> - Matches lines containing "error", "Error", "ERROR" (if case-insensitive)</li>
+                <li><strong>"@gmail.com"</strong> - Matches lines with Gmail addresses</li>
+                <li><strong>"TODO"</strong> - Matches lines with TODO comments</li>
+            </ul>
+
+            <h3>Whole Word Matching</h3>
+            <p>
+                Ensures you match complete words only:
+            </p>
+            <ul>
+                <li><strong>"log"</strong> as whole word won't match "login" or "catalog"</li>
+                <li><strong>"test"</strong> as whole word won't match "testing" or "latest"</li>
+            </ul>
+
+            <h3>Position-Based Matching</h3>
+            <p>
+                Match patterns at specific positions in lines:
+            </p>
+            <ul>
+                <li><strong>Start of line:</strong> Lines beginning with specific text</li>
+                <li><strong>End of line:</strong> Lines ending with specific text</li>
+                <li><strong>Exact line:</strong> Lines that exactly match the pattern</li>
+            </ul>
+
+            <div class="tip-box">
+                <h3>💡 Pro Tip: Combining Filters</h3>
+                <p>
+                    Use multiple filters with AND/OR logic for complex filtering. For example:
+                    "Keep lines containing 'ERROR' OR 'WARNING' but NOT 'DEBUG'" can catch 
+                    important messages while filtering noise.
+                </p>
+            </div>
+
+            <h2 id="regex">Using Regular Expressions</h2>
+
+            <p>
+                Regular expressions (regex) provide powerful pattern matching capabilities for advanced filtering:
+            </p>
+
+            <h3>Common Regex Patterns for Line Filtering</h3>
+
+            <div class="example-box">
+# Lines starting with ERROR or WARN
+^(ERROR|WARN):
+
+# Lines containing email addresses
+\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b
+
+# Lines with prices (e.g., $123.45)
+\$\d+\.\d{2}
+
+# Lines containing dates (MM/DD/YYYY)
+\d{2}/\d{2}/\d{4}
+
+# Lines with IP addresses
+\b(?:\d{1,3}\.){3}\d{1,3}\b
+
+# Empty lines or whitespace only
+^\s*$
+
+# Lines with phone numbers
+\b\d{3}[-.]?\d{3}[-.]?\d{4}\b
+            </div>
+
+            <h3>Regex Special Characters</h3>
+            <ul>
+                <li><span class="code-inline">^</span> - Start of line</li>
+                <li><span class="code-inline">$</span> - End of line</li>
+                <li><span class="code-inline">.</span> - Any character</li>
+                <li><span class="code-inline">*</span> - Zero or more occurrences</li>
+                <li><span class="code-inline">+</span> - One or more occurrences</li>
+                <li><span class="code-inline">?</span> - Zero or one occurrence</li>
+                <li><span class="code-inline">\d</span> - Any digit</li>
+                <li><span class="code-inline">\w</span> - Any word character</li>
+                <li><span class="code-inline">\s</span> - Any whitespace</li>
+            </ul>
+
+            <h2 id="advanced">Advanced Filtering Strategies</h2>
+
+            <h3>1. Multi-Stage Filtering</h3>
+            <p>
+                Apply filters in sequence for complex requirements:
+            </p>
+            <ol>
+                <li>First pass: Remove all comment lines</li>
+                <li>Second pass: Remove empty lines</li>
+                <li>Third pass: Keep only lines with specific patterns</li>
+            </ol>
+
+            <h3>2. Inverse Filtering</h3>
+            <p>
+                Sometimes it's easier to specify what you DON'T want:
+            </p>
+            <ul>
+                <li>Instead of listing all valid entries, remove known invalid patterns</li>
+                <li>Remove lines NOT matching a pattern to keep only valid data</li>
+            </ul>
+
+            <h3>3. Context-Aware Filtering</h3>
+            <p>
+                Consider lines in context:
+            </p>
+            <ul>
+                <li>Keep lines before/after matches</li>
+                <li>Remove blocks of lines between markers</li>
+                <li>Filter based on line relationships</li>
+            </ul>
+
+            <h3>4. Performance Optimization</h3>
+            <p>
+                For large files:
+            </p>
+            <ul>
+                <li>Use simple string matching before regex when possible</li>
+                <li>Order filters from most to least restrictive</li>
+                <li>Process in chunks for very large files</li>
+            </ul>
+
+            <h2 id="tool-guide">Using Our Line Filter Pro Tool</h2>
+
+            <p>
+                Our <a href="/line-filter">Line Filter Pro</a> tool makes filtering effortless with these features:
+            </p>
+
+            <ol>
+                <li><strong>Choose Filter Mode:</strong>
+                    <ul>
+                        <li>Remove Lines - Delete matching lines</li>
+                        <li>Keep Lines - Keep only matching lines</li>
+                        <li>Extract Matches - Extract matching portions</li>
+                    </ul>
+                </li>
+                <li><strong>Enter Filter Pattern:</strong> Type text or regex pattern</li>
+                <li><strong>Configure Options:</strong>
+                    <ul>
+                        <li>Case sensitivity</li>
+                        <li>Whole word matching</li>
+                        <li>Regular expressions</li>
+                        <li>Remove empty lines</li>
+                    </ul>
+                </li>
+                <li><strong>Add Multiple Filters:</strong> Combine with AND/OR logic</li>
+                <li><strong>Apply and Review:</strong> See statistics and filtered output</li>
+                <li><strong>Copy Results:</strong> One-click copy to clipboard</li>
+            </ol>
+
+            <!-- Call to Action -->
+            <div class="cta-box">
+                <h3>Ready to Filter Your Text?</h3>
+                <p>Stop manually deleting lines. Use our free Line Filter Pro tool!</p>
+                <a href="/line-filter" class="btn">Try Line Filter Pro →</a>
+            </div>
+
+            <h2 id="faq">Frequently Asked Questions</h2>
+
+            <h3>Can I use multiple filters at once?</h3>
+            <p>
+                Yes! Our Line Filter Pro tool supports multiple filters with AND/OR logic. You can combine 
+                filters like "contains ERROR" OR "contains WARNING" AND "does not contain DEBUG" for 
+                precise filtering.
+            </p>
+
+            <h3>What's the difference between removing and keeping lines?</h3>
+            <p>
+                <strong>Remove mode:</strong> Deletes lines that match your pattern, keeping everything else.<br>
+                <strong>Keep mode:</strong> Keeps only lines that match your pattern, deleting everything else.<br>
+                They're inverses of each other - choose based on whether you have fewer lines to remove or keep.
+            </p>
+
+            <h3>How do I filter lines that DON'T contain a pattern?</h3>
+            <p>
+                Use "Keep Lines" mode with your pattern. This will remove all lines containing the pattern 
+                and keep everything else. Alternatively, use "Remove Lines" with an inverted regex pattern.
+            </p>
+
+            <h3>Can I filter by line length or other properties?</h3>
+            <p>
+                Yes, using regex patterns:
+            </p>
+            <ul>
+                <li>Lines with 10+ characters: <span class="code-inline">^.{10,}$</span></li>
+                <li>Lines with exactly 5 words: <span class="code-inline">^\S+\s+\S+\s+\S+\s+\S+\s+\S+$</span></li>
+                <li>Lines starting with numbers: <span class="code-inline">^\d</span></li>
+            </ul>
+
+            <h3>What's the maximum file size I can filter?</h3>
+            <p>
+                Our online tool handles files up to 10MB efficiently. For larger files, consider using 
+                command-line tools or processing in chunks.
+            </p>
+
+            <h2>Conclusion</h2>
+
+            <p>
+                Line filtering is an essential text manipulation skill that saves hours of manual work. 
+                Whether you're cleaning log files, extracting data, or processing lists, understanding 
+                how to filter lines by pattern transforms tedious tasks into instant operations.
+            </p>
+
+            <p>
+                With our <a href="/line-filter">Line Filter Pro</a> tool, you have access to powerful 
+                filtering capabilities without needing to write code or learn complex commands. Start 
+                filtering smarter, not harder!
+            </p>
+
+            <!-- Related Articles -->
+            <div class="related-articles">
+                <h3>Related Articles & Tools</h3>
+                <ul>
+                    <li><a href="/blog/remove-duplicate-lines-text">How to Remove Duplicate Lines from Any Text</a></li>
+                    <li><a href="/blog/how-to-sort-lists-online">How to Sort Lists Online: Alphabetically, Numerically & More</a></li>
+                    <li><a href="/remove-duplicates">Remove Duplicates Tool</a></li>
+                    <li><a href="/find-replace">Find & Replace Tool</a></li>
+                    <li><a href="/sort-lines">Sort Lines Tool</a></li>
+                </ul>
+            </div>
+        </div>
+    </article>
+
+    <footer style="text-align: center; margin-top: 60px; padding: 40px 20px; color: #666;">
+        <p>&copy; 2025 FreeTextConvert.com - Building helpful tools one day at a time</p>
+    </footer>
+</div>
+
+</body>
+</html>
