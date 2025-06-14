@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML Tag Stripper - Remove HTML Tags Online | Free Text Convert</title>
+    <meta name="description" content="Strip HTML tags from text instantly. Remove all HTML markup while preserving text content. Perfect for cleaning web content, emails, and formatted text.">
+    <link rel="stylesheet" href="../style.css">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📝</text></svg>">
+    <link rel="canonical" href="https://freetextconvert.com/html-stripper">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="HTML Tag Stripper - Remove HTML Tags Online">
+    <meta property="og:description" content="Strip HTML tags from text instantly. Free online tool to clean HTML markup.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://freetextconvert.com/html-stripper">
+    
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-792NQ00CEV"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-792NQ00CEV');
+    </script>
+    
+    <style>
+        .options-container {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+        
+        .option-group {
+            margin: 15px 0;
+        }
+        
+        .option-group label {
+            display: flex;
+            align-items: center;
+            margin: 8px 0;
+            cursor: pointer;
+            color: #333;
+        }
+        
+        .option-group input[type="checkbox"] {
+            margin-right: 10px;
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+        }
+        
+        .example-buttons {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin: 20px 0;
+        }
+        
+        .example-btn {
+            padding: 8px 16px;
+            background: #e9ecef;
+            border: 1px solid #dee2e6;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 14px;
+        }
+        
+        .example-btn:hover {
+            background: #dee2e6;
+            transform: translateY(-1px);
+        }
+        
+        .stats {
+            display: flex;
+            gap: 30px;
+            margin: 20px 0;
+            font-size: 14px;
+            color: #666;
+        }
+        
+        .action-buttons {
+            display: flex;
+            gap: 10px;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+        
+        @media (max-width: 600px) {
+            .example-buttons {
+                justify-content: center;
+            }
+            
+            .action-buttons {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Free Text Convert</h1>
+            <p class="tagline">Simple, fast, and free text transformation tools</p>
+            <nav style="margin-top: 15px; text-align: center;">
+                <a href="/" style="margin-right: 20px; color: #3498db; text-decoration: none;">Home</a>
+                <a href="/tools" style="margin-right: 20px; color: #3498db; text-decoration: none;">All Tools</a>
+                <a href="/blog" style="color: #3498db; text-decoration: none;">Blog</a>
+            </nav>
+        </header>
+
+        <main>
+            <div class="tool-card">
+                <h2>HTML Tag Stripper</h2>
+                <p style="text-align: center; margin-bottom: 30px; color: #666;">
+                    Remove all HTML tags and keep only the text content. Perfect for cleaning web content, emails, and formatted text.
+                </p>
+
+                <div class="input-section">
+                    <label for="input">HTML Text to Clean:</label>
+                    <textarea id="input" rows="8" placeholder="Paste your HTML content here..."></textarea>
+                    <div class="stats">
+                        <span>Characters: <span id="charCount">0</span></span>
+                        <span>Tags found: <span id="tagCount">0</span></span>
+                    </div>
+                </div>
+
+                <div class="example-buttons">
+                    <button class="example-btn" onclick="loadExample('basic')">📝 Basic HTML</button>
+                    <button class="example-btn" onclick="loadExample('email')">📧 Email HTML</button>
+                    <button class="example-btn" onclick="loadExample('wordpress')">📰 Blog Post</button>
+                    <button class="example-btn" onclick="loadExample('complex')">🔧 Complex HTML</button>
+                </div>
+
+                <div class="options-container">
+                    <h3 style="margin-top: 0; margin-bottom: 15px;">Options:</h3>
+                    <div class="option-group">
+                        <label>
+                            <input type="checkbox" id="preserveLineBreaks" checked>
+                            Preserve line breaks (convert &lt;br&gt; and &lt;p&gt; to new lines)
+                        </label>
+                        <label>
+                            <input type="checkbox" id="decodeEntities" checked>
+                            Decode HTML entities (&amp;nbsp; → space, &amp;amp; → &amp;)
+                        </label>
+                        <label>
+                            <input type="checkbox" id="removeExtraSpaces" checked>
+                            Remove extra spaces
+                        </label>
+                        <label>
+                            <input type="checkbox" id="removeScriptStyle" checked>
+                            Remove script and style content
+                        </label>
+                    </div>
+                </div>
+
+                <div class="action-buttons">
+                    <button class="btn btn-primary" onclick="stripHTML()">🧹 Strip HTML Tags</button>
+                    <button class="btn btn-secondary" onclick="clearAll()">Clear All</button>
+                </div>
+
+                <div class="output-section">
+                    <label for="output">Cleaned Text:</label>
+                    <textarea id="output" rows="8" readonly placeholder="Cleaned text will appear here..."></textarea>
+                    <div class="action-buttons">
+                        <button class="btn btn-primary" onclick="copyToClipboard()">📋 Copy Cleaned Text</button>
+                        <button class="btn btn-secondary" onclick="downloadText()">💾 Download as TXT</button>
+                    </div>
+                </div>
+
+                <div style="background: #e3f2fd; padding: 20px; border-radius: 10px; margin: 30px 0;">
+                    <h3 style="margin-top: 0; color: #1976d2;">💡 Pro Tips</h3>
+                    <ul style="margin: 0; padding-left: 20px;">
+                        <li>This tool removes ALL HTML tags while preserving the text content</li>
+                        <li>Perfect for cleaning content copied from websites or emails</li>
+                        <li>Use "Preserve line breaks" to maintain paragraph structure</li>
+                        <li>Combine with our <a href="/line-break-remover">Line Break Remover</a> for additional formatting</li>
+                    </ul>
+                </div>
+
+                <div style="background: #fff3cd; padding: 20px; border-radius: 10px; margin: 20px 0;">
+                    <h3 style="margin-top: 0; color: #856404;">🔗 Complete Your Workflow</h3>
+                    <p style="margin-bottom: 15px;">After stripping HTML, you might need:</p>
+                    <div style="display: flex; gap: 15px; flex-wrap: wrap;">
+                        <a href="/line-break-remover" class="btn btn-secondary">Remove Line Breaks</a>
+                        <a href="/remove-duplicates" class="btn btn-secondary">Remove Duplicates</a>
+                        <a href="/find-replace" class="btn btn-secondary">Find & Replace</a>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            <p>&copy; 2025 FreeTextConvert.com - Building tools with ❤️ since Day 1</p>
+        </footer>
+    </div>
+
+    <script>
+        // Update character and tag count
+        document.getElementById('input').addEventListener('input', updateStats);
+
+        function updateStats() {
+            const input = document.getElementById('input').value;
+            document.getElementById('charCount').textContent = input.length;
+            
+            // Count HTML tags
+            const tagMatches = input.match(/<[^>]+>/g);
+            document.getElementById('tagCount').textContent = tagMatches ? tagMatches.length : 0;
+        }
+
+        function stripHTML() {
+            const input = document.getElementById('input').value;
+            if (!input.trim()) {
+                alert('Please paste some HTML content to strip tags from.');
+                return;
+            }
+
+            let text = input;
+
+            // Get options
+            const preserveLineBreaks = document.getElementById('preserveLineBreaks').checked;
+            const decodeEntities = document.getElementById('decodeEntities').checked;
+            const removeExtraSpaces = document.getElementById('removeExtraSpaces').checked;
+            const removeScriptStyle = document.getElementById('removeScriptStyle').checked;
+
+            // Remove script and style content if option is checked
+            if (removeScriptStyle) {
+                text = text.replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, '');
+                text = text.replace(/<style\b[^<]*(?:(?!<\/style>)<[^<]*)*<\/style>/gi, '');
+            }
+
+            // Preserve line breaks if option is checked
+            if (preserveLineBreaks) {
+                // Convert br tags to newlines
+                text = text.replace(/<br\s*\/?>/gi, '\n');
+                // Convert p and div tags to double newlines
+                text = text.replace(/<\/p>/gi, '\n\n');
+                text = text.replace(/<\/div>/gi, '\n\n');
+                // Convert li tags to newlines with dash
+                text = text.replace(/<li[^>]*>/gi, '\n• ');
+                // Add newlines before headings
+                text = text.replace(/<h[1-6][^>]*>/gi, '\n\n');
+                text = text.replace(/<\/h[1-6]>/gi, '\n');
+            }
+
+            // Remove all HTML tags
+            text = text.replace(/<[^>]+>/g, '');
+
+            // Decode HTML entities if option is checked
+            if (decodeEntities) {
+                const entities = {
+                    '&nbsp;': ' ',
+                    '&amp;': '&',
+                    '&lt;': '<',
+                    '&gt;': '>',
+                    '&quot;': '"',
+                    '&#039;': "'",
+                    '&apos;': "'",
+                    '&copy;': '©',
+                    '&reg;': '®',
+                    '&trade;': '™',
+                    '&mdash;': '—',
+                    '&ndash;': '–',
+                    '&hellip;': '…',
+                    '&bull;': '•',
+                    '&laquo;': '«',
+                    '&raquo;': '»'
+                };
+
+                for (let entity in entities) {
+                    text = text.replace(new RegExp(entity, 'g'), entities[entity]);
+                }
+
+                // Decode numeric entities
+                text = text.replace(/&#(\d+);/g, (match, num) => String.fromCharCode(num));
+                text = text.replace(/&#x([0-9A-Fa-f]+);/g, (match, hex) => String.fromCharCode(parseInt(hex, 16)));
+            }
+
+            // Remove extra spaces if option is checked
+            if (removeExtraSpaces) {
+                // Replace multiple spaces with single space
+                text = text.replace(/\s+/g, ' ');
+                // Replace multiple newlines with double newline
+                text = text.replace(/\n\s*\n\s*\n/g, '\n\n');
+                // Trim each line
+                text = text.split('\n').map(line => line.trim()).join('\n');
+                // Trim the entire text
+                text = text.trim();
+            }
+
+            document.getElementById('output').value = text;
+            
+            // Track conversion
+            if (typeof gtag !== 'undefined') {
+                gtag('event', 'strip_html', {
+                    'event_category': 'Tool Usage',
+                    'event_label': 'HTML Stripper',
+                    'value': text.length
+                });
+            }
+        }
+
+        function loadExample(type) {
+            const examples = {
+                basic: `<h1>Welcome to My Website</h1>
+<p>This is a <strong>paragraph</strong> with some <em>formatted text</em>.</p>
+<ul>
+    <li>First item</li>
+    <li>Second item</li>
+    <li>Third item</li>
+</ul>`,
+                email: `<div style="font-family: Arial, sans-serif;">
+    <h2>Newsletter Title</h2>
+    <p>Dear subscriber,</p>
+    <p>Check out our <a href="https://example.com">latest updates</a>!</p>
+    <br>
+    <p>Best regards,<br>
+    The Team</p>
+</div>`,
+                wordpress: `<article class="post">
+    <header>
+        <h1 class="post-title">10 Tips for Better Writing</h1>
+        <span class="meta">Published on <time>June 14, 2025</time></span>
+    </header>
+    <div class="content">
+        <p>Writing is an essential skill. Here&rsquo;s how to improve:</p>
+        <ol>
+            <li>Read more books</li>
+            <li>Practice daily</li>
+            <li>Get feedback</li>
+        </ol>
+        <blockquote>&ldquo;The pen is mightier than the sword.&rdquo;</blockquote>
+    </div>
+</article>`,
+                complex: `<!DOCTYPE html>
+<html>
+<head>
+    <title>Page Title</title>
+    <style>
+        body { font-family: Arial; }
+        .hidden { display: none; }
+    </style>
+</head>
+<body>
+    <script>
+        console.log("This won't appear");
+    <\/script>
+    <h1>Main &amp; Title</h1>
+    <p>Price: $19.99 &mdash; save 50%!</p>
+    <div class="content">
+        <p>Copyright &copy; 2025. All rights reserved&trade;.</p>
+        <!-- This is a comment -->
+        <table>
+            <tr><td>Cell 1</td><td>Cell 2</td></tr>
+        </table>
+    </div>
+</body>
+</html>`
+            };
+
+            document.getElementById('input').value = examples[type];
+            updateStats();
+            document.getElementById('output').value = '';
+        }
+
+        function copyToClipboard() {
+            const output = document.getElementById('output').value;
+            if (!output) {
+                alert('Please strip HTML tags first!');
+                return;
+            }
+
+            navigator.clipboard.writeText(output).then(() => {
+                const btn = event.target;
+                const originalText = btn.textContent;
+                btn.textContent = '✓ Copied!';
+                setTimeout(() => {
+                    btn.textContent = originalText;
+                }, 2000);
+            });
+        }
+
+        function downloadText() {
+            const output = document.getElementById('output').value;
+            if (!output) {
+                alert('Please strip HTML tags first!');
+                return;
+            }
+
+            const blob = new Blob([output], { type: 'text/plain' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'cleaned-text.txt';
+            document.body.appendChild(a);
+            a.click();
+            window.URL.revokeObjectURL(url);
+            document.body.removeChild(a);
+        }
+
+        function clearAll() {
+            document.getElementById('input').value = '';
+            document.getElementById('output').value = '';
+            updateStats();
+        }
+    </script>
+</body>
+</html>
