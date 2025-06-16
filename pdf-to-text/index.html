@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PDF to Text Converter - Extract Text from PDF Online | Free Text Convert</title>
+    <meta name="description" content="Extract text from PDF files instantly online. Free PDF to text converter with no signup required. Perfect for copying content from PDFs.">
+    <link rel="stylesheet" href="../style.css">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📝</text></svg>">
+    <link rel="canonical" href="https://freetextconvert.com/pdf-to-text">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="PDF to Text Converter - Extract Text Online Free">
+    <meta property="og:description" content="Convert PDF to text instantly. Extract all text from PDF files online.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://freetextconvert.com/pdf-to-text">
+    
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-792NQ00CEV"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-792NQ00CEV');
+    </script>
+    
+    <!-- PDF.js library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+    <script>
+        // Configure PDF.js worker
+        pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+    </script>
+    
+    <style>
+        .upload-area {
+            border: 3px dashed #3498db;
+            border-radius: 10px;
+            padding: 60px 20px;
+            text-align: center;
+            background: #f8f9fa;
+            transition: all 0.3s;
+            cursor: pointer;
+            margin: 30px 0;
+        }
+        
+        .upload-area:hover {
+            background: #e3f2fd;
+            border-color: #2196f3;
+        }
+        
+        .upload-area.dragover {
+            background: #e3f2fd;
+            border-color: #2196f3;
+            transform: scale(1.02);
+        }
+        
+        .upload-icon {
+            font-size: 60px;
+            color: #3498db;
+            margin-bottom: 20px;
+        }
+        
+        .file-input {
+            display: none;
+        }
+        
+        .processing {
+            display: none;
+            text-align: center;
+            padding: 40px;
+        }
+        
+        .processing.active {
+            display: block;
+        }
+        
+        .spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #3498db;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+            margin: 20px auto;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .options-container {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+        
+        .option-group {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+        
+        .option-group label {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            color: #333;
+        }
+        
+        .option-group input[type="checkbox"] {
+            margin-right: 8px;
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+        }
+        
+        .pdf-info {
+            background: #e8f4f8;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            display: none;
+        }
+        
+        .pdf-info.active {
+            display: block;
+        }
+        
+        .info-item {
+            margin: 10px 0;
+            color: #555;
+        }
+        
+        .output-section {
+            display: none;
+        }
+        
+        .output-section.active {
+            display: block;
+        }
+        
+        .action-buttons {
+            display: flex;
+            gap: 10px;
+            margin: 20px 0;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        .page-selector {
+            background: #fff;
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+            margin: 20px 0;
+            display: none;
+        }
+        
+        .page-selector.active {
+            display: block;
+        }
+        
+        .page-range {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            margin: 10px 0;
+        }
+        
+        .page-range input {
+            width: 80px;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        
+        @media (max-width: 600px) {
+            .upload-area {
+                padding: 40px 15px;
+            }
+            
+            .action-buttons {
+                flex-direction: column;
+                width: 100%;
+            }
+            
+            .btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Free Text Convert</h1>
+            <p class="tagline">Simple, fast, and free text transformation tools</p>
+            <nav style="margin-top: 15px; text-align: center;">
+                <a href="/" style="margin-right: 20px; color: #3498db; text-decoration: none;">Home</a>
+                <a href="/tools" style="margin-right: 20px; color: #3498db; text-decoration: none;">All Tools</a>
+                <a href="/blog" style="color: #3498db; text-decoration: none;">Blog</a>
+            </nav>
+        </header>
+
+        <main>
+            <div class="tool-card">
+                <h2>PDF to Text Converter</h2>
+                <p style="text-align: center; margin-bottom: 30px; color: #666;">
+                    Extract text from any PDF file instantly. No signup, no file uploads to servers - everything happens in your browser.
+                </p>
+
+                <div class="upload-area" id="uploadArea" onclick="document.getElementById('fileInput').click()">
+                    <div class="upload-icon">📄</div>
+                    <h3>Drop PDF file here or click to upload</h3>
+                    <p style="color: #666; margin: 10px 0;">Maximum file size: 50MB</p>
+                    <p style="color: #999; font-size: 14px;">Your file never leaves your browser</p>
+                </div>
+
+                <input type="file" id="fileInput" class="file-input" accept=".pdf">
+
+                <div class="processing" id="processing">
+                    <div class="spinner"></div>
+                    <h3>Processing PDF...</h3>
+                    <p id="processingStatus">Reading page 1...</p>
+                </div>
+
+                <div class="pdf-info" id="pdfInfo">
+                    <h3 style="margin-top: 0;">PDF Information</h3>
+                    <div class="info-item">📄 <strong>File:</strong> <span id="fileName"></span></div>
+                    <div class="info-item">📑 <strong>Pages:</strong> <span id="pageCount"></span></div>
+                    <div class="info-item">💾 <strong>Size:</strong> <span id="fileSize"></span></div>
+                </div>
+
+                <div class="page-selector" id="pageSelector">
+                    <h4>Select pages to extract:</h4>
+                    <label style="display: block; margin: 10px 0;">
+                        <input type="radio" name="pageOption" value="all" checked> All pages
+                    </label>
+                    <label style="display: block; margin: 10px 0;">
+                        <input type="radio" name="pageOption" value="range"> Page range:
+                    </label>
+                    <div class="page-range">
+                        <input type="number" id="startPage" min="1" placeholder="From" disabled>
+                        <span>to</span>
+                        <input type="number" id="endPage" min="1" placeholder="To" disabled>
+                    </div>
+                </div>
+
+                <div class="options-container">
+                    <h3 style="margin-top: 0; margin-bottom: 15px;">Extraction Options:</h3>
+                    <div class="option-group">
+                        <label>
+                            <input type="checkbox" id="preserveFormatting" checked>
+                            Preserve line breaks and paragraphs
+                        </label>
+                        <label>
+                            <input type="checkbox" id="removeExtraSpaces" checked>
+                            Remove extra spaces
+                        </label>
+                        <label>
+                            <input type="checkbox" id="addPageNumbers">
+                            Add page numbers
+                        </label>
+                        <label>
+                            <input type="checkbox" id="skipEmptyPages" checked>
+                            Skip empty pages
+                        </label>
+                    </div>
+                </div>
+
+                <div style="text-align: center; margin: 30px 0;">
+                    <button class="btn btn-primary" id="extractBtn" onclick="extractText()" style="display: none; font-size: 18px; padding: 15px 40px;">
+                        📝 Extract Text
+                    </button>
+                </div>
+
+                <div class="output-section" id="outputSection">
+                    <label for="output">Extracted Text:</label>
+                    <textarea id="output" rows="12" readonly placeholder="Extracted text will appear here..."></textarea>
+                    <div class="action-buttons">
+                        <button class="btn btn-primary" onclick="copyToClipboard()">📋 Copy Text</button>
+                        <button class="btn btn-secondary" onclick="downloadText()">💾 Download TXT</button>
+                        <button class="btn btn-secondary" onclick="clearAll()">🗑️ Clear All</button>
+                    </div>
+                </div>
+
+                <div style="background: #e3f2fd; padding: 20px; border-radius: 10px; margin: 30px 0;">
+                    <h3 style="margin-top: 0; color: #1976d2;">💡 Pro Tips</h3>
+                    <ul style="margin: 0; padding-left: 20px;">
+                        <li>This tool works entirely in your browser - files are never uploaded</li>
+                        <li>For scanned PDFs, text extraction may not work (they're images)</li>
+                        <li>Large PDFs may take a moment to process</li>
+                        <li>After extracting, use our <a href="/find-replace">Find & Replace</a> tool for cleanup</li>
+                    </ul>
+                </div>
+
+                <div style="background: #fff3cd; padding: 20px; border-radius: 10px; margin: 20px 0;">
+                    <h3 style="margin-top: 0; color: #856404;">🔗 Complete Your Workflow</h3>
+                    <p style="margin-bottom: 15px;">After extracting text from PDF:</p>
+                    <div style="display: flex; gap: 15px; flex-wrap: wrap;">
+                        <a href="/line-break-remover" class="btn btn-secondary">Fix Line Breaks</a>
+                        <a href="/find-replace" class="btn btn-secondary">Find & Replace</a>
+                        <a href="/remove-duplicates" class="btn btn-secondary">Remove Duplicates</a>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            <p>&copy; 2025 FreeTextConvert.com - Your privacy-first text tools</p>
+        </footer>
+    </div>
+
+    <script>
+        let pdfDocument = null;
+        let extractedPages = [];
+
+        // File upload handling
+        const fileInput = document.getElementById('fileInput');
+        const uploadArea = document.getElementById('uploadArea');
+
+        // Drag and drop
+        uploadArea.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            uploadArea.classList.add('dragover');
+        });
+
+        uploadArea.addEventListener('dragleave', () => {
+            uploadArea.classList.remove('dragover');
+        });
+
+        uploadArea.addEventListener('drop', (e) => {
+            e.preventDefault();
+            uploadArea.classList.remove('dragover');
+            
+            const files = e.dataTransfer.files;
+            if (files.length > 0 && files[0].type === 'application/pdf') {
+                handleFile(files[0]);
+            } else {
+                alert('Please drop a PDF file.');
+            }
+        });
+
+        fileInput.addEventListener('change', (e) => {
+            if (e.target.files.length > 0) {
+                handleFile(e.target.files[0]);
+            }
+        });
+
+        // Handle page range selection
+        document.querySelectorAll('input[name="pageOption"]').forEach(radio => {
+            radio.addEventListener('change', (e) => {
+                const isRange = e.target.value === 'range';
+                document.getElementById('startPage').disabled = !isRange;
+                document.getElementById('endPage').disabled = !isRange;
+            });
+        });
+
+        async function handleFile(file) {
+            if (file.size > 50 * 1024 * 1024) {
+                alert('File size exceeds 50MB limit.');
+                return;
+            }
+
+            // Show processing
+            document.getElementById('processing').classList.add('active');
+            document.getElementById('extractBtn').style.display = 'none';
+            document.getElementById('outputSection').classList.remove('active');
+
+            // File info
+            document.getElementById('fileName').textContent = file.name;
+            document.getElementById('fileSize').textContent = formatFileSize(file.size);
+
+            try {
+                const arrayBuffer = await file.arrayBuffer();
+                const loadingTask = pdfjsLib.getDocument(arrayBuffer);
+                
+                pdfDocument = await loadingTask.promise;
+                const numPages = pdfDocument.numPages;
+                
+                document.getElementById('pageCount').textContent = numPages;
+                document.getElementById('pdfInfo').classList.add('active');
+                
+                // Set page range limits
+                document.getElementById('startPage').max = numPages;
+                document.getElementById('endPage').max = numPages;
+                document.getElementById('startPage').value = 1;
+                document.getElementById('endPage').value = numPages;
+                
+                // Show page selector for multi-page PDFs
+                if (numPages > 1) {
+                    document.getElementById('pageSelector').classList.add('active');
+                }
+                
+                // Show extract button
+                document.getElementById('extractBtn').style.display = 'inline-block';
+                document.getElementById('processing').classList.remove('active');
+                
+            } catch (error) {
+                console.error('Error loading PDF:', error);
+                alert('Error loading PDF. Please make sure the file is a valid PDF.');
+                document.getElementById('processing').classList.remove('active');
+            }
+        }
+
+        async function extractText() {
+            if (!pdfDocument) return;
+
+            document.getElementById('processing').classList.add('active');
+            document.getElementById('outputSection').classList.remove('active');
+            
+            const pageOption = document.querySelector('input[name="pageOption"]:checked').value;
+            let startPage = 1;
+            let endPage = pdfDocument.numPages;
+            
+            if (pageOption === 'range') {
+                startPage = parseInt(document.getElementById('startPage').value) || 1;
+                endPage = parseInt(document.getElementById('endPage').value) || pdfDocument.numPages;
+                
+                if (startPage > endPage) {
+                    alert('Invalid page range.');
+                    document.getElementById('processing').classList.remove('active');
+                    return;
+                }
+            }
+            
+            extractedPages = [];
+            const preserveFormatting = document.getElementById('preserveFormatting').checked;
+            const addPageNumbers = document.getElementById('addPageNumbers').checked;
+            const skipEmptyPages = document.getElementById('skipEmptyPages').checked;
+            
+            try {
+                for (let pageNum = startPage; pageNum <= endPage; pageNum++) {
+                    document.getElementById('processingStatus').textContent = `Extracting page ${pageNum} of ${endPage}...`;
+                    
+                    const page = await pdfDocument.getPage(pageNum);
+                    const textContent = await page.getTextContent();
+                    
+                    let pageText = '';
+                    let lastY = null;
+                    
+                    textContent.items.forEach(item => {
+                        if (preserveFormatting && lastY !== null && Math.abs(item.transform[5] - lastY) > 5) {
+                            pageText += '\n';
+                        }
+                        pageText += item.str;
+                        lastY = item.transform[5];
+                    });
+                    
+                    if (!skipEmptyPages || pageText.trim()) {
+                        if (addPageNumbers) {
+                            pageText = `--- Page ${pageNum} ---\n${pageText}\n`;
+                        }
+                        extractedPages.push(pageText);
+                    }
+                }
+                
+                // Process the extracted text
+                let finalText = extractedPages.join('\n\n');
+                
+                if (document.getElementById('removeExtraSpaces').checked) {
+                    finalText = finalText.replace(/\s+/g, ' ').replace(/\n\s*\n/g, '\n\n');
+                }
+                
+                document.getElementById('output').value = finalText;
+                document.getElementById('outputSection').classList.add('active');
+                document.getElementById('processing').classList.remove('active');
+                
+                // Track usage
+                if (typeof gtag !== 'undefined') {
+                    gtag('event', 'pdf_extract', {
+                        'event_category': 'Tool Usage',
+                        'event_label': 'PDF to Text',
+                        'value': endPage - startPage + 1
+                    });
+                }
+                
+            } catch (error) {
+                console.error('Error extracting text:', error);
+                alert('Error extracting text from PDF.');
+                document.getElementById('processing').classList.remove('active');
+            }
+        }
+
+        function formatFileSize(bytes) {
+            if (bytes === 0) return '0 Bytes';
+            const k = 1024;
+            const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+            const i = Math.floor(Math.log(bytes) / Math.log(k));
+            return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+        }
+
+        function copyToClipboard() {
+            const output = document.getElementById('output').value;
+            if (!output) {
+                alert('Please extract text first!');
+                return;
+            }
+
+            navigator.clipboard.writeText(output).then(() => {
+                const btn = event.target;
+                const originalText = btn.textContent;
+                btn.textContent = '✓ Copied!';
+                setTimeout(() => {
+                    btn.textContent = originalText;
+                }, 2000);
+            });
+        }
+
+        function downloadText() {
+            const output = document.getElementById('output').value;
+            if (!output) {
+                alert('Please extract text first!');
+                return;
+            }
+
+            const fileName = document.getElementById('fileName').textContent.replace('.pdf', '.txt');
+            const blob = new Blob([output], { type: 'text/plain' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = fileName;
+            document.body.appendChild(a);
+            a.click();
+            window.URL.revokeObjectURL(url);
+            document.body.removeChild(a);
+        }
+
+        function clearAll() {
+            fileInput.value = '';
+            document.getElementById('output').value = '';
+            document.getElementById('pdfInfo').classList.remove('active');
+            document.getElementById('pageSelector').classList.remove('active');
+            document.getElementById('outputSection').classList.remove('active');
+            document.getElementById('extractBtn').style.display = 'none';
+            pdfDocument = null;
+            extractedPages = [];
+        }
+    </script>
+</body>
+</html>
