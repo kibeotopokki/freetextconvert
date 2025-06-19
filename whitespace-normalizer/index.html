@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Whitespace Normalizer - Clean & Fix Text Spacing Online | Free Text Convert</title>
+    <meta name="description" content="Fix whitespace issues instantly. Remove extra spaces, normalize tabs, clean invisible characters. Free online whitespace cleaner tool.">
+    <link rel="stylesheet" href="../style.css">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="canonical" href="https://freetextconvert.com/whitespace-normalizer">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="Whitespace Normalizer - Fix Text Spacing Issues">
+    <meta property="og:description" content="Clean whitespace problems instantly. Remove extra spaces, fix tabs, clean invisible characters.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://freetextconvert.com/whitespace-normalizer">
+    
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-792NQ00CEV"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-792NQ00CEV');
+    </script>
+    
+    <style>
+        .options-container {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+        
+        .option-group {
+            margin: 20px 0;
+        }
+        
+        .option-group h4 {
+            margin-bottom: 15px;
+            color: #2c3e50;
+        }
+        
+        .option-item {
+            margin: 10px 0;
+            display: flex;
+            align-items: center;
+        }
+        
+        .option-item label {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            color: #333;
+            flex: 1;
+        }
+        
+        .option-item input[type="checkbox"],
+        .option-item input[type="radio"] {
+            margin-right: 10px;
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+        }
+        
+        .stats-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+        
+        .stat-box {
+            background: #e3f2fd;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+        }
+        
+        .stat-number {
+            font-size: 24px;
+            font-weight: bold;
+            color: #1976d2;
+        }
+        
+        .stat-label {
+            font-size: 14px;
+            color: #666;
+            margin-top: 5px;
+        }
+        
+        .example-buttons {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin: 20px 0;
+            justify-content: center;
+        }
+        
+        .example-btn {
+            padding: 8px 16px;
+            background: #e9ecef;
+            border: 1px solid #dee2e6;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 14px;
+        }
+        
+        .example-btn:hover {
+            background: #dee2e6;
+            transform: translateY(-1px);
+        }
+        
+        .warning-box {
+            background: #fff3cd;
+            border: 1px solid #ffeeba;
+            color: #856404;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+            display: none;
+        }
+        
+        .warning-box.active {
+            display: block;
+        }
+        
+        .invisible-chars {
+            background: #ffebee;
+            padding: 10px;
+            border-radius: 5px;
+            margin: 10px 0;
+            font-family: monospace;
+            display: none;
+        }
+        
+        .invisible-chars.active {
+            display: block;
+        }
+        
+        @media (max-width: 600px) {
+            .stats-container {
+                grid-template-columns: 1fr 1fr;
+            }
+            
+            .example-buttons {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Free Text Convert</h1>
+            <p class="tagline">Simple, fast, and free text transformation tools</p>
+            <nav style="margin-top: 15px; text-align: center;">
+                <a href="/" style="margin-right: 20px; color: #3498db; text-decoration: none;">Home</a>
+                <a href="/tools" style="margin-right: 20px; color: #3498db; text-decoration: none;">All Tools</a>
+                <a href="/blog" style="color: #3498db; text-decoration: none;">Blog</a>
+            </nav>
+        </header>
+
+        <main>
+            <div class="tool-card">
+                <h2>Whitespace Normalizer</h2>
+                <p style="text-align: center; margin-bottom: 30px; color: #666;">
+                    Fix all whitespace issues instantly. Remove extra spaces, normalize tabs, clean invisible characters, and standardize line endings.
+                </p>
+
+                <div class="input-section">
+                    <label for="input">Text with Whitespace Issues:</label>
+                    <textarea id="input" rows="8" placeholder="Paste your text with spacing problems here..."></textarea>
+                    <div class="stats-container">
+                        <div class="stat-box">
+                            <div class="stat-number" id="charCount">0</div>
+                            <div class="stat-label">Characters</div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="stat-number" id="spaceCount">0</div>
+                            <div class="stat-label">Spaces</div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="stat-number" id="tabCount">0</div>
+                            <div class="stat-label">Tabs</div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="stat-number" id="invisibleCount">0</div>
+                            <div class="stat-label">Invisible Chars</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="example-buttons">
+                    <button class="example-btn" onclick="loadExample('extraSpaces')">🔲 Extra Spaces</button>
+                    <button class="example-btn" onclick="loadExample('mixedWhitespace')">🔀 Mixed Tabs/Spaces</button>
+                    <button class="example-btn" onclick="loadExample('invisible')">👻 Invisible Characters</button>
+                    <button class="example-btn" onclick="loadExample('messy')">🌪️ Messy Text</button>
+                </div>
+
+                <div class="options-container">
+                    <h3 style="margin-top: 0; margin-bottom: 20px;">Cleaning Options:</h3>
+                    
+                    <div class="option-group">
+                        <h4>🔲 Space Handling</h4>
+                        <div class="option-item">
+                            <label>
+                                <input type="checkbox" id="removeExtraSpaces" checked>
+                                Remove multiple spaces (keep single spaces)
+                            </label>
+                        </div>
+                        <div class="option-item">
+                            <label>
+                                <input type="checkbox" id="trimLines" checked>
+                                Trim spaces from start and end of lines
+                            </label>
+                        </div>
+                        <div class="option-item">
+                            <label>
+                                <input type="checkbox" id="removeAllSpaces">
+                                Remove ALL spaces (creates continuous text)
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="option-group">
+                        <h4>📐 Tab Handling</h4>
+                        <div class="option-item">
+                            <label>
+                                <input type="radio" name="tabOption" id="tabsToSpaces" value="spaces" checked>
+                                Convert tabs to spaces
+                            </label>
+                        </div>
+                        <div class="option-item">
+                            <label>
+                                <input type="radio" name="tabOption" id="spacesToTabs" value="tabs">
+                                Convert spaces to tabs (4 spaces = 1 tab)
+                            </label>
+                        </div>
+                        <div class="option-item">
+                            <label>
+                                <input type="radio" name="tabOption" id="removeTabs" value="remove">
+                                Remove all tabs
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="option-group">
+                        <h4>👻 Invisible Characters</h4>
+                        <div class="option-item">
+                            <label>
+                                <input type="checkbox" id="removeZeroWidth" checked>
+                                Remove zero-width spaces
+                            </label>
+                        </div>
+                        <div class="option-item">
+                            <label>
+                                <input type="checkbox" id="removeNonBreaking" checked>
+                                Replace non-breaking spaces with regular spaces
+                            </label>
+                        </div>
+                        <div class="option-item">
+                            <label>
+                                <input type="checkbox" id="removeControlChars" checked>
+                                Remove control characters
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="option-group">
+                        <h4>↩️ Line Endings</h4>
+                        <div class="option-item">
+                            <label>
+                                <input type="radio" name="lineEnding" id="keepLineEndings" value="keep" checked>
+                                Keep current line endings
+                            </label>
+                        </div>
+                        <div class="option-item">
+                            <label>
+                                <input type="radio" name="lineEnding" id="windowsLineEndings" value="windows">
+                                Windows line endings (CRLF)
+                            </label>
+                        </div>
+                        <div class="option-item">
+                            <label>
+                                <input type="radio" name="lineEnding" id="unixLineEndings" value="unix">
+                                Unix/Mac line endings (LF)
+                            </label>
+                        </div>
+                        <div class="option-item">
+                            <label>
+                                <input type="checkbox" id="removeEmptyLines">
+                                Remove empty lines
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="text-align: center; margin: 30px 0;">
+                    <button class="btn btn-primary" onclick="normalizeWhitespace()" style="font-size: 18px; padding: 15px 40px;">
+                        🧹 Clean Whitespace
+                    </button>
+                    <button class="btn btn-secondary" onclick="showInvisible()" style="margin-left: 10px;">
+                        👁️ Show Invisible
+                    </button>
+                </div>
+
+                <div class="warning-box" id="warningBox"></div>
+                <div class="invisible-chars" id="invisibleDisplay"></div>
+
+                <div class="output-section">
+                    <label for="output">Cleaned Text:</label>
+                    <textarea id="output" rows="8" readonly placeholder="Cleaned text will appear here..."></textarea>
+                    <div class="stats-container">
+                        <div class="stat-box">
+                            <div class="stat-number" id="removedCount">0</div>
+                            <div class="stat-label">Chars Removed</div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="stat-number" id="cleanedSpaces">0</div>
+                            <div class="stat-label">Spaces Fixed</div>
+                        </div>
+                    </div>
+                    <div style="display: flex; gap: 10px; margin-top: 20px; flex-wrap: wrap;">
+                        <button class="btn btn-primary" onclick="copyToClipboard()">📋 Copy Cleaned Text</button>
+                        <button class="btn btn-secondary" onclick="downloadText()">💾 Download TXT</button>
+                        <button class="btn btn-secondary" onclick="clearAll()">🗑️ Clear All</button>
+                    </div>
+                </div>
+
+                <div style="background: #e3f2fd; padding: 20px; border-radius: 10px; margin: 30px 0;">
+                    <h3 style="margin-top: 0; color: #1976d2;">💡 Pro Tips</h3>
+                    <ul style="margin: 0; padding-left: 20px;">
+                        <li>Invisible characters often come from copying between different programs</li>
+                        <li>Use "Show Invisible" to see what's really in your text</li>
+                        <li>Zero-width spaces are common in web content and can break code</li>
+                        <li>Non-breaking spaces (from &amp;nbsp;) look like regular spaces but behave differently</li>
+                    </ul>
+                </div>
+
+                <div style="background: #fff3cd; padding: 20px; border-radius: 10px; margin: 20px 0;">
+                    <h3 style="margin-top: 0; color: #856404;">🔗 Complete Your Text Cleanup</h3>
+                    <p style="margin-bottom: 15px;">After normalizing whitespace:</p>
+                    <div style="display: flex; gap: 15px; flex-wrap: wrap;">
+                        <a href="/remove-duplicates" class="btn btn-secondary">Remove Duplicates</a>
+                        <a href="/line-filter" class="btn btn-secondary">Filter Lines</a>
+                        <a href="/find-replace" class="btn btn-secondary">Find & Replace</a>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            <div style="margin-bottom: 15px;">
+                <h4 style="margin-bottom: 10px;">Popular Tools</h4>
+                <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 15px;">
+                    <a href="/" style="color: #3498db;">Case Converter</a> |
+                    <a href="/word-counter" style="color: #3498db;">Word Counter</a> |
+                    <a href="/whitespace-normalizer" style="color: #3498db;">Whitespace Normalizer</a> |
+                    <a href="/json-formatter" style="color: #3498db;">JSON Formatter</a> |
+                    <a href="/data-cleaning-suite" style="color: #3498db;">Data Cleaning Suite</a>
+                </div>
+            </div>
+            <p>&copy; 2025 FreeTextConvert.com - Building helpful tools one day at a time</p>
+
+            <!-- Donation Section - Add before closing </footer> tag -->
+            <div style="background: #f8f9fa; padding: 30px 20px; margin: 40px auto 20px; max-width: 600px; border-radius: 15px; text-align: center; box-shadow: 0 2px 10px rgba(0,0,0,0.05);">
+                <h3 style="margin-bottom: 15px; color: #2c3e50;">
+                    ☕ Love these free tools?
+                </h3>
+                <p style="margin-bottom: 20px; color: #555; line-height: 1.6;">
+                    Hi! I'm Cino, solo developer of Free Text Convert. 
+                    I'm building these tools to help writers and developers save time.
+                    Your support keeps them <strong>free</strong> and <strong>ad-free</strong> forever!
+                </p>
+                    <a href="https://buymeacoffee.com/cinophan" 
+                        target="_blank"
+                        rel="noopener"
+                        style="background: #FFDD00; color: #000000; padding: 14px 35px; 
+                            border-radius: 30px; text-decoration: none; font-weight: bold;
+                            display: inline-block; transition: all 0.3s; font-size: 16px;
+                            box-shadow: 0 4px 15px rgba(255, 221, 0, 0.3);"
+                        onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 20px rgba(255, 221, 0, 0.4)';"
+                        onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 15px rgba(255, 221, 0, 0.3)';">
+                        <span style="font-size: 20px; vertical-align: middle;">☕</span> 
+                            Buy me a coffee
+                    </a>
+                        <p style="margin-top: 20px; font-size: 13px; color: #999;">
+                            Even $3 helps me dedicate more time to building tools you need! 🙏
+                        </p>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        // Update stats on input
+        document.getElementById('input').addEventListener('input', updateInputStats);
+
+        function updateInputStats() {
+            const input = document.getElementById('input').value;
+            
+            // Count characters
+            document.getElementById('charCount').textContent = input.length;
+            
+            // Count regular spaces
+            const spaceCount = (input.match(/ /g) || []).length;
+            document.getElementById('spaceCount').textContent = spaceCount;
+            
+            // Count tabs
+            const tabCount = (input.match(/\t/g) || []).length;
+            document.getElementById('tabCount').textContent = tabCount;
+            
+            // Count invisible characters
+            const invisibleCount = countInvisibleChars(input);
+            document.getElementById('invisibleCount').textContent = invisibleCount;
+        }
+
+        function countInvisibleChars(text) {
+            let count = 0;
+            // Zero-width spaces
+            count += (text.match(/\u200B/g) || []).length;
+            // Non-breaking spaces
+            count += (text.match(/\u00A0/g) || []).length;
+            // Zero-width non-joiner
+            count += (text.match(/\u200C/g) || []).length;
+            // Zero-width joiner
+            count += (text.match(/\u200D/g) || []).length;
+            // Other invisible Unicode characters
+            count += (text.match(/[\u2000-\u200F\u2028-\u202F\u205F-\u206F]/g) || []).length;
+            return count;
+        }
+
+        function normalizeWhitespace() {
+            let text = document.getElementById('input').value;
+            if (!text) {
+                alert('Please enter some text to clean.');
+                return;
+            }
+
+            const originalLength = text.length;
+            const originalSpaces = (text.match(/ /g) || []).length;
+            
+            // Get options
+            const removeExtraSpaces = document.getElementById('removeExtraSpaces').checked;
+            const trimLines = document.getElementById('trimLines').checked;
+            const removeAllSpaces = document.getElementById('removeAllSpaces').checked;
+            const removeEmptyLines = document.getElementById('removeEmptyLines').checked;
+            const removeZeroWidth = document.getElementById('removeZeroWidth').checked;
+            const removeNonBreaking = document.getElementById('removeNonBreaking').checked;
+            const removeControlChars = document.getElementById('removeControlChars').checked;
+            
+            const tabOption = document.querySelector('input[name="tabOption"]:checked').value;
+            const lineEndingOption = document.querySelector('input[name="lineEnding"]:checked').value;
+            
+            // Handle invisible characters first
+            if (removeZeroWidth) {
+                // Remove zero-width spaces and joiners
+                text = text.replace(/[\u200B\u200C\u200D\uFEFF]/g, '');
+            }
+            
+            if (removeNonBreaking) {
+                // Replace non-breaking spaces with regular spaces
+                text = text.replace(/\u00A0/g, ' ');
+            }
+            
+            if (removeControlChars) {
+                // Remove control characters except tabs, newlines, and carriage returns
+                text = text.replace(/[\x00-\x08\x0B\x0C\x0E-\x1F\x7F]/g, '');
+            }
+            
+            // Handle tabs
+            if (tabOption === 'spaces') {
+                text = text.replace(/\t/g, '    '); // 4 spaces per tab
+            } else if (tabOption === 'tabs') {
+                text = text.replace(/    /g, '\t'); // 4 spaces to tab
+            } else if (tabOption === 'remove') {
+                text = text.replace(/\t/g, '');
+            }
+            
+            // Handle line endings
+            if (lineEndingOption === 'windows') {
+                text = text.replace(/\r?\n/g, '\r\n');
+            } else if (lineEndingOption === 'unix') {
+                text = text.replace(/\r\n/g, '\n').replace(/\r/g, '\n');
+            }
+            
+            // Split into lines for line-based operations
+            let lines = text.split(/\r?\n/);
+            
+            // Trim lines
+            if (trimLines) {
+                lines = lines.map(line => line.trim());
+            }
+            
+            // Remove empty lines
+            if (removeEmptyLines) {
+                lines = lines.filter(line => line.trim() !== '');
+            }
+            
+            // Join lines back
+            text = lines.join('\n');
+            
+            // Handle spaces
+            if (removeAllSpaces) {
+                text = text.replace(/ /g, '');
+            } else if (removeExtraSpaces) {
+                // Replace multiple spaces with single space
+                text = text.replace(/ +/g, ' ');
+            }
+            
+            // Final cleanup - remove any remaining weird whitespace
+            text = text.replace(/[\u2000-\u200A\u2028\u2029\u202F\u205F\u3000]/g, ' ');
+            
+            // Display result
+            document.getElementById('output').value = text;
+            
+            // Update stats
+            const removedChars = originalLength - text.length;
+            const cleanedSpaces = originalSpaces - (text.match(/ /g) || []).length;
+            
+            document.getElementById('removedCount').textContent = removedChars;
+            document.getElementById('cleanedSpaces').textContent = Math.abs(cleanedSpaces);
+            
+            // Show warning if significant content was removed
+            if (removedChars > originalLength * 0.1) {
+                const warning = document.getElementById('warningBox');
+                warning.textContent = `⚠️ Removed ${removedChars} characters (${Math.round(removedChars/originalLength*100)}% of original text)`;
+                warning.classList.add('active');
+            } else {
+                document.getElementById('warningBox').classList.remove('active');
+            }
+            
+            // Track usage
+            if (typeof gtag !== 'undefined') {
+                gtag('event', 'whitespace_normalize', {
+                    'event_category': 'Tool Usage',
+                    'event_label': 'Whitespace Normalizer',
+                    'value': originalLength
+                });
+            }
+        }
+
+        function showInvisible() {
+            const input = document.getElementById('input').value;
+            if (!input) {
+                alert('Please enter some text first.');
+                return;
+            }
+            
+            let display = input;
+            // Make invisible characters visible
+            display = display.replace(/ /g, '·');
+            display = display.replace(/\t/g, '→');
+            display = display.replace(/\u200B/g, '[ZWSP]');
+            display = display.replace(/\u00A0/g, '[NBSP]');
+            display = display.replace(/\u200C/g, '[ZWNJ]');
+            display = display.replace(/\u200D/g, '[ZWJ]');
+            display = display.replace(/\r\n/g, '[CRLF]\n');
+            display = display.replace(/\n/g, '[LF]\n');
+            display = display.replace(/\r/g, '[CR]');
+            
+            const invisibleDisplay = document.getElementById('invisibleDisplay');
+            invisibleDisplay.textContent = display;
+            invisibleDisplay.classList.add('active');
+            
+            // Auto-hide after 10 seconds
+            setTimeout(() => {
+                invisibleDisplay.classList.remove('active');
+            }, 10000);
+        }
+
+        function loadExample(type) {
+            const examples = {
+                extraSpaces: `This   text    has     too    many      spaces.
+                And   also    spaces    at the end of lines.    
+                    Indented    with     irregular    spacing.`,
+                
+                mixedWhitespace: `function example() {
+	    // Mixed tabs and spaces
+    	const value = "test";
+	        if (value) {
+    	    	return true;
+        	}
+}`,
+                
+                invisible: `This text has​invisible characters.
+Here's a non-breaking space: test test
+Zero-width​space​here​and​here
+Control chars: ` + String.fromCharCode(0x200B) + `hidden` + String.fromCharCode(0x00A0) + `spaces`,
+                
+                messy: `  This    text	has   everything  wrong!   
+	Mixed	tabs   and    spaces	
+​Invisible​characters​everywhere​
+Non-breaking spaces between words
+   
+   Empty lines above   
+Trailing spaces...     `
+            };
+            
+            document.getElementById('input').value = examples[type];
+            updateInputStats();
+            document.getElementById('output').value = '';
+        }
+
+        function copyToClipboard() {
+            const output = document.getElementById('output').value;
+            if (!output) {
+                alert('Please clean some text first!');
+                return;
+            }
+
+            navigator.clipboard.writeText(output).then(() => {
+                const btn = event.target;
+                const originalText = btn.textContent;
+                btn.textContent = '✓ Copied!';
+                setTimeout(() => {
+                    btn.textContent = originalText;
+                }, 2000);
+            });
+        }
+
+        function downloadText() {
+            const output = document.getElementById('output').value;
+            if (!output) {
+                alert('Please clean some text first!');
+                return;
+            }
+
+            const blob = new Blob([output], { type: 'text/plain' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'cleaned-text.txt';
+            document.body.appendChild(a);
+            a.click();
+            window.URL.revokeObjectURL(url);
+            document.body.removeChild(a);
+        }
+
+        function clearAll() {
+            document.getElementById('input').value = '';
+            document.getElementById('output').value = '';
+            document.getElementById('warningBox').classList.remove('active');
+            document.getElementById('invisibleDisplay').classList.remove('active');
+            updateInputStats();
+            document.getElementById('removedCount').textContent = '0';
+            document.getElementById('cleanedSpaces').textContent = '0';
+        }
+
+        // Handle "remove all spaces" checkbox interaction
+        document.getElementById('removeAllSpaces').addEventListener('change', function(e) {
+            if (e.target.checked) {
+                document.getElementById('removeExtraSpaces').checked = false;
+                document.getElementById('removeExtraSpaces').disabled = true;
+            } else {
+                document.getElementById('removeExtraSpaces').disabled = false;
+                document.getElementById('removeExtraSpaces').checked = true;
+            }
+        });
+    </script>
+</body>
+</html>
