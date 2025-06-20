@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Line Numbers Online - Number Lines Tool | Free Text Convert</title>
+    <meta name="description" content="Add line numbers to text online instantly. Number lines with custom formats, starting numbers, and padding. Remove line numbers too. Free tool, no signup required.">
+    <link rel="stylesheet" href="../style.css">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📝</text></svg>">
+    <link rel="canonical" href="https://freetextconvert.com/add-line-numbers">
+    
+    <!-- Schema.org markup -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Add Line Numbers Tool",
+        "url": "https://freetextconvert.com/add-line-numbers",
+        "description": "Free online tool to add or remove line numbers from text",
+        "applicationCategory": "UtilityApplication",
+        "operatingSystem": "Any",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+        }
+    }
+    </script>
+    
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-792NQ00CEV"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-792NQ00CEV');
+    </script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Free Text Convert</h1>
+            <p class="tagline">Simple, fast, and free text transformation tools</p>
+            <nav style="margin-top: 15px; text-align: center;">
+                <a href="/" style="margin-right: 20px; color: #3498db; text-decoration: none;">Home</a>
+                <a href="/tools" style="margin-right: 20px; color: #3498db; text-decoration: none;">All Tools</a>
+                <a href="/blog" style="color: #3498db; text-decoration: none;">Blog</a>
+            </nav>
+        </header>
+
+        <main>
+            <div class="tool-card" style="margin-bottom: 30px;">
+                <h2>Add Line Numbers</h2>
+                <p style="text-align: center; color: #666; margin-bottom: 30px;">
+                    Add or remove line numbers from text with custom formatting options
+                </p>
+
+                <div class="tool-section">
+                    <!-- Mode Selection -->
+                    <div style="margin-bottom: 30px;">
+                        <h3>Mode:</h3>
+                        <div style="display: flex; gap: 20px; flex-wrap: wrap;">
+                            <label style="display: flex; align-items: center; cursor: pointer;">
+                                <input type="radio" name="mode" value="add" checked 
+                                    style="margin-right: 8px;" onchange="updateMode()">
+                                Add Line Numbers
+                            </label>
+                            <label style="display: flex; align-items: center; cursor: pointer;">
+                                <input type="radio" name="mode" value="remove" 
+                                    style="margin-right: 8px;" onchange="updateMode()">
+                                Remove Line Numbers
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Add Mode Options -->
+                    <div id="addOptions" style="margin-bottom: 30px;">
+                        <h3>Numbering Options:</h3>
+                        
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin-bottom: 20px;">
+                            <!-- Format Selection -->
+                            <div>
+                                <label for="format" style="display: block; margin-bottom: 5px;">Format:</label>
+                                <select id="format" style="width: 100%; padding: 8px; border-radius: 5px; border: 1px solid #ddd;">
+                                    <option value="1.">1. (with period)</option>
+                                    <option value="1)">1) (with parenthesis)</option>
+                                    <option value="1:">1: (with colon)</option>
+                                    <option value="1">1 (number only)</option>
+                                    <option value="[1]">[1] (with brackets)</option>
+                                    <option value="1 -">1 - (with dash)</option>
+                                    <option value="1 |">1 | (with pipe)</option>
+                                    <option value="01.">01. (padded)</option>
+                                    <option value="001.">001. (padded 3 digits)</option>
+                                </select>
+                            </div>
+
+                            <!-- Starting Number -->
+                            <div>
+                                <label for="startNumber" style="display: block; margin-bottom: 5px;">Start at:</label>
+                                <input type="number" id="startNumber" value="1" min="0" 
+                                    style="width: 100%; padding: 8px; border-radius: 5px; border: 1px solid #ddd;">
+                            </div>
+
+                            <!-- Separator -->
+                            <div>
+                                <label for="separator" style="display: block; margin-bottom: 5px;">After number:</label>
+                                <input type="text" id="separator" value=" " placeholder="Space, tab, etc."
+                                    style="width: 100%; padding: 8px; border-radius: 5px; border: 1px solid #ddd;">
+                            </div>
+
+                            <!-- Number Type -->
+                            <div>
+                                <label for="numberType" style="display: block; margin-bottom: 5px;">Number type:</label>
+                                <select id="numberType" style="width: 100%; padding: 8px; border-radius: 5px; border: 1px solid #ddd;">
+                                    <option value="numeric">1, 2, 3...</option>
+                                    <option value="letter-lower">a, b, c...</option>
+                                    <option value="letter-upper">A, B, C...</option>
+                                    <option value="roman-lower">i, ii, iii...</option>
+                                    <option value="roman-upper">I, II, III...</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Additional Options -->
+                        <div style="margin-top: 20px;">
+                            <label style="display: flex; align-items: center; cursor: pointer;">
+                                <input type="checkbox" id="skipEmpty" checked style="margin-right: 8px;">
+                                Skip empty lines
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Remove Mode Options -->
+                    <div id="removeOptions" style="display: none; margin-bottom: 30px;">
+                        <h3>Remove Options:</h3>
+                        <p style="color: #666; margin-bottom: 15px;">
+                            Automatically detects and removes common line number formats
+                        </p>
+                        <div>
+                            <label style="display: flex; align-items: center; cursor: pointer;">
+                                <input type="checkbox" id="removeAggressive" style="margin-right: 8px;">
+                                Aggressive mode (removes any leading numbers)
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Quick Examples -->
+                    <div style="margin-bottom: 30px;">
+                        <h3>Quick Examples:</h3>
+                        <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                            <button onclick="loadExample('todo')" 
+                                style="padding: 8px 16px; background: #ecf0f1; border: 1px solid #bdc3c7; border-radius: 5px; cursor: pointer;">
+                                To-Do List
+                            </button>
+                            <button onclick="loadExample('code')" 
+                                style="padding: 8px 16px; background: #ecf0f1; border: 1px solid #bdc3c7; border-radius: 5px; cursor: pointer;">
+                                Code Lines
+                            </button>
+                            <button onclick="loadExample('steps')" 
+                                style="padding: 8px 16px; background: #ecf0f1; border: 1px solid #bdc3c7; border-radius: 5px; cursor: pointer;">
+                                Instructions
+                            </button>
+                            <button onclick="loadExample('outline')" 
+                                style="padding: 8px 16px; background: #ecf0f1; border: 1px solid #bdc3c7; border-radius: 5px; cursor: pointer;">
+                                Document Outline
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Input Area -->
+                    <div style="position: relative;">
+                        <label for="input" style="font-weight: bold; display: block; margin-bottom: 10px;">
+                            Enter your text:
+                        </label>
+                        <textarea 
+                            id="input" 
+                            placeholder="Paste your text here..."
+                            style="width: 100%; height: 300px; padding: 15px; border: 2px solid #3498db; border-radius: 10px; font-family: 'Courier New', monospace; font-size: 14px; resize: vertical;"
+                        ></textarea>
+                        <div style="position: absolute; top: 35px; right: 10px; background: white; padding: 5px;">
+                            <span id="lineCount" style="color: #666; font-size: 12px;">0 lines</span>
+                        </div>
+                    </div>
+
+                    <!-- Action Buttons -->
+                    <div style="text-align: center; margin: 30px 0;">
+                        <button onclick="processText()" 
+                            style="background: #3498db; color: white; padding: 15px 40px; font-size: 18px; border: none; border-radius: 30px; cursor: pointer; margin-right: 10px;">
+                            Process Text
+                        </button>
+                        <button onclick="clearAll()" 
+                            style="background: #95a5a6; color: white; padding: 15px 30px; font-size: 16px; border: none; border-radius: 30px; cursor: pointer;">
+                            Clear All
+                        </button>
+                    </div>
+
+                    <!-- Output Area -->
+                    <div style="position: relative;">
+                        <label for="output" style="font-weight: bold; display: block; margin-bottom: 10px;">
+                            Result:
+                        </label>
+                        <textarea 
+                            id="output" 
+                            readonly
+                            style="width: 100%; height: 300px; padding: 15px; border: 2px solid #27ae60; border-radius: 10px; font-family: 'Courier New', monospace; font-size: 14px; background: #f8f9fa; resize: vertical;"
+                        ></textarea>
+                        <button onclick="copyOutput()" 
+                            style="position: absolute; top: 35px; right: 10px; background: #27ae60; color: white; padding: 8px 16px; border: none; border-radius: 5px; cursor: pointer;">
+                            Copy Result
+                        </button>
+                    </div>
+
+                    <!-- Statistics -->
+                    <div id="stats" style="margin-top: 20px; padding: 15px; background: #ecf0f1; border-radius: 10px; display: none;">
+                        <h4 style="margin-bottom: 10px;">Statistics:</h4>
+                        <div id="statsContent" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px;">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pro Tips Section -->
+            <div class="tool-card" style="margin-top: 30px;">
+                <h3>💡 Pro Tips</h3>
+                <ul style="line-height: 1.8;">
+                    <li><strong>For Code:</strong> Use padded numbers (01, 02) for better alignment</li>
+                    <li><strong>For Lists:</strong> Try different formats like "1)" or "1." based on your style guide</li>
+                    <li><strong>For Documents:</strong> Roman numerals (I, II, III) add a formal touch</li>
+                    <li><strong>Skip Empty Lines:</strong> Keep this checked to maintain paragraph structure</li>
+                    <li><strong>Custom Separator:</strong> Use tab (\t) for better spacing in code editors</li>
+                </ul>
+            </div>
+
+            <!-- Use Cases -->
+            <div class="tool-card" style="margin-top: 30px;">
+                <h3>Common Use Cases</h3>
+                <ul style="line-height: 1.8;">
+                    <li>📝 <strong>Academic Writing:</strong> Number citations or reference lists</li>
+                    <li>💻 <strong>Code Documentation:</strong> Add line numbers for code reviews</li>
+                    <li>📋 <strong>Lists & Instructions:</strong> Create numbered step-by-step guides</li>
+                    <li>📚 <strong>Legal Documents:</strong> Number paragraphs for easy reference</li>
+                    <li>🎓 <strong>Teaching Materials:</strong> Number lines for class discussions</li>
+                </ul>
+            </div>
+
+            <!-- Related Tools -->
+            <div class="tool-card" style="margin-top: 30px;">
+                <h3>Related Tools</h3>
+                <p>After adding line numbers, you might want to:</p>
+                <ul style="line-height: 1.8;">
+                    <li>📊 <a href="/sort-lines">Sort your numbered lines</a></li>
+                    <li>➕ <a href="/prefix-suffix">Add custom prefixes or suffixes</a></li>
+                    <li>🔍 <a href="/line-filter">Filter specific numbered lines</a></li>
+                    <li>✂️ <a href="/remove-duplicates">Remove duplicate entries</a></li>
+                </ul>
+            </div>
+        </main>
+
+        <footer>
+            <div style="background: #f8f9fa; padding: 30px 20px; margin: 40px auto 20px; max-width: 600px; border-radius: 15px; text-align: center; box-shadow: 0 2px 10px rgba(0,0,0,0.05);">
+                <h3 style="margin-bottom: 15px; color: #2c3e50;">
+                    ☕ Love these free tools?
+                </h3>
+                <p style="margin-bottom: 20px; color: #555; line-height: 1.6;">
+                    Hi! I'm Cino, solo developer of Free Text Convert.
+                    I'm building these tools to help writers and developers save time.
+                    Your support keeps them <strong>free</strong> and <strong>ad-free</strong> forever!
+                </p>
+                <a href="https://buymeacoffee.com/cinophan"
+                   target="_blank"
+                   rel="noopener"
+                   style="background: #FFDD00; 
+                          color: #000000; 
+                          padding: 14px 35px;
+                          border-radius: 30px; 
+                          text-decoration: none;
+                          font-weight: bold;
+                          display: inline-block; 
+                          transition: all 0.3s; 
+                          font-size: 16px;
+                          box-shadow: 0 4px 15px rgba(255, 221, 0, 0.3);"
+                   onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 20px rgba(255, 221, 0, 0.4)';"
+                   onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 15px rgba(255, 221, 0, 0.3)';">
+                    <span style="font-size: 20px; vertical-align: middle;">☕</span>
+                    Buy me a coffee
+                </a>
+                <p style="margin-top: 20px; font-size: 13px; color: #999;">
+                    Even $3 helps me dedicate more time to building tools you need! 🙏
+                </p>
+            </div>
+            <div style="margin-bottom: 20px;">
+                <h4 style="margin-bottom: 10px;">Popular Tools</h4>
+                <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 15px;">
+                    <a href="/" style="color: #3498db;">Case Converter</a> |
+                    <a href="/word-counter" style="color: #3498db;">Word Counter</a> |
+                    <a href="/remove-duplicates" style="color: #3498db;">Remove Duplicates</a> |
+                    <a href="/json-formatter" style="color: #3498db;">JSON Formatter</a> |
+                    <a href="/line-filter" style="color: #3498db;">Line Filter</a> |
+                    <a href="/data-cleaning-suite" style="color: #3498db;">Data Cleaning Suite</a>
+                </div>
+            </div>
+            <div style="margin-bottom: 20px;">
+                <a href="/affiliate-disclosure" style="color: #3498db; margin-right: 20px;">Affiliate Disclosure</a>
+            </div>
+            <p>&copy; 2025 FreeTextConvert.com - Building helpful tools one day at a time</p>
+        </footer>
+    </div>
+
+    <script>
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            const input = document.getElementById('input');
+            input.addEventListener('input', updateLineCount);
+            updateLineCount();
+        });
+
+        function updateMode() {
+            const mode = document.querySelector('input[name="mode"]:checked').value;
+            document.getElementById('addOptions').style.display = mode === 'add' ? 'block' : 'none';
+            document.getElementById('removeOptions').style.display = mode === 'remove' ? 'block' : 'none';
+        }
+
+        function updateLineCount() {
+            const input = document.getElementById('input').value;
+            const lines = input.split('\n').filter(line => line.trim() || !document.getElementById('skipEmpty').checked);
+            document.getElementById('lineCount').textContent = `${lines.length} lines`;
+        }
+
+        function toRoman(num) {
+            const romanNumerals = [
+                [1000, 'M'], [900, 'CM'], [500, 'D'], [400, 'CD'],
+                [100, 'C'], [90, 'XC'], [50, 'L'], [40, 'XL'],
+                [10, 'X'], [9, 'IX'], [5, 'V'], [4, 'IV'], [1, 'I']
+            ];
+            
+            let result = '';
+            for (const [value, numeral] of romanNumerals) {
+                while (num >= value) {
+                    result += numeral;
+                    num -= value;
+                }
+            }
+            return result;
+        }
+
+        function toLetter(num) {
+            let result = '';
+            while (num > 0) {
+                num--;
+                result = String.fromCharCode(65 + (num % 26)) + result;
+                num = Math.floor(num / 26);
+            }
+            return result;
+        }
+
+        function formatNumber(num, format, numberType) {
+            let baseNumber;
+            
+            // Convert to appropriate type
+            switch (numberType) {
+                case 'letter-lower':
+                    baseNumber = toLetter(num).toLowerCase();
+                    break;
+                case 'letter-upper':
+                    baseNumber = toLetter(num);
+                    break;
+                case 'roman-lower':
+                    baseNumber = toRoman(num).toLowerCase();
+                    break;
+                case 'roman-upper':
+                    baseNumber = toRoman(num);
+                    break;
+                default:
+                    baseNumber = num.toString();
+            }
+            
+            // Apply format
+            if (format === '01.' && numberType === 'numeric') {
+                baseNumber = num.toString().padStart(2, '0');
+                return baseNumber + '.';
+            } else if (format === '001.' && numberType === 'numeric') {
+                baseNumber = num.toString().padStart(3, '0');
+                return baseNumber + '.';
+            } else if (format === '1') {
+                return baseNumber;
+            } else {
+                // Replace the '1' in format with actual number
+                return format.replace(/0*1/, baseNumber);
+            }
+        }
+
+        function processText() {
+            const mode = document.querySelector('input[name="mode"]:checked').value;
+            const input = document.getElementById('input').value;
+            
+            if (!input.trim()) {
+                alert('Please enter some text to process');
+                return;
+            }
+            
+            let result;
+            let stats = {};
+            
+            if (mode === 'add') {
+                result = addLineNumbers(input);
+                stats = {
+                    'Lines Numbered': result.split('\n').filter(line => line.trim()).length,
+                    'Empty Lines': result.split('\n').filter(line => !line.trim()).length,
+                    'Total Lines': result.split('\n').length
+                };
+            } else {
+                result = removeLineNumbers(input);
+                const removed = input.split('\n').length - result.split('\n').length;
+                stats = {
+                    'Lines Processed': input.split('\n').length,
+                    'Numbers Removed': input.split('\n').filter((line, i) => line !== result.split('\n')[i]).length,
+                    'Result Lines': result.split('\n').length
+                };
+            }
+            
+            document.getElementById('output').value = result;
+            displayStats(stats);
+        }
+
+        function addLineNumbers(text) {
+            const format = document.getElementById('format').value;
+            const startNumber = parseInt(document.getElementById('startNumber').value) || 1;
+            const separator = document.getElementById('separator').value;
+            const numberType = document.getElementById('numberType').value;
+            const skipEmpty = document.getElementById('skipEmpty').checked;
+            
+            const lines = text.split('\n');
+            let lineNumber = startNumber;
+            
+            return lines.map(line => {
+                if (skipEmpty && !line.trim()) {
+                    return line;
+                }
+                
+                const formattedNumber = formatNumber(lineNumber, format, numberType);
+                lineNumber++;
+                return formattedNumber + separator + line;
+            }).join('\n');
+        }
+
+        function removeLineNumbers(text) {
+            const aggressive = document.getElementById('removeAggressive').checked;
+            const lines = text.split('\n');
+            
+            return lines.map(line => {
+                if (!line.trim()) return line;
+                
+                if (aggressive) {
+                    // Remove any leading numbers and common separators
+                    return line.replace(/^[\s]*[0-9]+[\s\.\)\:\-\|\]]*[\s]*/, '');
+                } else {
+                    // Common patterns for line numbers
+                    const patterns = [
+                        /^[\s]*[0-9]+\.[\s]+/,     // 1. 
+                        /^[\s]*[0-9]+\)[\s]+/,     // 1)
+                        /^[\s]*[0-9]+\:[\s]+/,     // 1:
+                        /^[\s]*[0-9]+[\s]+/,       // 1 
+                        /^[\s]*\[[0-9]+\][\s]+/,   // [1]
+                        /^[\s]*[0-9]+[\s]*\-[\s]+/, // 1 -
+                        /^[\s]*[0-9]+[\s]*\|[\s]+/, // 1 |
+                        /^[\s]*[IVXLCDMivxlcdm]+\.[\s]+/, // Roman numerals
+                        /^[\s]*[A-Za-z]+\.[\s]+/,   // Letters
+                        /^[\s]*[A-Za-z]+\)[\s]+/    // Letters with )
+                    ];
+                    
+                    for (const pattern of patterns) {
+                        if (pattern.test(line)) {
+                            return line.replace(pattern, '');
+                        }
+                    }
+                }
+                
+                return line;
+            }).join('\n');
+        }
+
+        function displayStats(stats) {
+            const statsDiv = document.getElementById('stats');
+            const statsContent = document.getElementById('statsContent');
+            
+            statsContent.innerHTML = Object.entries(stats)
+                .map(([key, value]) => `
+                    <div style="text-align: center;">
+                        <div style="font-size: 24px; font-weight: bold; color: #3498db;">${value}</div>
+                        <div style="color: #666; font-size: 14px;">${key}</div>
+                    </div>
+                `).join('');
+            
+            statsDiv.style.display = 'block';
+        }
+
+        function copyOutput() {
+            const output = document.getElementById('output');
+            output.select();
+            document.execCommand('copy');
+            
+            const button = event.target;
+            const originalText = button.textContent;
+            button.textContent = 'Copied!';
+            button.style.background = '#2ecc71';
+            
+            setTimeout(() => {
+                button.textContent = originalText;
+                button.style.background = '#27ae60';
+            }, 2000);
+        }
+
+        function clearAll() {
+            document.getElementById('input').value = '';
+            document.getElementById('output').value = '';
+            document.getElementById('stats').style.display = 'none';
+            updateLineCount();
+        }
+
+        function loadExample(type) {
+            const examples = {
+                todo: `Buy groceries
+Call dentist for appointment
+Finish project report
+Send email to client
+Review meeting notes`,
+                
+                code: `function calculateTotal(items) {
+    let total = 0;
+    for (const item of items) {
+        total += item.price * item.quantity;
+    }
+    return total;
+}`,
+                
+                steps: `Preheat oven to 350°F
+Mix flour and sugar in a bowl
+Add eggs and milk
+Stir until smooth
+Pour into baking pan
+Bake for 25 minutes`,
+                
+                outline: `Introduction
+Background and Context
+Main Arguments
+Supporting Evidence
+Counter Arguments
+Conclusion
+References`
+            };
+            
+            document.getElementById('input').value = examples[type];
+            updateLineCount();
+        }
+    </script>
+</body>
+</html>
