@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Extract Emails and URLs from Text - Free Online Tool | Free Text Convert</title>
+    <meta name="description" content="Extract emails, URLs, and phone numbers from any text instantly. Free online extractor tool finds all email addresses, web links, and phone numbers. No signup required.">
+    <link rel="stylesheet" href="../style.css">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📝</text></svg>">
+    <link rel="canonical" href="https://freetextconvert.com/extract-emails-urls">
+    
+    <!-- Schema.org markup -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Extract Emails and URLs Tool",
+        "url": "https://freetextconvert.com/extract-emails-urls",
+        "description": "Free online tool to extract email addresses, URLs, and phone numbers from text",
+        "applicationCategory": "UtilityApplication",
+        "operatingSystem": "Any",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+        }
+    }
+    </script>
+    
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-792NQ00CEV"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-792NQ00CEV');
+    </script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Free Text Convert</h1>
+            <p class="tagline">Simple, fast, and free text transformation tools</p>
+            <nav style="margin-top: 15px; text-align: center;">
+                <a href="/" style="margin-right: 20px; color: #3498db; text-decoration: none;">Home</a>
+                <a href="/tools" style="margin-right: 20px; color: #3498db; text-decoration: none;">All Tools</a>
+                <a href="/blog" style="color: #3498db; text-decoration: none;">Blog</a>
+            </nav>
+        </header>
+
+        <main>
+            <div class="tool-card" style="margin-bottom: 30px;">
+                <h2>Extract Emails, URLs & Phone Numbers</h2>
+                <p style="text-align: center; color: #666; margin-bottom: 30px;">
+                    Extract all email addresses, URLs, and phone numbers from any text instantly
+                </p>
+
+                <div class="tool-section">
+                    <!-- Extraction Options -->
+                    <div style="margin-bottom: 30px;">
+                        <h3>What to Extract:</h3>
+                        <div style="display: flex; gap: 20px; flex-wrap: wrap; margin-bottom: 20px;">
+                            <label style="display: flex; align-items: center; cursor: pointer;">
+                                <input type="checkbox" id="extractEmails" checked 
+                                    style="margin-right: 8px;">
+                                Email Addresses
+                            </label>
+                            <label style="display: flex; align-items: center; cursor: pointer;">
+                                <input type="checkbox" id="extractUrls" checked 
+                                    style="margin-right: 8px;">
+                                URLs/Links
+                            </label>
+                            <label style="display: flex; align-items: center; cursor: pointer;">
+                                <input type="checkbox" id="extractPhones" checked 
+                                    style="margin-right: 8px;">
+                                Phone Numbers
+                            </label>
+                        </div>
+
+                        <!-- Output Format -->
+                        <h3>Output Format:</h3>
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px; margin-bottom: 20px;">
+                            <label style="display: flex; align-items: center; cursor: pointer;">
+                                <input type="radio" name="outputFormat" value="list" checked 
+                                    style="margin-right: 8px;">
+                                One per line
+                            </label>
+                            <label style="display: flex; align-items: center; cursor: pointer;">
+                                <input type="radio" name="outputFormat" value="comma" 
+                                    style="margin-right: 8px;">
+                                Comma separated
+                            </label>
+                            <label style="display: flex; align-items: center; cursor: pointer;">
+                                <input type="radio" name="outputFormat" value="semicolon" 
+                                    style="margin-right: 8px;">
+                                Semicolon separated
+                            </label>
+                            <label style="display: flex; align-items: center; cursor: pointer;">
+                                <input type="radio" name="outputFormat" value="json" 
+                                    style="margin-right: 8px;">
+                                JSON format
+                            </label>
+                        </div>
+
+                        <!-- Additional Options -->
+                        <h3>Options:</h3>
+                        <div style="display: flex; gap: 20px; flex-wrap: wrap;">
+                            <label style="display: flex; align-items: center; cursor: pointer;">
+                                <input type="checkbox" id="removeDuplicates" checked 
+                                    style="margin-right: 8px;">
+                                Remove duplicates
+                            </label>
+                            <label style="display: flex; align-items: center; cursor: pointer;">
+                                <input type="checkbox" id="sortResults" 
+                                    style="margin-right: 8px;">
+                                Sort alphabetically
+                            </label>
+                            <label style="display: flex; align-items: center; cursor: pointer;">
+                                <input type="checkbox" id="validateEmails" checked 
+                                    style="margin-right: 8px;">
+                                Validate emails
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Quick Examples -->
+                    <div style="margin-bottom: 30px;">
+                        <h3>Quick Examples:</h3>
+                        <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                            <button onclick="loadExample('contact')" 
+                                style="padding: 8px 16px; background: #ecf0f1; border: 1px solid #bdc3c7; border-radius: 5px; cursor: pointer;">
+                                Contact Info
+                            </button>
+                            <button onclick="loadExample('article')" 
+                                style="padding: 8px 16px; background: #ecf0f1; border: 1px solid #bdc3c7; border-radius: 5px; cursor: pointer;">
+                                Web Article
+                            </button>
+                            <button onclick="loadExample('business')" 
+                                style="padding: 8px 16px; background: #ecf0f1; border: 1px solid #bdc3c7; border-radius: 5px; cursor: pointer;">
+                                Business Card
+                            </button>
+                            <button onclick="loadExample('social')" 
+                                style="padding: 8px 16px; background: #ecf0f1; border: 1px solid #bdc3c7; border-radius: 5px; cursor: pointer;">
+                                Social Media
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Input Area -->
+                    <div style="position: relative;">
+                        <label for="input" style="font-weight: bold; display: block; margin-bottom: 10px;">
+                            Enter your text:
+                        </label>
+                        <textarea 
+                            id="input" 
+                            placeholder="Paste text containing emails, URLs, or phone numbers..."
+                            style="width: 100%; height: 300px; padding: 15px; border: 2px solid #3498db; border-radius: 10px; font-family: Arial, sans-serif; font-size: 14px; resize: vertical;"
+                        ></textarea>
+                        <div style="position: absolute; top: 35px; right: 10px; background: white; padding: 5px;">
+                            <span id="charCount" style="color: #666; font-size: 12px;">0 characters</span>
+                        </div>
+                    </div>
+
+                    <!-- Action Buttons -->
+                    <div style="text-align: center; margin: 30px 0;">
+                        <button onclick="extractData()" 
+                            style="background: #3498db; color: white; padding: 15px 40px; font-size: 18px; border: none; border-radius: 30px; cursor: pointer; margin-right: 10px;">
+                            Extract Data
+                        </button>
+                        <button onclick="clearAll()" 
+                            style="background: #95a5a6; color: white; padding: 15px 30px; font-size: 16px; border: none; border-radius: 30px; cursor: pointer;">
+                            Clear All
+                        </button>
+                    </div>
+
+                    <!-- Results Tabs -->
+                    <div id="resultsSection" style="display: none;">
+                        <div style="display: flex; gap: 10px; margin-bottom: 20px; border-bottom: 2px solid #ecf0f1;">
+                            <button id="tabAll" onclick="switchTab('all')" 
+                                style="padding: 10px 20px; background: #3498db; color: white; border: none; border-radius: 5px 5px 0 0; cursor: pointer;">
+                                All Results
+                            </button>
+                            <button id="tabEmails" onclick="switchTab('emails')" 
+                                style="padding: 10px 20px; background: #ecf0f1; color: #333; border: none; border-radius: 5px 5px 0 0; cursor: pointer;">
+                                Emails (<span id="emailCount">0</span>)
+                            </button>
+                            <button id="tabUrls" onclick="switchTab('urls')" 
+                                style="padding: 10px 20px; background: #ecf0f1; color: #333; border: none; border-radius: 5px 5px 0 0; cursor: pointer;">
+                                URLs (<span id="urlCount">0</span>)
+                            </button>
+                            <button id="tabPhones" onclick="switchTab('phones')" 
+                                style="padding: 10px 20px; background: #ecf0f1; color: #333; border: none; border-radius: 5px 5px 0 0; cursor: pointer;">
+                                Phones (<span id="phoneCount">0</span>)
+                            </button>
+                        </div>
+
+                        <!-- Output Area -->
+                        <div style="position: relative;">
+                            <textarea 
+                                id="output" 
+                                readonly
+                                style="width: 100%; height: 300px; padding: 15px; border: 2px solid #27ae60; border-radius: 10px; font-family: 'Courier New', monospace; font-size: 14px; background: #f8f9fa; resize: vertical;"
+                            ></textarea>
+                            <button onclick="copyOutput()" 
+                                style="position: absolute; top: 10px; right: 10px; background: #27ae60; color: white; padding: 8px 16px; border: none; border-radius: 5px; cursor: pointer;">
+                                Copy Results
+                            </button>
+                        </div>
+
+                        <!-- Download Options -->
+                        <div style="margin-top: 20px; text-align: center;">
+                            <button onclick="downloadResults('txt')" 
+                                style="background: #95a5a6; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; margin-right: 10px;">
+                                Download as TXT
+                            </button>
+                            <button onclick="downloadResults('csv')" 
+                                style="background: #95a5a6; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer;">
+                                Download as CSV
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Statistics -->
+                    <div id="stats" style="margin-top: 30px; padding: 20px; background: #ecf0f1; border-radius: 10px; display: none;">
+                        <h4 style="margin-bottom: 15px;">Extraction Statistics:</h4>
+                        <div id="statsContent" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px;">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pro Tips Section -->
+            <div class="tool-card" style="margin-top: 30px;">
+                <h3>💡 Pro Tips</h3>
+                <ul style="line-height: 1.8;">
+                    <li><strong>Email Validation:</strong> We validate email formats to reduce false positives</li>
+                    <li><strong>URL Detection:</strong> Finds both http/https links and plain domain names</li>
+                    <li><strong>Phone Formats:</strong> Detects various formats including international numbers</li>
+                    <li><strong>Bulk Processing:</strong> Can handle thousands of contacts at once</li>
+                    <li><strong>Privacy First:</strong> All processing happens in your browser - no data uploaded</li>
+                </ul>
+            </div>
+
+            <!-- Use Cases -->
+            <div class="tool-card" style="margin-top: 30px;">
+                <h3>Common Use Cases</h3>
+                <ul style="line-height: 1.8;">
+                    <li>📧 <strong>Email Marketing:</strong> Extract contacts from documents or web pages</li>
+                    <li>🔗 <strong>Link Analysis:</strong> Find all URLs in articles or reports</li>
+                    <li>📞 <strong>Contact Management:</strong> Pull phone numbers from business cards or directories</li>
+                    <li>🔍 <strong>Data Mining:</strong> Extract contact info from unstructured text</li>
+                    <li>📊 <strong>Lead Generation:</strong> Build contact lists from public sources</li>
+                </ul>
+            </div>
+
+            <!-- Related Tools -->
+            <div class="tool-card" style="margin-top: 30px;">
+                <h3>Related Tools</h3>
+                <p>After extracting data, you might want to:</p>
+                <ul style="line-height: 1.8;">
+                    <li>✂️ <a href="/remove-duplicates">Remove duplicate emails or URLs</a></li>
+                    <li>📊 <a href="/sort-lines">Sort your extracted data</a></li>
+                    <li>🔍 <a href="/line-filter">Filter specific domains or patterns</a></li>
+                    <li>📝 <a href="/csv-to-json">Convert to JSON format</a></li>
+                </ul>
+            </div>
+        </main>
+
+        <footer>
+            <div style="background: #f8f9fa; padding: 30px 20px; margin: 40px auto 20px; max-width: 600px; border-radius: 15px; text-align: center; box-shadow: 0 2px 10px rgba(0,0,0,0.05);">
+                <h3 style="margin-bottom: 15px; color: #2c3e50;">
+                    ☕ Love these free tools?
+                </h3>
+                <p style="margin-bottom: 20px; color: #555; line-height: 1.6;">
+                    Hi! I'm Cino, solo developer of Free Text Convert.
+                    I'm building these tools to help writers and developers save time.
+                    Your support keeps them <strong>free</strong> and <strong>ad-free</strong> forever!
+                </p>
+                <a href="https://buymeacoffee.com/cinophan"
+                   target="_blank"
+                   rel="noopener"
+                   style="background: #FFDD00; 
+                          color: #000000; 
+                          padding: 14px 35px;
+                          border-radius: 30px; 
+                          text-decoration: none;
+                          font-weight: bold;
+                          display: inline-block; 
+                          transition: all 0.3s; 
+                          font-size: 16px;
+                          box-shadow: 0 4px 15px rgba(255, 221, 0, 0.3);"
+                   onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 20px rgba(255, 221, 0, 0.4)';"
+                   onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 15px rgba(255, 221, 0, 0.3)';">
+                    <span style="font-size: 20px; vertical-align: middle;">☕</span>
+                    Buy me a coffee
+                </a>
+                <p style="margin-top: 20px; font-size: 13px; color: #999;">
+                    Even $3 helps me dedicate more time to building tools you need! 🙏
+                </p>
+            </div>
+            <div style="margin-bottom: 20px;">
+                <h4 style="margin-bottom: 10px;">Popular Tools</h4>
+                <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 15px;">
+                    <a href="/" style="color: #3498db;">Case Converter</a> |
+                    <a href="/word-counter" style="color: #3498db;">Word Counter</a> |
+                    <a href="/remove-duplicates" style="color: #3498db;">Remove Duplicates</a> |
+                    <a href="/json-formatter" style="color: #3498db;">JSON Formatter</a> |
+                    <a href="/line-filter" style="color: #3498db;">Line Filter</a> |
+                    <a href="/data-cleaning-suite" style="color: #3498db;">Data Cleaning Suite</a>
+                </div>
+            </div>
+            <div style="margin-bottom: 20px;">
+                <a href="/affiliate-disclosure" style="color: #3498db; margin-right: 20px;">Affiliate Disclosure</a>
+            </div>
+            <p>&copy; 2025 FreeTextConvert.com - Building helpful tools one day at a time</p>
+        </footer>
+    </div>
+
+    <script>
+        // Global variables
+        let extractedData = {
+            emails: [],
+            urls: [],
+            phones: []
+        };
+        let currentTab = 'all';
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            const input = document.getElementById('input');
+            input.addEventListener('input', updateCharCount);
+            updateCharCount();
+        });
+
+        function updateCharCount() {
+            const input = document.getElementById('input').value;
+            document.getElementById('charCount').textContent = `${input.length} characters`;
+        }
+
+        function validateEmail(email) {
+            const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return re.test(email);
+        }
+
+        function extractData() {
+            const input = document.getElementById('input').value;
+            if (!input.trim()) {
+                alert('Please enter some text to extract data from');
+                return;
+            }
+
+            const extractEmails = document.getElementById('extractEmails').checked;
+            const extractUrls = document.getElementById('extractUrls').checked;
+            const extractPhones = document.getElementById('extractPhones').checked;
+            const removeDuplicates = document.getElementById('removeDuplicates').checked;
+            const sortResults = document.getElementById('sortResults').checked;
+            const validateEmailsOption = document.getElementById('validateEmails').checked;
+
+            // Reset extracted data
+            extractedData = {
+                emails: [],
+                urls: [],
+                phones: []
+            };
+
+            // Extract emails
+            if (extractEmails) {
+                const emailRegex = /[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}/g;
+                let emails = input.match(emailRegex) || [];
+                
+                if (validateEmailsOption) {
+                    emails = emails.filter(email => validateEmail(email));
+                }
+                
+                extractedData.emails = emails.map(e => e.toLowerCase());
+            }
+
+            // Extract URLs
+            if (extractUrls) {
+                // Match http/https URLs
+                const httpRegex = /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/g;
+                const httpUrls = input.match(httpRegex) || [];
+                
+                // Match www. URLs without protocol
+                const wwwRegex = /www\.[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/g;
+                const wwwUrls = (input.match(wwwRegex) || []).map(url => 'http://' + url);
+                
+                // Match plain domain names (be more restrictive to avoid false positives)
+                const domainRegex = /(?:^|\s)([a-zA-Z0-9-]+\.(?:com|org|net|edu|gov|mil|int|co|io|ai|app|dev|me|tv|info|biz|name|pro|museum|coop|aero|[a-z]{2}))\b/g;
+                const domainMatches = [...input.matchAll(domainRegex)];
+                const domains = domainMatches.map(match => 'http://' + match[1]);
+                
+                extractedData.urls = [...httpUrls, ...wwwUrls, ...domains];
+            }
+
+            // Extract phone numbers
+            if (extractPhones) {
+                // Various phone formats
+                const phonePatterns = [
+                    /\+?1?\s?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}/g, // US format
+                    /\+\d{1,3}\s?\d{1,14}/g, // International format
+                    /\d{3}[\s.-]\d{3}[\s.-]\d{4}/g, // Simple format
+                    /\(\d{3}\)\s?\d{3}-\d{4}/g, // (123) 456-7890
+                    /\d{10,14}/g // Just digits
+                ];
+                
+                let phones = [];
+                phonePatterns.forEach(pattern => {
+                    const matches = input.match(pattern) || [];
+                    phones = phones.concat(matches);
+                });
+                
+                // Filter out obvious non-phone numbers (like years)
+                phones = phones.filter(phone => {
+                    const digits = phone.replace(/\D/g, '');
+                    return digits.length >= 10 && digits.length <= 14 && !digits.startsWith('20');
+                });
+                
+                extractedData.phones = phones;
+            }
+
+            // Remove duplicates if requested
+            if (removeDuplicates) {
+                extractedData.emails = [...new Set(extractedData.emails)];
+                extractedData.urls = [...new Set(extractedData.urls)];
+                extractedData.phones = [...new Set(extractedData.phones)];
+            }
+
+            // Sort if requested
+            if (sortResults) {
+                extractedData.emails.sort();
+                extractedData.urls.sort();
+                extractedData.phones.sort();
+            }
+
+            // Display results
+            displayResults();
+            displayStats();
+        }
+
+        function displayResults() {
+            const format = document.querySelector('input[name="outputFormat"]:checked').value;
+            const output = document.getElementById('output');
+            const resultsSection = document.getElementById('resultsSection');
+            
+            // Update counts
+            document.getElementById('emailCount').textContent = extractedData.emails.length;
+            document.getElementById('urlCount').textContent = extractedData.urls.length;
+            document.getElementById('phoneCount').textContent = extractedData.phones.length;
+            
+            // Show results section
+            resultsSection.style.display = 'block';
+            
+            // Display based on current tab
+            switchTab(currentTab);
+        }
+
+        function switchTab(tab) {
+            currentTab = tab;
+            const format = document.querySelector('input[name="outputFormat"]:checked').value;
+            const output = document.getElementById('output');
+            
+            // Update tab styles
+            document.querySelectorAll('[id^="tab"]').forEach(btn => {
+                btn.style.background = '#ecf0f1';
+                btn.style.color = '#333';
+            });
+            document.getElementById('tab' + tab.charAt(0).toUpperCase() + tab.slice(1)).style.background = '#3498db';
+            document.getElementById('tab' + tab.charAt(0).toUpperCase() + tab.slice(1)).style.color = 'white';
+            
+            let data = [];
+            
+            switch (tab) {
+                case 'all':
+                    if (extractedData.emails.length > 0) {
+                        data = data.concat(['=== EMAILS ==='], extractedData.emails, ['']);
+                    }
+                    if (extractedData.urls.length > 0) {
+                        data = data.concat(['=== URLS ==='], extractedData.urls, ['']);
+                    }
+                    if (extractedData.phones.length > 0) {
+                        data = data.concat(['=== PHONE NUMBERS ==='], extractedData.phones, ['']);
+                    }
+                    break;
+                case 'emails':
+                    data = extractedData.emails;
+                    break;
+                case 'urls':
+                    data = extractedData.urls;
+                    break;
+                case 'phones':
+                    data = extractedData.phones;
+                    break;
+            }
+            
+            // Format output
+            let formattedOutput = '';
+            
+            switch (format) {
+                case 'list':
+                    formattedOutput = data.join('\n');
+                    break;
+                case 'comma':
+                    formattedOutput = data.filter(item => !item.startsWith('===')).join(', ');
+                    break;
+                case 'semicolon':
+                    formattedOutput = data.filter(item => !item.startsWith('===')).join('; ');
+                    break;
+                case 'json':
+                    if (tab === 'all') {
+                        formattedOutput = JSON.stringify(extractedData, null, 2);
+                    } else {
+                        formattedOutput = JSON.stringify(data, null, 2);
+                    }
+                    break;
+            }
+            
+            output.value = formattedOutput;
+        }
+
+        function displayStats() {
+            const stats = document.getElementById('stats');
+            const statsContent = document.getElementById('statsContent');
+            
+            const totalExtracted = extractedData.emails.length + extractedData.urls.length + extractedData.phones.length;
+            
+            const statsHtml = `
+                <div style="text-align: center;">
+                    <div style="font-size: 24px; font-weight: bold; color: #3498db;">${totalExtracted}</div>
+                    <div style="color: #666; font-size: 14px;">Total Items</div>
+                </div>
+                <div style="text-align: center;">
+                    <div style="font-size: 24px; font-weight: bold; color: #e74c3c;">${extractedData.emails.length}</div>
+                    <div style="color: #666; font-size: 14px;">Email Addresses</div>
+                </div>
+                <div style="text-align: center;">
+                    <div style="font-size: 24px; font-weight: bold; color: #27ae60;">${extractedData.urls.length}</div>
+                    <div style="color: #666; font-size: 14px;">URLs</div>
+                </div>
+                <div style="text-align: center;">
+                    <div style="font-size: 24px; font-weight: bold; color: #f39c12;">${extractedData.phones.length}</div>
+                    <div style="color: #666; font-size: 14px;">Phone Numbers</div>
+                </div>
+            `;
+            
+            statsContent.innerHTML = statsHtml;
+            stats.style.display = 'block';
+        }
+
+        function copyOutput() {
+            const output = document.getElementById('output');
+            output.select();
+            document.execCommand('copy');
+            
+            const button = event.target;
+            const originalText = button.textContent;
+            button.textContent = 'Copied!';
+            button.style.background = '#2ecc71';
+            
+            setTimeout(() => {
+                button.textContent = originalText;
+                button.style.background = '#27ae60';
+            }, 2000);
+        }
+
+        function downloadResults(fileType) {
+            const format = document.querySelector('input[name="outputFormat"]:checked').value;
+            let content = '';
+            let filename = '';
+            
+            if (fileType === 'txt') {
+                content = document.getElementById('output').value;
+                filename = 'extracted_data.txt';
+            } else if (fileType === 'csv') {
+                // Create CSV format
+                const rows = [];
+                rows.push('Type,Value');
+                
+                extractedData.emails.forEach(email => {
+                    rows.push(`Email,"${email}"`);
+                });
+                extractedData.urls.forEach(url => {
+                    rows.push(`URL,"${url}"`);
+                });
+                extractedData.phones.forEach(phone => {
+                    rows.push(`Phone,"${phone}"`);
+                });
+                
+                content = rows.join('\n');
+                filename = 'extracted_data.csv';
+            }
+            
+            // Create download
+            const blob = new Blob([content], { type: 'text/plain' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = filename;
+            a.click();
+            window.URL.revokeObjectURL(url);
+        }
+
+        function clearAll() {
+            document.getElementById('input').value = '';
+            document.getElementById('output').value = '';
+            document.getElementById('resultsSection').style.display = 'none';
+            document.getElementById('stats').style.display = 'none';
+            updateCharCount();
+            extractedData = { emails: [], urls: [], phones: [] };
+        }
+
+        function loadExample(type) {
+            const examples = {
+                contact: `Contact our team for more information:
+                
+John Smith - john.smith@company.com - (555) 123-4567
+Mary Johnson - mary@example.org - +1-555-987-6543
+Support Team - support@company.com - 1-800-555-0123
+
+Visit our website at https://www.company.com or www.company.org
+Follow us on social media: https://twitter.com/company
+
+For urgent matters, call our hotline: (555) 999-8888`,
+                
+                article: `Check out these amazing resources for web development:
+
+1. Learn JavaScript at https://javascript.info/
+2. CSS tricks and tips: www.css-tricks.com
+3. MDN Web Docs: https://developer.mozilla.org/
+
+For questions, contact:
+- Tutorial support: help@webdevsite.com
+- Author: jane.doe@email.com
+- Editor: editor@techblog.io
+
+Found a bug? Report it at bugs@webplatform.org or call +1 (555) 246-8135`,
+                
+                business: `Tech Solutions Inc.
+123 Business Ave, Suite 500
+San Francisco, CA 94105
+
+Main: (415) 555-0100
+Fax: (415) 555-0101
+Support: 1-800-TECH-HELP
+
+Email: info@techsolutions.com
+Sales: sales@techsolutions.com
+Careers: jobs@techsolutions.com
+
+Website: https://www.techsolutions.com
+LinkedIn: https://linkedin.com/company/techsolutions
+GitHub: github.com/techsolutions`,
+                
+                social: `🎉 Big announcement! 
+
+Contact us:
+📧 hello@startup.io
+📱 +1 (555) 123-4567
+🌐 https://startup.io
+
+Team contacts:
+CEO: alex@startup.io
+CTO: sam@startup.io  
+Marketing: marketing@startup.io
+
+Find us online:
+- Website: www.startup.io
+- Twitter: twitter.com/startupIO
+- Instagram: instagram.com/startup.io
+- TikTok: tiktok.com/@startupIO
+
+Questions? Call us at 555-START-UP or email support@startup.io!`
+            };
+            
+            document.getElementById('input').value = examples[type];
+            updateCharCount();
+        }
+    </script>
+</body>
+</html>
