@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Text to Binary & Hex Converter - Free Online Tool | Free Text Convert</title>
+    <meta name="description" content="Convert text to binary and hexadecimal online instantly. Free binary to text, hex to text converter. ASCII, UTF-8 encoding support. No signup required.">
+    <link rel="stylesheet" href="../style.css">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📝</text></svg>">
+    <link rel="canonical" href="https://freetextconvert.com/text-binary-hex">
+    
+    <!-- Schema.org markup -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Text to Binary & Hex Converter",
+        "url": "https://freetextconvert.com/text-binary-hex",
+        "description": "Free online tool to convert text to binary and hexadecimal, or decode binary/hex to text",
+        "applicationCategory": "UtilityApplication",
+        "operatingSystem": "Any",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+        }
+    }
+    </script>
+    
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-792NQ00CEV"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-792NQ00CEV');
+    </script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Free Text Convert</h1>
+            <p class="tagline">Simple, fast, and free text transformation tools</p>
+            <nav style="margin-top: 15px; text-align: center;">
+                <a href="/" style="margin-right: 20px; color: #3498db; text-decoration: none;">Home</a>
+                <a href="/tools" style="margin-right: 20px; color: #3498db; text-decoration: none;">All Tools</a>
+                <a href="/blog" style="color: #3498db; text-decoration: none;">Blog</a>
+            </nav>
+        </header>
+
+        <main>
+            <div class="tool-card" style="margin-bottom: 30px;">
+                <h2>Text to Binary & Hex Converter</h2>
+                <p style="text-align: center; color: #666; margin-bottom: 30px;">
+                    Convert text to binary or hexadecimal, and decode binary/hex back to text
+                </p>
+
+                <div class="tool-section">
+                    <!-- Conversion Mode -->
+                    <div style="margin-bottom: 30px;">
+                        <h3>Conversion Mode:</h3>
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px;">
+                            <label style="display: flex; align-items: center; cursor: pointer; padding: 10px; border: 2px solid #e0e0e0; border-radius: 8px; transition: all 0.3s;"
+                                   onmouseover="this.style.borderColor='#3498db'" onmouseout="this.style.borderColor='#e0e0e0'">
+                                <input type="radio" name="mode" value="text-to-binary" checked 
+                                    style="margin-right: 8px;" onchange="updateMode()">
+                                Text → Binary
+                            </label>
+                            <label style="display: flex; align-items: center; cursor: pointer; padding: 10px; border: 2px solid #e0e0e0; border-radius: 8px; transition: all 0.3s;"
+                                   onmouseover="this.style.borderColor='#3498db'" onmouseout="this.style.borderColor='#e0e0e0'">
+                                <input type="radio" name="mode" value="binary-to-text" 
+                                    style="margin-right: 8px;" onchange="updateMode()">
+                                Binary → Text
+                            </label>
+                            <label style="display: flex; align-items: center; cursor: pointer; padding: 10px; border: 2px solid #e0e0e0; border-radius: 8px; transition: all 0.3s;"
+                                   onmouseover="this.style.borderColor='#3498db'" onmouseout="this.style.borderColor='#e0e0e0'">
+                                <input type="radio" name="mode" value="text-to-hex" 
+                                    style="margin-right: 8px;" onchange="updateMode()">
+                                Text → Hex
+                            </label>
+                            <label style="display: flex; align-items: center; cursor: pointer; padding: 10px; border: 2px solid #e0e0e0; border-radius: 8px; transition: all 0.3s;"
+                                   onmouseover="this.style.borderColor='#3498db'" onmouseout="this.style.borderColor='#e0e0e0'">
+                                <input type="radio" name="mode" value="hex-to-text" 
+                                    style="margin-right: 8px;" onchange="updateMode()">
+                                Hex → Text
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Encoding Options -->
+                    <div id="encodingOptions" style="margin-bottom: 30px;">
+                        <h3>Options:</h3>
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px;">
+                            <!-- Separator -->
+                            <div>
+                                <label for="separator" style="display: block; margin-bottom: 5px;">Separator:</label>
+                                <select id="separator" style="width: 100%; padding: 8px; border-radius: 5px; border: 1px solid #ddd;">
+                                    <option value=" ">Space</option>
+                                    <option value="">No separator</option>
+                                    <option value="\n">New line</option>
+                                    <option value=", ">Comma + space</option>
+                                    <option value=" | ">Pipe</option>
+                                </select>
+                            </div>
+
+                            <!-- Output Format -->
+                            <div id="outputFormatDiv">
+                                <label for="outputFormat" style="display: block; margin-bottom: 5px;">Format:</label>
+                                <select id="outputFormat" style="width: 100%; padding: 8px; border-radius: 5px; border: 1px solid #ddd;">
+                                    <option value="plain">Plain</option>
+                                    <option value="0b">With 0b prefix (binary)</option>
+                                    <option value="0x">With 0x prefix (hex)</option>
+                                    <option value="grouped">Grouped by bytes</option>
+                                </select>
+                            </div>
+
+                            <!-- Case (for hex) -->
+                            <div id="caseDiv" style="display: none;">
+                                <label for="hexCase" style="display: block; margin-bottom: 5px;">Hex Case:</label>
+                                <select id="hexCase" style="width: 100%; padding: 8px; border-radius: 5px; border: 1px solid #ddd;">
+                                    <option value="upper">Uppercase (A-F)</option>
+                                    <option value="lower">Lowercase (a-f)</option>
+                                </select>
+                            </div>
+
+                            <!-- Encoding -->
+                            <div>
+                                <label for="encoding" style="display: block; margin-bottom: 5px;">Character Encoding:</label>
+                                <select id="encoding" style="width: 100%; padding: 8px; border-radius: 5px; border: 1px solid #ddd;">
+                                    <option value="utf8">UTF-8</option>
+                                    <option value="ascii">ASCII</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Quick Examples -->
+                    <div style="margin-bottom: 30px;">
+                        <h3>Quick Examples:</h3>
+                        <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                            <button onclick="loadExample('hello')" 
+                                style="padding: 8px 16px; background: #ecf0f1; border: 1px solid #bdc3c7; border-radius: 5px; cursor: pointer;">
+                                Hello World
+                            </button>
+                            <button onclick="loadExample('numbers')" 
+                                style="padding: 8px 16px; background: #ecf0f1; border: 1px solid #bdc3c7; border-radius: 5px; cursor: pointer;">
+                                Numbers
+                            </button>
+                            <button onclick="loadExample('special')" 
+                                style="padding: 8px 16px; background: #ecf0f1; border: 1px solid #bdc3c7; border-radius: 5px; cursor: pointer;">
+                                Special Chars
+                            </button>
+                            <button onclick="loadExample('emoji')" 
+                                style="padding: 8px 16px; background: #ecf0f1; border: 1px solid #bdc3c7; border-radius: 5px; cursor: pointer;">
+                                Emoji
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Input Area -->
+                    <div style="position: relative;">
+                        <label for="input" style="font-weight: bold; display: block; margin-bottom: 10px;">
+                            <span id="inputLabel">Enter your text:</span>
+                        </label>
+                        <textarea 
+                            id="input" 
+                            placeholder="Type or paste your text here..."
+                            style="width: 100%; height: 200px; padding: 15px; border: 2px solid #3498db; border-radius: 10px; font-family: 'Courier New', monospace; font-size: 14px; resize: vertical;"
+                        ></textarea>
+                        <div style="position: absolute; top: 35px; right: 10px; background: white; padding: 5px;">
+                            <span id="charCount" style="color: #666; font-size: 12px;">0 characters</span>
+                        </div>
+                    </div>
+
+                    <!-- Action Buttons -->
+                    <div style="text-align: center; margin: 30px 0;">
+                        <button onclick="convert()" 
+                            style="background: #3498db; color: white; padding: 15px 40px; font-size: 18px; border: none; border-radius: 30px; cursor: pointer; margin-right: 10px;">
+                            Convert
+                        </button>
+                        <button onclick="swapInputOutput()" 
+                            style="background: #27ae60; color: white; padding: 15px 30px; font-size: 16px; border: none; border-radius: 30px; cursor: pointer; margin-right: 10px;">
+                            ↕️ Swap
+                        </button>
+                        <button onclick="clearAll()" 
+                            style="background: #95a5a6; color: white; padding: 15px 30px; font-size: 16px; border: none; border-radius: 30px; cursor: pointer;">
+                            Clear All
+                        </button>
+                    </div>
+
+                    <!-- Output Area -->
+                    <div style="position: relative;">
+                        <label for="output" style="font-weight: bold; display: block; margin-bottom: 10px;">
+                            <span id="outputLabel">Binary result:</span>
+                        </label>
+                        <textarea 
+                            id="output" 
+                            readonly
+                            style="width: 100%; height: 200px; padding: 15px; border: 2px solid #27ae60; border-radius: 10px; font-family: 'Courier New', monospace; font-size: 14px; background: #f8f9fa; resize: vertical;"
+                        ></textarea>
+                        <button onclick="copyOutput()" 
+                            style="position: absolute; top: 35px; right: 10px; background: #27ae60; color: white; padding: 8px 16px; border: none; border-radius: 5px; cursor: pointer;">
+                            Copy Result
+                        </button>
+                    </div>
+
+                    <!-- Conversion Info -->
+                    <div id="conversionInfo" style="margin-top: 30px; padding: 20px; background: #ecf0f1; border-radius: 10px; display: none;">
+                        <h4 style="margin-bottom: 15px;">Conversion Details:</h4>
+                        <div id="infoContent" style="font-family: 'Courier New', monospace; font-size: 14px;">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- How It Works Section -->
+            <div class="tool-card" style="margin-top: 30px;">
+                <h3>📚 How It Works</h3>
+                <div style="line-height: 1.8;">
+                    <h4>Binary Conversion:</h4>
+                    <ul>
+                        <li>Each character is converted to its ASCII/UTF-8 value</li>
+                        <li>The value is then represented in binary (base 2)</li>
+                        <li>Example: 'A' = 65 = 01000001</li>
+                    </ul>
+                    
+                    <h4>Hexadecimal Conversion:</h4>
+                    <ul>
+                        <li>Each character is converted to its ASCII/UTF-8 value</li>
+                        <li>The value is then represented in hexadecimal (base 16)</li>
+                        <li>Example: 'A' = 65 = 41</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Use Cases -->
+            <div class="tool-card" style="margin-top: 30px;">
+                <h3>Common Use Cases</h3>
+                <ul style="line-height: 1.8;">
+                    <li>💻 <strong>Programming:</strong> Debug character encoding issues</li>
+                    <li>🔐 <strong>Cryptography:</strong> Analyze encoded messages</li>
+                    <li>🎓 <strong>Education:</strong> Learn about number systems and encoding</li>
+                    <li>🔧 <strong>Debugging:</strong> Inspect raw data values</li>
+                    <li>🌐 <strong>Web Development:</strong> Work with color codes and data URIs</li>
+                </ul>
+            </div>
+
+            <!-- Related Tools -->
+            <div class="tool-card" style="margin-top: 30px;">
+                <h3>Related Tools</h3>
+                <p>After converting to binary/hex, you might want to:</p>
+                <ul style="line-height: 1.8;">
+                    <li>🔤 <a href="/">Convert text case</a></li>
+                    <li>🔧 <a href="/json-formatter">Format JSON data</a></li>
+                    <li>📊 <a href="/csv-to-json">Convert between data formats</a></li>
+                    <li>🧹 <a href="/whitespace-normalizer">Clean whitespace issues</a></li>
+                </ul>
+            </div>
+        </main>
+
+        <footer>
+            <div style="background: #f8f9fa; padding: 30px 20px; margin: 40px auto 20px; max-width: 600px; border-radius: 15px; text-align: center; box-shadow: 0 2px 10px rgba(0,0,0,0.05);">
+                <h3 style="margin-bottom: 15px; color: #2c3e50;">
+                    ☕ Love these free tools?
+                </h3>
+                <p style="margin-bottom: 20px; color: #555; line-height: 1.6;">
+                    Hi! I'm Cino, solo developer of Free Text Convert.
+                    I'm building these tools to help writers and developers save time.
+                    Your support keeps them <strong>free</strong> and <strong>ad-free</strong> forever!
+                </p>
+                <a href="https://buymeacoffee.com/cinophan"
+                   target="_blank"
+                   rel="noopener"
+                   style="background: #FFDD00; 
+                          color: #000000; 
+                          padding: 14px 35px;
+                          border-radius: 30px; 
+                          text-decoration: none;
+                          font-weight: bold;
+                          display: inline-block; 
+                          transition: all 0.3s; 
+                          font-size: 16px;
+                          box-shadow: 0 4px 15px rgba(255, 221, 0, 0.3);"
+                   onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 20px rgba(255, 221, 0, 0.4)';"
+                   onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 15px rgba(255, 221, 0, 0.3)';">
+                    <span style="font-size: 20px; vertical-align: middle;">☕</span>
+                    Buy me a coffee
+                </a>
+                <p style="margin-top: 20px; font-size: 13px; color: #999;">
+                    Even $3 helps me dedicate more time to building tools you need! 🙏
+                </p>
+            </div>
+            <div style="margin-bottom: 20px;">
+                <h4 style="margin-bottom: 10px;">Popular Tools</h4>
+                <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 15px;">
+                    <a href="/" style="color: #3498db;">Case Converter</a> |
+                    <a href="/word-counter" style="color: #3498db;">Word Counter</a> |
+                    <a href="/remove-duplicates" style="color: #3498db;">Remove Duplicates</a> |
+                    <a href="/json-formatter" style="color: #3498db;">JSON Formatter</a> |
+                    <a href="/line-filter" style="color: #3498db;">Line Filter</a> |
+                    <a href="/data-cleaning-suite" style="color: #3498db;">Data Cleaning Suite</a>
+                </div>
+            </div>
+            <div style="margin-bottom: 20px;">
+                <a href="/privacy-policy" style="color: #3498db; margin-right: 20px;">Privacy Policy</a>
+                <a href="/terms-of-service" style="color: #3498db; margin-right: 20px;">Terms of Service</a>
+                <a href="/affiliate-disclosure" style="color: #3498db;">Affiliate Disclosure</a>
+            </div>
+            <p>&copy; 2025 FreeTextConvert.com - Building helpful tools one day at a time</p>
+        </footer>
+    </div>
+
+    <script>
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            const input = document.getElementById('input');
+            input.addEventListener('input', updateCharCount);
+            updateCharCount();
+            updateMode();
+        });
+
+        function updateCharCount() {
+            const input = document.getElementById('input').value;
+            document.getElementById('charCount').textContent = `${input.length} characters`;
+        }
+
+        function updateMode() {
+            const mode = document.querySelector('input[name="mode"]:checked').value;
+            const inputLabel = document.getElementById('inputLabel');
+            const outputLabel = document.getElementById('outputLabel');
+            const inputPlaceholder = document.getElementById('input');
+            const caseDiv = document.getElementById('caseDiv');
+            const outputFormatDiv = document.getElementById('outputFormatDiv');
+            
+            // Update labels and placeholders
+            switch(mode) {
+                case 'text-to-binary':
+                    inputLabel.textContent = 'Enter your text:';
+                    outputLabel.textContent = 'Binary result:';
+                    inputPlaceholder.placeholder = 'Type or paste your text here...';
+                    caseDiv.style.display = 'none';
+                    outputFormatDiv.style.display = 'block';
+                    break;
+                case 'binary-to-text':
+                    inputLabel.textContent = 'Enter binary:';
+                    outputLabel.textContent = 'Text result:';
+                    inputPlaceholder.placeholder = 'Enter binary (e.g., 01001000 01100101 01101100 01101100 01101111)...';
+                    caseDiv.style.display = 'none';
+                    outputFormatDiv.style.display = 'none';
+                    break;
+                case 'text-to-hex':
+                    inputLabel.textContent = 'Enter your text:';
+                    outputLabel.textContent = 'Hexadecimal result:';
+                    inputPlaceholder.placeholder = 'Type or paste your text here...';
+                    caseDiv.style.display = 'block';
+                    outputFormatDiv.style.display = 'block';
+                    break;
+                case 'hex-to-text':
+                    inputLabel.textContent = 'Enter hexadecimal:';
+                    outputLabel.textContent = 'Text result:';
+                    inputPlaceholder.placeholder = 'Enter hex (e.g., 48 65 6C 6C 6F or 48656C6C6F)...';
+                    caseDiv.style.display = 'none';
+                    outputFormatDiv.style.display = 'none';
+                    break;
+            }
+        }
+
+        function convert() {
+            const mode = document.querySelector('input[name="mode"]:checked').value;
+            const input = document.getElementById('input').value;
+            
+            if (!input.trim()) {
+                alert('Please enter some text to convert');
+                return;
+            }
+            
+            let result = '';
+            let info = '';
+            
+            switch(mode) {
+                case 'text-to-binary':
+                    result = textToBinary(input);
+                    info = generateConversionInfo(input, 'binary');
+                    break;
+                case 'binary-to-text':
+                    result = binaryToText(input);
+                    break;
+                case 'text-to-hex':
+                    result = textToHex(input);
+                    info = generateConversionInfo(input, 'hex');
+                    break;
+                case 'hex-to-text':
+                    result = hexToText(input);
+                    break;
+            }
+            
+            document.getElementById('output').value = result;
+            
+            if (info) {
+                document.getElementById('infoContent').innerHTML = info;
+                document.getElementById('conversionInfo').style.display = 'block';
+            } else {
+                document.getElementById('conversionInfo').style.display = 'none';
+            }
+        }
+
+        function textToBinary(text) {
+            const separator = document.getElementById('separator').value;
+            const format = document.getElementById('outputFormat').value;
+            const encoding = document.getElementById('encoding').value;
+            
+            let result = [];
+            
+            for (let i = 0; i < text.length; i++) {
+                let charCode = text.charCodeAt(i);
+                let binary = charCode.toString(2);
+                
+                // Pad with zeros
+                if (encoding === 'ascii' || charCode < 256) {
+                    binary = binary.padStart(8, '0');
+                } else {
+                    // For UTF-8 multi-byte characters
+                    binary = binary.padStart(16, '0');
+                }
+                
+                // Apply format
+                switch(format) {
+                    case '0b':
+                        binary = '0b' + binary;
+                        break;
+                    case 'grouped':
+                        binary = binary.match(/.{1,8}/g).join(' ');
+                        break;
+                }
+                
+                result.push(binary);
+            }
+            
+            return result.join(separator);
+        }
+
+        function binaryToText(binary) {
+            // Clean input - remove prefixes and normalize
+            binary = binary.replace(/0b/g, '').replace(/[^01\s]/g, '');
+            
+            // Split by various possible separators
+            const chunks = binary.split(/[\s,|]+/).filter(chunk => chunk.length > 0);
+            
+            let result = '';
+            
+            for (const chunk of chunks) {
+                if (chunk.length === 8 || chunk.length === 16) {
+                    const charCode = parseInt(chunk, 2);
+                    if (!isNaN(charCode)) {
+                        result += String.fromCharCode(charCode);
+                    }
+                }
+            }
+            
+            return result;
+        }
+
+        function textToHex(text) {
+            const separator = document.getElementById('separator').value;
+            const format = document.getElementById('outputFormat').value;
+            const hexCase = document.getElementById('hexCase').value;
+            
+            let result = [];
+            
+            for (let i = 0; i < text.length; i++) {
+                let charCode = text.charCodeAt(i);
+                let hex = charCode.toString(16);
+                
+                // Pad with zeros
+                if (charCode < 256) {
+                    hex = hex.padStart(2, '0');
+                } else {
+                    hex = hex.padStart(4, '0');
+                }
+                
+                // Apply case
+                hex = hexCase === 'upper' ? hex.toUpperCase() : hex.toLowerCase();
+                
+                // Apply format
+                switch(format) {
+                    case '0x':
+                        hex = '0x' + hex;
+                        break;
+                    case 'grouped':
+                        // Group by bytes
+                        if (hex.length > 2) {
+                            hex = hex.match(/.{1,2}/g).join(' ');
+                        }
+                        break;
+                }
+                
+                result.push(hex);
+            }
+            
+            return result.join(separator);
+        }
+
+        function hexToText(hex) {
+            // Clean input - remove prefixes and normalize
+            hex = hex.replace(/0x/g, '').replace(/[^0-9A-Fa-f\s]/g, '');
+            
+            // Split by various possible separators
+            const chunks = hex.split(/[\s,|]+/).filter(chunk => chunk.length > 0);
+            
+            let result = '';
+            
+            for (const chunk of chunks) {
+                // Process in pairs (bytes)
+                for (let i = 0; i < chunk.length; i += 2) {
+                    const byte = chunk.substr(i, 2);
+                    if (byte.length === 2) {
+                        const charCode = parseInt(byte, 16);
+                        if (!isNaN(charCode)) {
+                            result += String.fromCharCode(charCode);
+                        }
+                    }
+                }
+            }
+            
+            return result;
+        }
+
+        function generateConversionInfo(text, type) {
+            const firstChar = text.charAt(0);
+            if (!firstChar) return '';
+            
+            const charCode = firstChar.charCodeAt(0);
+            const binary = charCode.toString(2).padStart(8, '0');
+            const hex = charCode.toString(16).padStart(2, '0').toUpperCase();
+            
+            let info = `<strong>Example: "${firstChar}"</strong><br>`;
+            info += `ASCII/Unicode value: ${charCode}<br>`;
+            info += `Binary: ${binary}<br>`;
+            info += `Hexadecimal: ${hex}<br>`;
+            
+            if (type === 'binary') {
+                info += `<br>Binary breakdown: ${binary.split('').join(' ')}`;
+            }
+            
+            return info;
+        }
+
+        function swapInputOutput() {
+            const mode = document.querySelector('input[name="mode"]:checked').value;
+            const input = document.getElementById('input').value;
+            const output = document.getElementById('output').value;
+            
+            // Swap the values
+            document.getElementById('input').value = output;
+            document.getElementById('output').value = input;
+            
+            // Toggle the mode
+            let newMode;
+            switch(mode) {
+                case 'text-to-binary':
+                    newMode = 'binary-to-text';
+                    break;
+                case 'binary-to-text':
+                    newMode = 'text-to-binary';
+                    break;
+                case 'text-to-hex':
+                    newMode = 'hex-to-text';
+                    break;
+                case 'hex-to-text':
+                    newMode = 'text-to-hex';
+                    break;
+            }
+            
+            document.querySelector(`input[name="mode"][value="${newMode}"]`).checked = true;
+            updateMode();
+            updateCharCount();
+        }
+
+        function copyOutput() {
+            const output = document.getElementById('output');
+            output.select();
+            document.execCommand('copy');
+            
+            const button = event.target;
+            const originalText = button.textContent;
+            button.textContent = 'Copied!';
+            button.style.background = '#2ecc71';
+            
+            setTimeout(() => {
+                button.textContent = originalText;
+                button.style.background = '#27ae60';
+            }, 2000);
+        }
+
+        function clearAll() {
+            document.getElementById('input').value = '';
+            document.getElementById('output').value = '';
+            document.getElementById('conversionInfo').style.display = 'none';
+            updateCharCount();
+        }
+
+        function loadExample(type) {
+            const examples = {
+                hello: 'Hello World!',
+                numbers: '123456789',
+                special: '!@#$%^&*()',
+                emoji: '😀🚀💻'
+            };
+            
+            document.getElementById('input').value = examples[type];
+            updateCharCount();
+            convert();
+        }
+    </script>
+</body>
+</html>
