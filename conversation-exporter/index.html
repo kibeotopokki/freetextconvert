@@ -71,6 +71,7 @@
             gap: 10px;
             margin-bottom: 20px;
             flex-wrap: wrap;
+            justify-content: center;
         }
         
         .format-btn {
@@ -95,48 +96,31 @@
             transform: translateY(-2px);
         }
         
-        .controls {
+        .options {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
             margin-bottom: 20px;
-        }
-        
-        @media (max-width: 768px) {
-            .controls {
-                grid-template-columns: 1fr;
-            }
-        }
-        
-        .control-group {
             background: #f8f9fa;
-            padding: 15px;
+            padding: 20px;
             border-radius: 8px;
         }
         
-        .control-group h3 {
-            color: #2c3e50;
-            margin-bottom: 10px;
-            font-size: 16px;
-        }
-        
-        .checkbox-group {
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-        }
-        
-        .checkbox-group label {
+        .option {
             display: flex;
             align-items: center;
             gap: 8px;
-            cursor: pointer;
         }
         
-        .checkbox-group input[type="checkbox"] {
+        .option input[type="checkbox"] {
             width: 18px;
             height: 18px;
             cursor: pointer;
+        }
+        
+        .option label {
+            cursor: pointer;
+            user-select: none;
         }
         
         textarea {
@@ -160,6 +144,7 @@
             gap: 10px;
             margin-top: 20px;
             flex-wrap: wrap;
+            justify-content: center;
         }
         
         .btn {
@@ -208,35 +193,21 @@
             padding: 20px;
             border-radius: 8px;
             margin-top: 20px;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 15px;
-        }
-        
-        .stat-item {
+            display: none;
             text-align: center;
-        }
-        
-        .stat-value {
-            font-size: 24px;
-            font-weight: bold;
-            color: #2c3e50;
-        }
-        
-        .stat-label {
-            color: #7f8c8d;
-            font-size: 14px;
         }
         
         .examples {
             margin-top: 30px;
+            text-align: center;
         }
         
         .example-buttons {
             display: flex;
             gap: 10px;
-            margin-bottom: 20px;
+            margin-top: 10px;
             flex-wrap: wrap;
+            justify-content: center;
         }
         
         .example-btn {
@@ -253,6 +224,34 @@
         .example-btn:hover {
             background: #7f8c8d;
             transform: translateY(-2px);
+        }
+        
+        .label {
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 10px;
+            display: block;
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            padding: 20px;
+            color: #666;
+        }
+        
+        nav {
+            margin-bottom: 20px;
+        }
+        
+        nav a {
+            color: #3498db;
+            text-decoration: none;
+            margin: 0 15px;
+        }
+        
+        nav a:hover {
+            text-decoration: underline;
         }
         
         .pro-tips {
@@ -285,62 +284,14 @@
             left: 0;
         }
         
-        footer {
-            text-align: center;
-            margin-top: 50px;
-            padding: 20px;
-            color: #666;
-        }
-        
-        nav {
-            margin-bottom: 20px;
-        }
-        
-        nav a {
-            color: #3498db;
-            text-decoration: none;
-            margin: 0 15px;
-        }
-        
-        nav a:hover {
-            text-decoration: underline;
-        }
-        
-        .related-tools {
-            margin-top: 40px;
-            padding: 20px;
-            background: #f8f9fa;
-            border-radius: 8px;
-        }
-        
-        .related-tools h3 {
-            color: #2c3e50;
-            margin-bottom: 15px;
-        }
-        
-        .related-tools-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 10px;
-        }
-        
-        .related-tool {
-            padding: 10px;
-            background: white;
-            border-radius: 5px;
-            text-align: center;
-            transition: all 0.3s;
-        }
-        
-        .related-tool:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        }
-        
-        .related-tool a {
-            color: #3498db;
-            text-decoration: none;
-            font-weight: 500;
+        @media (max-width: 768px) {
+            .format-buttons {
+                flex-direction: column;
+            }
+            
+            .format-btn {
+                width: 100%;
+            }
         }
     </style>
     
@@ -369,113 +320,73 @@
         <div class="tool-container">
             <div class="tool-header">
                 <h2>Conversation Exporter</h2>
-                <p>Format and export chat conversations, clean up messy logs, prepare for documentation</p>
+                <p>Format and export chat conversations for documentation or AI tools</p>
             </div>
 
             <div class="format-buttons">
-                <button class="format-btn active" onclick="setFormat('markdown')">Markdown</button>
-                <button class="format-btn" onclick="setFormat('plain')">Plain Text</button>
-                <button class="format-btn" onclick="setFormat('json')">JSON</button>
-                <button class="format-btn" onclick="setFormat('html')">HTML</button>
-                <button class="format-btn" onclick="setFormat('summary')">Summary Only</button>
+                <button class="format-btn active" onclick="setFormat('markdown')" id="btn-markdown">Markdown</button>
+                <button class="format-btn" onclick="setFormat('plain')" id="btn-plain">Plain Text</button>
+                <button class="format-btn" onclick="setFormat('json')" id="btn-json">JSON</button>
+                <button class="format-btn" onclick="setFormat('simple')" id="btn-simple">Simple Format</button>
             </div>
 
-            <div class="controls">
-                <div class="control-group">
-                    <h3>⚡ Quick Options</h3>
-                    <div class="checkbox-group">
-                        <label>
-                            <input type="checkbox" id="removeTimestamps" onchange="processText()">
-                            Remove timestamps
-                        </label>
-                        <label>
-                            <input type="checkbox" id="removeEmojis" onchange="processText()">
-                            Remove emojis
-                        </label>
-                        <label>
-                            <input type="checkbox" id="cleanFormatting" checked onchange="processText()">
-                            Clean extra formatting
-                        </label>
-                        <label>
-                            <input type="checkbox" id="mergeMessages" onchange="processText()">
-                            Merge consecutive messages
-                        </label>
-                    </div>
+            <div class="options">
+                <div class="option">
+                    <input type="checkbox" id="removeTimestamps">
+                    <label for="removeTimestamps">Remove timestamps</label>
                 </div>
-                
-                <div class="control-group">
-                    <h3>🎯 Export Options</h3>
-                    <div class="checkbox-group">
-                        <label>
-                            <input type="checkbox" id="addHeaders" checked onchange="processText()">
-                            Add section headers
-                        </label>
-                        <label>
-                            <input type="checkbox" id="addDate" checked onchange="processText()">
-                            Include export date
-                        </label>
-                        <label>
-                            <input type="checkbox" id="addSummary" onchange="processText()">
-                            Generate summary section
-                        </label>
-                        <label>
-                            <input type="checkbox" id="preserveCode" checked onchange="processText()">
-                            Preserve code blocks
-                        </label>
-                    </div>
+                <div class="option">
+                    <input type="checkbox" id="cleanSpacing" checked>
+                    <label for="cleanSpacing">Clean extra spacing</label>
+                </div>
+                <div class="option">
+                    <input type="checkbox" id="addHeaders" checked>
+                    <label for="addHeaders">Add headers</label>
+                </div>
+                <div class="option">
+                    <input type="checkbox" id="includeDate" checked>
+                    <label for="includeDate">Include export date</label>
                 </div>
             </div>
 
-            <div style="margin-bottom: 10px;">
-                <label for="input" style="font-weight: bold; color: #2c3e50;">Paste your conversation:</label>
-            </div>
-            <textarea id="input" placeholder="Paste your chat conversation here...
+            <div>
+                <label class="label" for="input">Paste your conversation here:</label>
+                <textarea id="input" placeholder="Paste your chat conversation here...
 
-Example formats supported:
+Example:
+John: Hey, how's the project going?
+Sarah: Great! Just finished the main features.
+John: Awesome, let's review tomorrow.
+
+Supports formats like:
 - WhatsApp exports
-- Slack conversations
+- Slack conversations  
 - Discord logs
-- Claude/ChatGPT chats
-- Customer support transcripts
+- AI chat history
 - Any text conversation"></textarea>
+            </div>
 
             <div class="action-buttons">
-                <button class="btn btn-primary" onclick="processText()">🔄 Format Conversation</button>
-                <button class="btn btn-secondary" onclick="copyToClipboard()">📋 Copy Formatted</button>
-                <button class="btn btn-secondary" onclick="downloadText()">💾 Download</button>
+                <button class="btn btn-primary" onclick="processConversation()">🔄 Format Conversation</button>
+                <button class="btn btn-secondary" onclick="copyOutput()">📋 Copy Result</button>
+                <button class="btn btn-secondary" onclick="downloadResult()">💾 Download</button>
                 <button class="btn btn-warning" onclick="clearAll()">🗑️ Clear All</button>
             </div>
 
-            <div class="stats" id="stats" style="display: none;">
-                <div class="stat-item">
-                    <div class="stat-value" id="messageCount">0</div>
-                    <div class="stat-label">Messages</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-value" id="participantCount">0</div>
-                    <div class="stat-label">Participants</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-value" id="wordCount">0</div>
-                    <div class="stat-label">Words</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-value" id="charCount">0</div>
-                    <div class="stat-label">Characters</div>
-                </div>
+            <div class="stats" id="stats">
+                <p id="statsText">Processing...</p>
             </div>
 
-            <div style="margin-top: 20px; margin-bottom: 10px;">
-                <label for="output" style="font-weight: bold; color: #2c3e50;">Formatted output:</label>
+            <div style="margin-top: 20px;">
+                <label class="label" for="output">Formatted result:</label>
+                <textarea id="output" placeholder="Your formatted conversation will appear here..." readonly></textarea>
             </div>
-            <textarea id="output" placeholder="Your formatted conversation will appear here..." readonly></textarea>
 
             <div class="examples">
-                <h3>📝 Try with examples:</h3>
+                <h3>Try with examples:</h3>
                 <div class="example-buttons">
-                    <button class="example-btn" onclick="loadExample('chat')">💬 Chat Conversation</button>
-                    <button class="example-btn" onclick="loadExample('support')">🎧 Support Transcript</button>
-                    <button class="example-btn" onclick="loadExample('meeting')">📅 Meeting Notes</button>
+                    <button class="example-btn" onclick="loadExample('chat')">💬 Chat Example</button>
+                    <button class="example-btn" onclick="loadExample('support')">🎧 Support Chat</button>
                     <button class="example-btn" onclick="loadExample('ai')">🤖 AI Conversation</button>
                 </div>
             </div>
@@ -483,30 +394,12 @@ Example formats supported:
             <div class="pro-tips">
                 <h3>Pro Tips</h3>
                 <ul>
-                    <li>For Claude/ChatGPT: Use Markdown format with "Add Headers" enabled</li>
-                    <li>For documentation: Enable "Generate summary section" for quick overview</li>
-                    <li>For sharing: "Plain Text" format works everywhere</li>
+                    <li>For AI tools (Claude, ChatGPT): Use Markdown format with headers enabled</li>
+                    <li>For documentation: Plain text format works universally</li>
                     <li>For developers: JSON format preserves all metadata</li>
-                    <li>For long conversations: "Summary Only" gives you the key points</li>
+                    <li>Remove timestamps for cleaner output</li>
+                    <li>The tool works entirely in your browser - no data is uploaded</li>
                 </ul>
-            </div>
-
-            <div class="related-tools">
-                <h3>🔧 Related Tools You Might Like</h3>
-                <div class="related-tools-grid">
-                    <div class="related-tool">
-                        <a href="/text-diff">Text Diff Checker</a>
-                    </div>
-                    <div class="related-tool">
-                        <a href="/remove-duplicates">Remove Duplicates</a>
-                    </div>
-                    <div class="related-tool">
-                        <a href="/whitespace-normalizer">Whitespace Normalizer</a>
-                    </div>
-                    <div class="related-tool">
-                        <a href="/line-filter">Line Filter Pro</a>
-                    </div>
-                </div>
             </div>
         </div>
 
@@ -552,407 +445,350 @@ Example formats supported:
     </div>
 
     <script>
+        // Global variables
         let currentFormat = 'markdown';
         
+        // Set format function
         function setFormat(format) {
             currentFormat = format;
+            
+            // Update button states
             document.querySelectorAll('.format-btn').forEach(btn => {
                 btn.classList.remove('active');
             });
-            event.target.classList.add('active');
-            processText();
+            document.getElementById('btn-' + format).classList.add('active');
         }
         
-        function processText() {
+        // Main processing function
+        function processConversation() {
             const input = document.getElementById('input').value;
+            
             if (!input.trim()) {
-                updateStats(0, 0, 0, 0);
+                alert('Please paste a conversation to format');
                 return;
             }
             
-            let output = '';
+            // Get options
             const options = {
                 removeTimestamps: document.getElementById('removeTimestamps').checked,
-                removeEmojis: document.getElementById('removeEmojis').checked,
-                cleanFormatting: document.getElementById('cleanFormatting').checked,
-                mergeMessages: document.getElementById('mergeMessages').checked,
+                cleanSpacing: document.getElementById('cleanSpacing').checked,
                 addHeaders: document.getElementById('addHeaders').checked,
-                addDate: document.getElementById('addDate').checked,
-                addSummary: document.getElementById('addSummary').checked,
-                preserveCode: document.getElementById('preserveCode').checked
+                includeDate: document.getElementById('includeDate').checked
             };
             
-            // Parse conversation
-            const parsed = parseConversation(input, options);
+            let output = '';
             
-            // Format based on selected format
+            // Process based on format
             switch(currentFormat) {
                 case 'markdown':
-                    output = formatAsMarkdown(parsed, options);
+                    output = formatAsMarkdown(input, options);
                     break;
                 case 'plain':
-                    output = formatAsPlain(parsed, options);
+                    output = formatAsPlain(input, options);
                     break;
                 case 'json':
-                    output = formatAsJSON(parsed, options);
+                    output = formatAsJSON(input, options);
                     break;
-                case 'html':
-                    output = formatAsHTML(parsed, options);
-                    break;
-                case 'summary':
-                    output = formatAsSummary(parsed, options);
+                case 'simple':
+                    output = formatAsSimple(input, options);
                     break;
             }
             
+            // Show output
             document.getElementById('output').value = output;
-            updateStats(parsed.messages.length, parsed.participants.size, parsed.wordCount, parsed.charCount);
+            
+            // Show stats
+            showStats(input);
         }
         
-        function parseConversation(text, options) {
+        // Format as Markdown
+        function formatAsMarkdown(text, options) {
             let lines = text.split('\n');
-            const messages = [];
-            const participants = new Set();
-            let wordCount = 0;
-            let charCount = 0;
+            let output = '';
             
-            // Clean up lines
-            if (options.cleanFormatting) {
+            // Clean lines if needed
+            if (options.cleanSpacing) {
                 lines = lines.map(line => line.trim()).filter(line => line.length > 0);
             }
             
             // Remove timestamps if needed
             if (options.removeTimestamps) {
                 lines = lines.map(line => {
-                    // Common timestamp patterns
-                    return line.replace(/^\[\d{1,2}:\d{2}(:\d{2})?\s*(AM|PM)?\]/gi, '')
-                               .replace(/^\d{1,2}\/\d{1,2}\/\d{2,4},?\s*\d{1,2}:\d{2}\s*(AM|PM)?/gi, '')
-                               .replace(/^\d{4}-\d{2}-\d{2}\s+\d{2}:\d{2}:\d{2}/gi, '')
-                               .trim();
+                    // Remove common timestamp patterns
+                    return line
+                        .replace(/^\[\d{1,2}:\d{2}(:\d{2})?\s*(AM|PM)?\]\s*/gi, '')
+                        .replace(/^\d{1,2}\/\d{1,2}\/\d{2,4},?\s*\d{1,2}:\d{2}\s*(AM|PM)?\s*/gi, '')
+                        .replace(/^\(\d{1,2}:\d{2}(:\d{2})?\s*(AM|PM)?\)\s*/gi, '');
                 });
             }
             
-            // Remove emojis if needed
-            if (options.removeEmojis) {
-                lines = lines.map(line => {
-                    return line.replace(/[\u{1F600}-\u{1F64F}]|[\u{1F300}-\u{1F5FF}]|[\u{1F680}-\u{1F6FF}]|[\u{1F1E0}-\u{1F1FF}]|[\u{2600}-\u{26FF}]|[\u{2700}-\u{27BF}]/gu, '').trim();
-                });
-            }
-            
-            // Parse messages and identify participants
-            let currentMessage = null;
-            lines.forEach(line => {
-                // Try to identify message patterns
-                const patterns = [
-                    /^([^:]+):\s*(.+)$/,  // Name: message
-                    /^<([^>]+)>\s*(.+)$/,  // <Name> message
-                    /^\*\*([^*]+)\*\*:\s*(.+)$/,  // **Name**: message
-                    /^([A-Z][^:]+):\s*(.+)$/  // Capitalized name: message
-                ];
-                
-                let matched = false;
-                for (const pattern of patterns) {
-                    const match = line.match(pattern);
-                    if (match) {
-                        const sender = match[1].trim();
-                        const content = match[2].trim();
-                        
-                        if (options.mergeMessages && currentMessage && currentMessage.sender === sender) {
-                            currentMessage.content += '\n' + content;
-                        } else {
-                            if (currentMessage) messages.push(currentMessage);
-                            currentMessage = { sender, content };
-                        }
-                        
-                        participants.add(sender);
-                        matched = true;
-                        break;
-                    }
-                }
-                
-                if (!matched && currentMessage) {
-                    // Continuation of previous message
-                    currentMessage.content += '\n' + line;
-                } else if (!matched && !currentMessage) {
-                    // Standalone line
-                    messages.push({ sender: 'System', content: line });
-                }
-                
-                wordCount += line.split(/\s+/).filter(w => w.length > 0).length;
-                charCount += line.length;
-            });
-            
-            if (currentMessage) messages.push(currentMessage);
-            
-            return { messages, participants, wordCount, charCount };
-        }
-        
-        function formatAsMarkdown(parsed, options) {
-            let output = '';
-            
+            // Add headers
             if (options.addHeaders) {
                 output += '# Conversation Export\n\n';
             }
             
-            if (options.addDate) {
+            // Add date
+            if (options.includeDate) {
                 output += `**Export Date:** ${new Date().toLocaleString()}\n\n`;
             }
             
-            if (options.addSummary) {
-                output += '## Summary\n\n';
-                output += `- **Total Messages:** ${parsed.messages.length}\n`;
-                output += `- **Participants:** ${Array.from(parsed.participants).join(', ')}\n`;
-                output += `- **Word Count:** ${parsed.wordCount}\n\n`;
-            }
-            
+            // Add content header
             if (options.addHeaders) {
                 output += '## Messages\n\n';
             }
             
-            parsed.messages.forEach(msg => {
-                output += `**${msg.sender}:** ${msg.content}\n\n`;
+            // Process lines
+            lines.forEach(line => {
+                if (line.includes(':')) {
+                    const parts = line.split(':');
+                    const sender = parts[0].trim();
+                    const message = parts.slice(1).join(':').trim();
+                    
+                    if (sender && message) {
+                        output += `**${sender}:** ${message}\n\n`;
+                    } else {
+                        output += line + '\n\n';
+                    }
+                } else {
+                    output += line + '\n\n';
+                }
             });
             
             return output.trim();
         }
         
-        function formatAsPlain(parsed, options) {
+        // Format as Plain Text
+        function formatAsPlain(text, options) {
+            let lines = text.split('\n');
             let output = '';
             
+            // Clean lines if needed
+            if (options.cleanSpacing) {
+                lines = lines.map(line => line.trim()).filter(line => line.length > 0);
+            }
+            
+            // Remove timestamps if needed
+            if (options.removeTimestamps) {
+                lines = lines.map(line => {
+                    return line
+                        .replace(/^\[\d{1,2}:\d{2}(:\d{2})?\s*(AM|PM)?\]\s*/gi, '')
+                        .replace(/^\d{1,2}\/\d{1,2}\/\d{2,4},?\s*\d{1,2}:\d{2}\s*(AM|PM)?\s*/gi, '')
+                        .replace(/^\(\d{1,2}:\d{2}(:\d{2})?\s*(AM|PM)?\)\s*/gi, '');
+                });
+            }
+            
+            // Add headers
             if (options.addHeaders) {
-                output += 'CONVERSATION EXPORT\n' + '='.repeat(50) + '\n\n';
+                output += 'CONVERSATION EXPORT\n';
+                output += '===================\n\n';
             }
             
-            if (options.addDate) {
-                output += `Export Date: ${new Date().toLocaleString()}\n\n`;
+            // Add date
+            if (options.includeDate) {
+                output += 'Export Date: ' + new Date().toLocaleString() + '\n\n';
             }
             
-            if (options.addSummary) {
-                output += 'SUMMARY\n' + '-'.repeat(30) + '\n';
-                output += `Total Messages: ${parsed.messages.length}\n`;
-                output += `Participants: ${Array.from(parsed.participants).join(', ')}\n`;
-                output += `Word Count: ${parsed.wordCount}\n\n`;
+            // Add content
+            if (options.addHeaders) {
+                output += 'MESSAGES\n';
+                output += '--------\n\n';
             }
             
-            parsed.messages.forEach(msg => {
-                output += `${msg.sender}: ${msg.content}\n\n`;
-            });
+            output += lines.join('\n');
             
-            return output.trim();
+            return output;
         }
         
-        function formatAsJSON(parsed, options) {
+        // Format as JSON
+        function formatAsJSON(text, options) {
+            let lines = text.split('\n');
+            const messages = [];
+            
+            // Clean lines if needed
+            if (options.cleanSpacing) {
+                lines = lines.map(line => line.trim()).filter(line => line.length > 0);
+            }
+            
+            // Remove timestamps if needed
+            if (options.removeTimestamps) {
+                lines = lines.map(line => {
+                    return line
+                        .replace(/^\[\d{1,2}:\d{2}(:\d{2})?\s*(AM|PM)?\]\s*/gi, '')
+                        .replace(/^\d{1,2}\/\d{1,2}\/\d{2,4},?\s*\d{1,2}:\d{2}\s*(AM|PM)?\s*/gi, '')
+                        .replace(/^\(\d{1,2}:\d{2}(:\d{2})?\s*(AM|PM)?\)\s*/gi, '');
+                });
+            }
+            
+            // Parse messages
+            lines.forEach(line => {
+                if (line.includes(':')) {
+                    const parts = line.split(':');
+                    const sender = parts[0].trim();
+                    const message = parts.slice(1).join(':').trim();
+                    
+                    if (sender && message) {
+                        messages.push({
+                            sender: sender,
+                            message: message
+                        });
+                    }
+                }
+            });
+            
+            // Create JSON structure
             const data = {
-                exportDate: options.addDate ? new Date().toISOString() : undefined,
-                summary: options.addSummary ? {
-                    messageCount: parsed.messages.length,
-                    participants: Array.from(parsed.participants),
-                    wordCount: parsed.wordCount,
-                    charCount: parsed.charCount
-                } : undefined,
-                messages: parsed.messages
+                conversation: messages
             };
             
-            // Remove undefined fields
-            Object.keys(data).forEach(key => data[key] === undefined && delete data[key]);
+            if (options.includeDate) {
+                data.exportDate = new Date().toISOString();
+            }
+            
+            if (options.addHeaders) {
+                data.title = "Conversation Export";
+                data.messageCount = messages.length;
+            }
             
             return JSON.stringify(data, null, 2);
         }
         
-        function formatAsHTML(parsed, options) {
-            let output = '<!DOCTYPE html>\n<html>\n<head>\n<title>Conversation Export</title>\n';
-            output += '<style>body{font-family:Arial,sans-serif;max-width:800px;margin:0 auto;padding:20px;}.message{margin-bottom:15px;}.sender{font-weight:bold;color:#2c3e50;}.content{margin-left:20px;}</style>\n';
-            output += '</head>\n<body>\n';
+        // Format as Simple
+        function formatAsSimple(text, options) {
+            let lines = text.split('\n');
+            let output = '';
             
-            if (options.addHeaders) {
-                output += '<h1>Conversation Export</h1>\n';
+            // Clean lines if needed
+            if (options.cleanSpacing) {
+                lines = lines.map(line => line.trim()).filter(line => line.length > 0);
             }
             
-            if (options.addDate) {
-                output += `<p><strong>Export Date:</strong> ${new Date().toLocaleString()}</p>\n`;
+            // Remove timestamps if needed
+            if (options.removeTimestamps) {
+                lines = lines.map(line => {
+                    return line
+                        .replace(/^\[\d{1,2}:\d{2}(:\d{2})?\s*(AM|PM)?\]\s*/gi, '')
+                        .replace(/^\d{1,2}\/\d{1,2}\/\d{2,4},?\s*\d{1,2}:\d{2}\s*(AM|PM)?\s*/gi, '')
+                        .replace(/^\(\d{1,2}:\d{2}(:\d{2})?\s*(AM|PM)?\)\s*/gi, '');
+                });
             }
             
-            if (options.addSummary) {
-                output += '<h2>Summary</h2>\n<ul>\n';
-                output += `<li>Total Messages: ${parsed.messages.length}</li>\n`;
-                output += `<li>Participants: ${Array.from(parsed.participants).join(', ')}</li>\n`;
-                output += `<li>Word Count: ${parsed.wordCount}</li>\n</ul>\n`;
+            // Add date if needed
+            if (options.includeDate) {
+                output += '=== ' + new Date().toLocaleString() + ' ===\n\n';
             }
             
-            output += '<div class="messages">\n';
-            parsed.messages.forEach(msg => {
-                output += `<div class="message"><span class="sender">${msg.sender}:</span> <span class="content">${msg.content.replace(/\n/g, '<br>')}</span></div>\n`;
-            });
-            output += '</div>\n</body>\n</html>';
+            // Just clean up the conversation
+            output += lines.join('\n');
             
             return output;
         }
         
-        function formatAsSummary(parsed, options) {
-            let output = 'CONVERSATION SUMMARY\n' + '='.repeat(50) + '\n\n';
+        // Show statistics
+        function showStats(text) {
+            const stats = document.getElementById('stats');
+            const statsText = document.getElementById('statsText');
             
-            if (options.addDate) {
-                output += `Generated: ${new Date().toLocaleString()}\n\n`;
-            }
+            const lines = text.split('\n').filter(line => line.trim().length > 0);
+            const words = text.split(/\s+/).filter(word => word.length > 0);
+            const chars = text.length;
             
-            output += `Total Messages: ${parsed.messages.length}\n`;
-            output += `Participants: ${parsed.participants.size}\n`;
-            output += `- ${Array.from(parsed.participants).join('\n- ')}\n\n`;
+            statsText.innerHTML = `
+                <strong>Statistics:</strong> 
+                ${lines.length} lines | 
+                ${words.length} words | 
+                ${chars} characters
+            `;
             
-            // Message distribution
-            const messageCounts = {};
-            parsed.messages.forEach(msg => {
-                messageCounts[msg.sender] = (messageCounts[msg.sender] || 0) + 1;
-            });
-            
-            output += 'Message Distribution:\n';
-            Object.entries(messageCounts).forEach(([sender, count]) => {
-                const percentage = ((count / parsed.messages.length) * 100).toFixed(1);
-                output += `- ${sender}: ${count} messages (${percentage}%)\n`;
-            });
-            
-            output += `\nTotal Word Count: ${parsed.wordCount}\n`;
-            output += `Average Words per Message: ${Math.round(parsed.wordCount / parsed.messages.length)}\n`;
-            
-            // Key topics (simple keyword extraction)
-            const words = {};
-            parsed.messages.forEach(msg => {
-                msg.content.toLowerCase().split(/\s+/).forEach(word => {
-                    if (word.length > 4) {  // Only count words longer than 4 chars
-                        words[word] = (words[word] || 0) + 1;
-                    }
-                });
-            });
-            
-            const topWords = Object.entries(words)
-                .sort((a, b) => b[1] - a[1])
-                .slice(0, 10);
-            
-            if (topWords.length > 0) {
-                output += '\nMost Frequent Terms:\n';
-                topWords.forEach(([word, count]) => {
-                    output += `- ${word}: ${count} times\n`;
-                });
-            }
-            
-            return output;
+            stats.style.display = 'block';
         }
         
-        function updateStats(messages, participants, words, chars) {
-            document.getElementById('stats').style.display = messages > 0 ? 'grid' : 'none';
-            document.getElementById('messageCount').textContent = messages;
-            document.getElementById('participantCount').textContent = participants;
-            document.getElementById('wordCount').textContent = words.toLocaleString();
-            document.getElementById('charCount').textContent = chars.toLocaleString();
-        }
-        
-        function copyToClipboard() {
+        // Copy output
+        function copyOutput() {
             const output = document.getElementById('output');
+            
+            if (!output.value) {
+                alert('Nothing to copy! Format a conversation first.');
+                return;
+            }
+            
             output.select();
             document.execCommand('copy');
             
             // Visual feedback
             const btn = event.target;
-            const originalText = btn.textContent;
-            btn.textContent = '✅ Copied!';
+            const originalText = btn.innerHTML;
+            btn.innerHTML = '✅ Copied!';
             setTimeout(() => {
-                btn.textContent = originalText;
+                btn.innerHTML = originalText;
             }, 2000);
         }
         
-        function downloadText() {
+        // Download result
+        function downloadResult() {
             const output = document.getElementById('output').value;
+            
             if (!output) {
                 alert('Nothing to download! Format a conversation first.');
                 return;
             }
             
             const extensions = {
-                'markdown': '.md',
-                'plain': '.txt',
-                'json': '.json',
-                'html': '.html',
-                'summary': '.txt'
+                'markdown': 'md',
+                'plain': 'txt',
+                'json': 'json',
+                'simple': 'txt'
             };
             
+            const filename = 'conversation-export.' + extensions[currentFormat];
             const blob = new Blob([output], { type: 'text/plain' });
             const url = window.URL.createObjectURL(blob);
             const a = document.createElement('a');
             a.href = url;
-            a.download = `conversation-export-${new Date().getTime()}${extensions[currentFormat]}`;
+            a.download = filename;
             document.body.appendChild(a);
             a.click();
             document.body.removeChild(a);
             window.URL.revokeObjectURL(url);
         }
         
+        // Clear all
         function clearAll() {
             if (confirm('Clear all text? This cannot be undone.')) {
                 document.getElementById('input').value = '';
                 document.getElementById('output').value = '';
-                updateStats(0, 0, 0, 0);
+                document.getElementById('stats').style.display = 'none';
             }
         }
         
+        // Load examples
         function loadExample(type) {
             const examples = {
-                'chat': `Sarah: Hey, did you see the new project requirements?
-Mike: Yeah, just reviewed them. Looks like we need to pivot our approach.
-Sarah: I was thinking the same thing. The timeline is pretty tight too.
-Mike: We should probably schedule a meeting with the team tomorrow
-Sarah: Good idea. I'll send out the invite. 2pm work for you?
-Mike: Perfect! I'll prepare some initial thoughts on the technical approach.
-Sarah: Thanks Mike! This is going to be challenging but exciting.
-Mike: Absolutely! Looking forward to it.`,
+                'chat': `John: Hey, how's the project going?
+Sarah: Pretty good! Just finished the main features.
+John: That's awesome. Any blockers?
+Sarah: Just need to test the API integration.
+John: Let me know if you need help with that.
+Sarah: Will do, thanks!`,
                 
-                'support': `[09:34 AM] Customer: Hi, I'm having trouble logging into my account
-[09:35 AM] Support Agent: Hello! I'm sorry to hear you're having trouble. I'd be happy to help you with that.
-[09:35 AM] Support Agent: Can you please provide me with the email address associated with your account?
-[09:36 AM] Customer: Sure, it's john.doe@email.com
-[09:37 AM] Support Agent: Thank you. I see your account here. When did you last successfully log in?
-[09:38 AM] Customer: It was working yesterday, but today it says my password is incorrect
-[09:39 AM] Support Agent: I understand. Let me send you a password reset link to help resolve this quickly.
-[09:40 AM] Customer: That would be great, thanks!
-[09:41 AM] Support Agent: I've sent the reset link to your email. It should arrive within 2-3 minutes.
-[09:42 AM] Customer: Got it! Password reset and I'm back in. Thank you so much!
-[09:43 AM] Support Agent: Wonderful! Is there anything else I can help you with today?
-[09:43 AM] Customer: No, that's all. Thanks for the quick help!
-[09:44 AM] Support Agent: You're very welcome! Have a great day!`,
+                'support': `[10:32 AM] Customer: Hi, I can't log into my account
+[10:33 AM] Agent: I'm sorry to hear that. Can you tell me what error you're seeing?
+[10:34 AM] Customer: It says "Invalid password" but I'm sure it's correct
+[10:35 AM] Agent: Let me help you reset your password. What's your email?
+[10:36 AM] Customer: john.doe@example.com
+[10:37 AM] Agent: I've sent a reset link to your email. Please check and let me know!
+[10:40 AM] Customer: Got it, thanks! I'm back in.
+[10:41 AM] Agent: Great! Is there anything else I can help with?
+[10:42 AM] Customer: No, that's all. Thank you!`,
                 
-                'meeting': `Project Manager: Let's start with a quick status update. Team, how are we doing on the Q3 deliverables?
-Developer 1: The API integration is 80% complete. We hit a small snag with authentication but resolved it yesterday.
-Developer 2: Frontend is coming along nicely. All the main components are built, just need to polish the UI.
-Designer: I've completed all the mockups for the new features. Ready for implementation whenever dev is ready.
-Project Manager: Excellent progress! Any blockers we need to address?
-Developer 1: We might need additional API rate limits from the third-party service.
-Project Manager: I'll reach out to their team today. Anything else?
-QA Lead: Just a heads up - we'll need at least 3 days for thorough testing once dev is complete.
-Project Manager: Noted. Let's aim to have dev work done by end of week to give QA enough time.
-Team: Sounds good!
-Project Manager: Great meeting everyone. Same time next week?
-Team: 👍`,
-                
-                                'ai': `User: Can you explain how binary search works?
-                AI: Sure! Binary search is an efficient algorithm for finding an item from a sorted list of items.
-                User: How does it work?
-                AI: It repeatedly divides the search interval in half. If the value of the search key is less than the item in the middle, it continues on the lower half. Otherwise, it continues on the upper half. This continues until the value is found or the interval is empty.
-                User: Can you show me a simple example in Python?
-                AI: 
-                \`\`\`python
-                def binary_search(arr, target):
-                    left, right = 0, len(arr) - 1
-                    while left <= right:
-                        mid = (left + right) // 2
-                        if arr[mid] == target:
-                            return mid
-                        elif arr[mid] < target:
-                            left = mid + 1
-                        else:
-                            right = mid - 1
-                    return -1
-                \`\`\`
-                User: Thanks! That makes sense.
-                        AI: You're welcome! Let me know if you have any more questions.`
-                    };
-                    document.getElementById('input').value = examples[type] || '';
-                    processText();
-                }
+                'ai': `User: Can you explain what machine learning is?
+Assistant: Machine learning is a type of artificial intelligence that enables computers to learn and improve from experience without being explicitly programmed. Instead of following strict rules, ML systems identify patterns in data and make decisions based on those patterns.
+User: What's an example of machine learning in daily life?
+Assistant: A great example is email spam filters. They learn from millions of emails what spam looks like and automatically filter out unwanted messages. Another example is Netflix recommendations - the system learns your viewing preferences and suggests shows you might enjoy.
+User: That makes sense, thanks!`
+            };
+            
+            document.getElementById('input').value = examples[type] || '';
+        }
+    </script>
+</body>
+</html>
