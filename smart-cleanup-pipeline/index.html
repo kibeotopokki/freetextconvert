@@ -1,0 +1,915 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Cleanup Pipeline - Chain Multiple Text Cleanups | Free Text Convert</title>
+    <meta name="description" content="Clean text with multiple operations in one click. Remove line breaks, fix spacing, strip HTML, remove duplicates. Smart text cleanup pipeline tool.">
+    <link rel="canonical" href="https://freetextconvert.com/smart-cleanup-pipeline">
+    
+    <!-- Icons -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f5f5f5;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        h1 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+        
+        .tagline {
+            color: #666;
+            font-size: 18px;
+        }
+        
+        .tool-container {
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+        }
+        
+        .tool-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .tool-header h2 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+        
+        .preset-buttons {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        .preset-btn {
+            padding: 12px 24px;
+            border: 2px solid #3498db;
+            background: white;
+            color: #3498db;
+            border-radius: 30px;
+            cursor: pointer;
+            font-size: 15px;
+            transition: all 0.3s;
+            font-weight: 500;
+        }
+        
+        .preset-btn:hover, .preset-btn.active {
+            background: #3498db;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
+        }
+        
+        .pipeline-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        
+        @media (max-width: 768px) {
+            .pipeline-container {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .operations-section {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 10px;
+        }
+        
+        .operations-section h3 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+            font-size: 20px;
+        }
+        
+        .operation-group {
+            margin-bottom: 25px;
+        }
+        
+        .operation-group h4 {
+            color: #34495e;
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+        
+        .operation-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+            padding: 8px;
+            background: white;
+            border-radius: 5px;
+            transition: all 0.2s;
+        }
+        
+        .operation-item:hover {
+            background: #e3f2fd;
+        }
+        
+        .operation-item input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+        }
+        
+        .operation-item label {
+            cursor: pointer;
+            user-select: none;
+            flex: 1;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .operation-badge {
+            background: #e0e0e0;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 12px;
+            color: #666;
+        }
+        
+        .order-section {
+            background: #fff3cd;
+            padding: 25px;
+            border-radius: 10px;
+        }
+        
+        .order-section h3 {
+            color: #856404;
+            margin-bottom: 20px;
+            font-size: 20px;
+        }
+        
+        .order-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .order-item {
+            background: white;
+            padding: 15px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: move;
+            transition: all 0.2s;
+            border: 2px solid transparent;
+        }
+        
+        .order-item:hover {
+            border-color: #ffc107;
+            transform: translateX(5px);
+        }
+        
+        .order-item.dragging {
+            opacity: 0.5;
+        }
+        
+        .order-number {
+            background: #ffc107;
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+        
+        textarea {
+            width: 100%;
+            min-height: 300px;
+            padding: 15px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            font-family: monospace;
+            font-size: 14px;
+            resize: vertical;
+        }
+        
+        textarea:focus {
+            outline: none;
+            border-color: #3498db;
+        }
+        
+        .action-buttons {
+            display: flex;
+            gap: 10px;
+            margin: 20px 0;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        .btn {
+            padding: 12px 30px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .btn-primary {
+            background: #3498db;
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: #2980b9;
+            transform: translateY(-2px);
+        }
+        
+        .btn-secondary {
+            background: #27ae60;
+            color: white;
+        }
+        
+        .btn-secondary:hover {
+            background: #229954;
+            transform: translateY(-2px);
+        }
+        
+        .btn-warning {
+            background: #e74c3c;
+            color: white;
+        }
+        
+        .btn-warning:hover {
+            background: #c0392b;
+            transform: translateY(-2px);
+        }
+        
+        .stats {
+            background: #ecf0f1;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+            text-align: center;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+        
+        .stat-item {
+            text-align: center;
+        }
+        
+        .stat-value {
+            font-size: 24px;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+        
+        .stat-label {
+            color: #7f8c8d;
+            font-size: 14px;
+        }
+        
+        .label {
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 10px;
+            display: block;
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            padding: 20px;
+            color: #666;
+        }
+        
+        nav {
+            margin-bottom: 20px;
+        }
+        
+        nav a {
+            color: #3498db;
+            text-decoration: none;
+            margin: 0 15px;
+        }
+        
+        nav a:hover {
+            text-decoration: underline;
+        }
+        
+        .pro-tips {
+            background: #e8f5e9;
+            border: 2px solid #4caf50;
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 30px;
+        }
+        
+        .pro-tips h3 {
+            color: #2e7d32;
+            margin-bottom: 15px;
+        }
+        
+        .pro-tips ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .pro-tips li {
+            padding: 8px 0;
+            padding-left: 25px;
+            position: relative;
+        }
+        
+        .pro-tips li:before {
+            content: "✨";
+            position: absolute;
+            left: 0;
+        }
+        
+        .feature-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+            margin-left: 10px;
+        }
+    </style>
+    
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-792NQ00CEV"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-792NQ00CEV');
+    </script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Free Text Convert</h1>
+            <p class="tagline">Simple, fast, and free text transformation tools</p>
+            <nav>
+                <a href="/">Home</a>
+                <a href="/tools">All Tools</a>
+                <a href="/blog">Blog</a>
+                <a href="/data-cleaning-suite">Data Cleaning Suite</a>
+            </nav>
+        </header>
+
+        <div class="tool-container">
+            <div class="tool-header">
+                <h2>Smart Cleanup Pipeline <span class="feature-badge">INDUSTRY FIRST!</span></h2>
+                <p>Chain multiple text cleaning operations in one click - no more switching between tools!</p>
+            </div>
+
+            <div class="preset-buttons">
+                <button class="preset-btn" onclick="loadPreset('pdf')">📄 PDF Cleanup</button>
+                <button class="preset-btn" onclick="loadPreset('email')">📧 Email Cleanup</button>
+                <button class="preset-btn" onclick="loadPreset('data')">📊 Data Cleanup</button>
+                <button class="preset-btn" onclick="loadPreset('web')">🌐 Web Content</button>
+                <button class="preset-btn" onclick="loadPreset('custom')">⚙️ Custom</button>
+            </div>
+
+            <div class="pipeline-container">
+                <div class="operations-section">
+                    <h3>1️⃣ Select Operations</h3>
+                    
+                    <div class="operation-group">
+                        <h4>🧹 Basic Cleaning</h4>
+                        <div class="operation-item">
+                            <input type="checkbox" id="removeLineBreaks" checked>
+                            <label for="removeLineBreaks">
+                                Remove Line Breaks
+                                <span class="operation-badge">PDF Fix</span>
+                            </label>
+                        </div>
+                        <div class="operation-item">
+                            <input type="checkbox" id="removeExtraSpaces" checked>
+                            <label for="removeExtraSpaces">
+                                Remove Extra Spaces
+                                <span class="operation-badge">Common</span>
+                            </label>
+                        </div>
+                        <div class="operation-item">
+                            <input type="checkbox" id="trimLines">
+                            <label for="trimLines">
+                                Trim Line Spaces
+                                <span class="operation-badge">Clean</span>
+                            </label>
+                        </div>
+                        <div class="operation-item">
+                            <input type="checkbox" id="removeBlankLines">
+                            <label for="removeBlankLines">
+                                Remove Blank Lines
+                                <span class="operation-badge">Format</span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="operation-group">
+                        <h4>🔧 Advanced Cleaning</h4>
+                        <div class="operation-item">
+                            <input type="checkbox" id="removeDuplicates">
+                            <label for="removeDuplicates">
+                                Remove Duplicate Lines
+                                <span class="operation-badge">Data</span>
+                            </label>
+                        </div>
+                        <div class="operation-item">
+                            <input type="checkbox" id="stripHtml">
+                            <label for="stripHtml">
+                                Strip HTML Tags
+                                <span class="operation-badge">Web</span>
+                            </label>
+                        </div>
+                        <div class="operation-item">
+                            <input type="checkbox" id="fixQuotes">
+                            <label for="fixQuotes">
+                                Fix Smart Quotes
+                                <span class="operation-badge">Text</span>
+                            </label>
+                        </div>
+                        <div class="operation-item">
+                            <input type="checkbox" id="removeNumbers">
+                            <label for="removeNumbers">
+                                Remove Line Numbers
+                                <span class="operation-badge">Code</span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="operation-group">
+                        <h4>🎯 Specialized</h4>
+                        <div class="operation-item">
+                            <input type="checkbox" id="normalizeCase">
+                            <label for="normalizeCase">
+                                Normalize Case
+                                <span class="operation-badge">Format</span>
+                            </label>
+                        </div>
+                        <div class="operation-item">
+                            <input type="checkbox" id="removeSpecialChars">
+                            <label for="removeSpecialChars">
+                                Remove Special Characters
+                                <span class="operation-badge">Clean</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="order-section">
+                    <h3>2️⃣ Operation Order</h3>
+                    <p style="margin-bottom: 15px; font-size: 14px; color: #666;">
+                        Drag to reorder - operations run top to bottom
+                    </p>
+                    <ul class="order-list" id="orderList">
+                        <!-- Populated by JavaScript -->
+                    </ul>
+                </div>
+            </div>
+
+            <div>
+                <label class="label" for="input">Input Text:</label>
+                <textarea id="input" placeholder="Paste your messy text here...
+
+Example: Text copied from PDF with broken
+line breaks, extra    spaces, and duplicate lines.
+duplicate lines.
+
+Or HTML content with <b>tags</b> that need stripping."></textarea>
+            </div>
+
+            <div class="action-buttons">
+                <button class="btn btn-primary" onclick="runPipeline()">🚀 Run Cleanup Pipeline</button>
+                <button class="btn btn-secondary" onclick="copyOutput()">📋 Copy Result</button>
+                <button class="btn btn-secondary" onclick="downloadResult()">💾 Download</button>
+                <button class="btn btn-warning" onclick="clearAll()">🗑️ Clear All</button>
+            </div>
+
+            <div class="stats" id="stats" style="display: none;">
+                <h4>Cleanup Statistics</h4>
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <div class="stat-value" id="operationsRun">0</div>
+                        <div class="stat-label">Operations Run</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="charactersRemoved">0</div>
+                        <div class="stat-label">Characters Removed</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="linesAffected">0</div>
+                        <div class="stat-label">Lines Affected</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="cleanupPercent">0%</div>
+                        <div class="stat-label">Reduction</div>
+                    </div>
+                </div>
+            </div>
+
+            <div style="margin-top: 20px;">
+                <label class="label" for="output">Cleaned Text:</label>
+                <textarea id="output" placeholder="Your cleaned text will appear here..." readonly></textarea>
+            </div>
+
+            <div class="pro-tips">
+                <h3>✨ Pro Tips</h3>
+                <ul>
+                    <li><strong>PDF Cleanup:</strong> Removes line breaks + extra spaces + blank lines</li>
+                    <li><strong>Email Cleanup:</strong> Strips HTML + fixes quotes + removes duplicates</li>
+                    <li><strong>Data Cleanup:</strong> Removes duplicates + trims spaces + normalizes</li>
+                    <li><strong>Order Matters:</strong> Drag operations to change processing sequence</li>
+                    <li><strong>Save Time:</strong> No more switching between multiple tools!</li>
+                </ul>
+            </div>
+        </div>
+
+        <footer>
+            <p style="margin-bottom: 15px;">
+                <a href="/privacy-policy" style="color: #3498db; margin-right: 20px;">Privacy Policy</a>
+                <a href="/terms-of-service" style="color: #3498db; margin-right: 20px;">Terms of Service</a>
+                <a href="/affiliate-disclosure" style="color: #3498db;">Affiliate Disclosure</a>
+            </p>
+            
+            <!-- Donation Section -->
+            <div style="background: #f8f9fa; padding: 30px 20px; margin: 40px auto 20px; max-width: 600px; border-radius: 15px; text-align: center; box-shadow: 0 2px 10px rgba(0,0,0,0.05);">
+                <h3 style="margin-bottom: 15px; color: #2c3e50;">☕ Love these free tools?</h3>
+                <p style="margin-bottom: 20px; color: #555; line-height: 1.6;">
+                    Hi! I'm Cino, building Free Text Convert to help developers save time.
+                    Your support keeps these tools free forever!
+                </p>
+                <a href="https://buymeacoffee.com/cinophan" 
+                   target="_blank" 
+                   rel="noopener"
+                   style="background: #FFDD00; 
+                          color: #000000; 
+                          padding: 14px 35px; 
+                          border-radius: 30px; 
+                          text-decoration: none; 
+                          font-weight: bold; 
+                          display: inline-block; 
+                          transition: all 0.3s; 
+                          font-size: 16px;
+                          box-shadow: 0 4px 15px rgba(255, 221, 0, 0.3);"
+                   onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 20px rgba(255, 221, 0, 0.4)';"
+                   onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 15px rgba(255, 221, 0, 0.3)';">
+                    <span style="font-size: 20px; vertical-align: middle;">☕</span> Buy me a coffee
+                </a>
+            </div>
+            
+            <p>&copy; 2025 FreeTextConvert.com - Building helpful tools one day at a time</p>
+        </footer>
+    </div>
+
+    <script>
+        // Available operations
+        const operations = {
+            removeLineBreaks: {
+                name: 'Remove Line Breaks',
+                fn: (text) => text.replace(/\r?\n/g, ' ').replace(/\s+/g, ' ')
+            },
+            removeExtraSpaces: {
+                name: 'Remove Extra Spaces',
+                fn: (text) => text.replace(/\s+/g, ' ').trim()
+            },
+            trimLines: {
+                name: 'Trim Line Spaces',
+                fn: (text) => text.split('\n').map(line => line.trim()).join('\n')
+            },
+            removeBlankLines: {
+                name: 'Remove Blank Lines',
+                fn: (text) => text.split('\n').filter(line => line.trim()).join('\n')
+            },
+            removeDuplicates: {
+                name: 'Remove Duplicate Lines',
+                fn: (text) => {
+                    const lines = text.split('\n');
+                    const unique = [...new Set(lines)];
+                    return unique.join('\n');
+                }
+            },
+            stripHtml: {
+                name: 'Strip HTML Tags',
+                fn: (text) => text.replace(/<[^>]*>/g, '')
+            },
+            fixQuotes: {
+                name: 'Fix Smart Quotes',
+                fn: (text) => {
+                    return text
+                        .replace(/[\u2018\u2019]/g, "'")
+                        .replace(/[\u201C\u201D]/g, '"');
+                }
+            },
+            removeNumbers: {
+                name: 'Remove Line Numbers',
+                fn: (text) => {
+                    return text.split('\n').map(line => {
+                        return line.replace(/^\s*\d+[\.\)\]:]?\s*/, '');
+                    }).join('\n');
+                }
+            },
+            normalizeCase: {
+                name: 'Normalize Case',
+                fn: (text) => {
+                    return text.split('\n').map(line => {
+                        if (line.trim()) {
+                            return line.charAt(0).toUpperCase() + line.slice(1).toLowerCase();
+                        }
+                        return line;
+                    }).join('\n');
+                }
+            },
+            removeSpecialChars: {
+                name: 'Remove Special Characters',
+                fn: (text) => text.replace(/[^\w\s\n]/g, '')
+            }
+        };
+        
+        // Presets
+        const presets = {
+            pdf: {
+                name: 'PDF Cleanup',
+                operations: ['removeLineBreaks', 'removeExtraSpaces', 'removeBlankLines', 'trimLines']
+            },
+            email: {
+                name: 'Email Cleanup',
+                operations: ['stripHtml', 'fixQuotes', 'removeDuplicates', 'removeExtraSpaces']
+            },
+            data: {
+                name: 'Data Cleanup',
+                operations: ['trimLines', 'removeBlankLines', 'removeDuplicates', 'removeExtraSpaces']
+            },
+            web: {
+                name: 'Web Content',
+                operations: ['stripHtml', 'removeLineBreaks', 'removeExtraSpaces', 'fixQuotes']
+            },
+            custom: {
+                name: 'Custom',
+                operations: []
+            }
+        };
+        
+        // Initialize order list
+        function updateOrderList() {
+            const orderList = document.getElementById('orderList');
+            orderList.innerHTML = '';
+            
+            // Get all checked operations
+            Object.keys(operations).forEach(opId => {
+                const checkbox = document.getElementById(opId);
+                if (checkbox && checkbox.checked) {
+                    const li = document.createElement('li');
+                    li.className = 'order-item';
+                    li.draggable = true;
+                    li.dataset.operation = opId;
+                    li.innerHTML = `
+                        <span>${operations[opId].name}</span>
+                        <span class="order-number">${orderList.children.length + 1}</span>
+                    `;
+                    orderList.appendChild(li);
+                }
+            });
+            
+            // Add drag and drop handlers
+            addDragHandlers();
+        }
+        
+        // Load preset
+        function loadPreset(presetName) {
+            // Clear all checkboxes
+            Object.keys(operations).forEach(opId => {
+                const checkbox = document.getElementById(opId);
+                if (checkbox) checkbox.checked = false;
+            });
+            
+            // Check preset operations
+            const preset = presets[presetName];
+            if (preset) {
+                preset.operations.forEach(opId => {
+                    const checkbox = document.getElementById(opId);
+                    if (checkbox) checkbox.checked = true;
+                });
+            }
+            
+            // Update order list
+            updateOrderList();
+            
+            // Update active button
+            document.querySelectorAll('.preset-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+        }
+        
+        // Run the pipeline
+        function runPipeline() {
+            const input = document.getElementById('input').value;
+            
+            if (!input.trim()) {
+                alert('Please enter some text to clean');
+                return;
+            }
+            
+            let output = input;
+            let operationsRun = 0;
+            const originalLength = input.length;
+            
+            // Get operations in order
+            const orderList = document.getElementById('orderList');
+            const orderedOps = Array.from(orderList.children).map(li => li.dataset.operation);
+            
+            // Run operations in order
+            orderedOps.forEach(opId => {
+                if (operations[opId]) {
+                    output = operations[opId].fn(output);
+                    operationsRun++;
+                }
+            });
+            
+            // Update output
+            document.getElementById('output').value = output;
+            
+            // Update stats
+            const finalLength = output.length;
+            const removed = originalLength - finalLength;
+            const reduction = ((removed / originalLength) * 100).toFixed(1);
+            
+            document.getElementById('operationsRun').textContent = operationsRun;
+            document.getElementById('charactersRemoved').textContent = removed;
+            document.getElementById('linesAffected').textContent = input.split('\n').length;
+            document.getElementById('cleanupPercent').textContent = reduction + '%';
+            
+            document.getElementById('stats').style.display = 'block';
+        }
+        
+        // Copy output
+        function copyOutput() {
+            const output = document.getElementById('output');
+            
+            if (!output.value) {
+                alert('Nothing to copy! Run the cleanup pipeline first.');
+                return;
+            }
+            
+            output.select();
+            document.execCommand('copy');
+            
+            // Visual feedback
+            const btn = event.target;
+            const originalText = btn.innerHTML;
+            btn.innerHTML = '✅ Copied!';
+            setTimeout(() => {
+                btn.innerHTML = originalText;
+            }, 2000);
+        }
+        
+        // Download result
+        function downloadResult() {
+            const output = document.getElementById('output').value;
+            
+            if (!output) {
+                alert('Nothing to download! Run the cleanup pipeline first.');
+                return;
+            }
+            
+            const blob = new Blob([output], { type: 'text/plain' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'cleaned-text.txt';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            window.URL.revokeObjectURL(url);
+        }
+        
+        // Clear all
+        function clearAll() {
+            if (confirm('Clear all text? This cannot be undone.')) {
+                document.getElementById('input').value = '';
+                document.getElementById('output').value = '';
+                document.getElementById('stats').style.display = 'none';
+            }
+        }
+        
+        // Drag and drop
+        let draggedElement = null;
+        
+        function addDragHandlers() {
+            const items = document.querySelectorAll('.order-item');
+            
+            items.forEach(item => {
+                item.addEventListener('dragstart', (e) => {
+                    draggedElement = e.target;
+                    e.target.classList.add('dragging');
+                });
+                
+                item.addEventListener('dragend', (e) => {
+                    e.target.classList.remove('dragging');
+                });
+                
+                item.addEventListener('dragover', (e) => {
+                    e.preventDefault();
+                    const afterElement = getDragAfterElement(e.clientY);
+                    const orderList = document.getElementById('orderList');
+                    
+                    if (afterElement == null) {
+                        orderList.appendChild(draggedElement);
+                    } else {
+                        orderList.insertBefore(draggedElement, afterElement);
+                    }
+                    
+                    updateOrderNumbers();
+                });
+            });
+        }
+        
+        function getDragAfterElement(y) {
+            const draggableElements = [...document.querySelectorAll('.order-item:not(.dragging)')];
+            
+            return draggableElements.reduce((closest, child) => {
+                const box = child.getBoundingClientRect();
+                const offset = y - box.top - box.height / 2;
+                
+                if (offset < 0 && offset > closest.offset) {
+                    return { offset: offset, element: child };
+                } else {
+                    return closest;
+                }
+            }, { offset: Number.NEGATIVE_INFINITY }).element;
+        }
+        
+        function updateOrderNumbers() {
+            const items = document.querySelectorAll('.order-item');
+            items.forEach((item, index) => {
+                const numberSpan = item.querySelector('.order-number');
+                if (numberSpan) {
+                    numberSpan.textContent = index + 1;
+                }
+            });
+        }
+        
+        // Listen for checkbox changes
+        document.addEventListener('DOMContentLoaded', () => {
+            Object.keys(operations).forEach(opId => {
+                const checkbox = document.getElementById(opId);
+                if (checkbox) {
+                    checkbox.addEventListener('change', updateOrderList);
+                }
+            });
+            
+            // Load PDF preset by default
+            document.querySelector('.preset-btn').click();
+        });
+    </script>
+</body>
+</html>
