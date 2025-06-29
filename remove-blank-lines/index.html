@@ -84,18 +84,20 @@
                 <!-- Quick Examples -->
                 <div style="margin-bottom: 20px;">
                     <h3 style="margin-bottom: 15px;">Quick Examples:</h3>
-                    <button class="btn btn-secondary" onclick="loadExample('basic')" style="margin-right: 10px;">
-                        Basic Text
-                    </button>
-                    <button class="btn btn-secondary" onclick="loadExample('code')" style="margin-right: 10px;">
-                        Code
-                    </button>
-                    <button class="btn btn-secondary" onclick="loadExample('document')" style="margin-right: 10px;">
-                        Document
-                    </button>
-                    <button class="btn btn-secondary" onclick="loadExample('list')">
-                        List
-                    </button>
+                    <div style="text-align: center;">
+                        <button class="btn btn-secondary" onclick="loadExample('basic')" style="margin-right: 10px;">
+                            Basic Text
+                        </button>
+                        <button class="btn btn-secondary" onclick="loadExample('code')" style="margin-right: 10px;">
+                            Code
+                        </button>
+                        <button class="btn btn-secondary" onclick="loadExample('document')" style="margin-right: 10px;">
+                            Document
+                        </button>
+                        <button class="btn btn-secondary" onclick="loadExample('list')">
+                            List
+                        </button>
+                    </div>
                 </div>
                 
                 <!-- Input Section -->
@@ -111,36 +113,36 @@
                     ></textarea>
                 </div>
                 
-                <!-- Buttons and Stats Row -->
-                <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 15px; margin-bottom: 20px;">
-                    <button class="btn btn-primary" onclick="removeBlankLines()">
+                <!-- Buttons -->
+                <div style="text-align: center; margin-bottom: 20px;">
+                    <button class="btn btn-primary" onclick="removeBlankLines()" style="margin-right: 10px;">
                         🧹 Remove Blank Lines
                     </button>
-                    <button class="btn btn-secondary" onclick="swapText()">
+                    <button class="btn btn-secondary" onclick="swapText()" style="margin-right: 10px;">
                         🔄 Swap
                     </button>
                     <button class="btn btn-secondary" onclick="clearAll()">
                         Clear All
                     </button>
-                    
-                    <!-- Stats -->
-                    <div style="margin-left: auto; display: flex; gap: 20px; flex-wrap: wrap;">
-                        <div style="text-align: center;">
-                            <div style="font-size: 24px; font-weight: bold; color: #3498db;" id="linesRemoved">0</div>
-                            <div style="font-size: 12px; color: #666;">Lines Removed</div>
-                        </div>
-                        <div style="text-align: center;">
-                            <div style="font-size: 24px; font-weight: bold; color: #3498db;" id="totalLinesBefore">0</div>
-                            <div style="font-size: 12px; color: #666;">Lines Before</div>
-                        </div>
-                        <div style="text-align: center;">
-                            <div style="font-size: 24px; font-weight: bold; color: #3498db;" id="totalLinesAfter">0</div>
-                            <div style="font-size: 12px; color: #666;">Lines After</div>
-                        </div>
-                        <div style="text-align: center;">
-                            <div style="font-size: 24px; font-weight: bold; color: #3498db;" id="percentReduced">0%</div>
-                            <div style="font-size: 12px; color: #666;">Reduced By</div>
-                        </div>
+                </div>
+                
+                <!-- Stats -->
+                <div style="display: flex; justify-content: center; gap: 30px; flex-wrap: wrap; margin-bottom: 20px;">
+                    <div style="text-align: center;">
+                        <div style="font-size: 24px; font-weight: bold; color: #3498db;" id="linesRemoved">0</div>
+                        <div style="font-size: 12px; color: #666;">Lines Removed</div>
+                    </div>
+                    <div style="text-align: center;">
+                        <div style="font-size: 24px; font-weight: bold; color: #3498db;" id="totalLinesBefore">0</div>
+                        <div style="font-size: 12px; color: #666;">Lines Before</div>
+                    </div>
+                    <div style="text-align: center;">
+                        <div style="font-size: 24px; font-weight: bold; color: #3498db;" id="totalLinesAfter">0</div>
+                        <div style="font-size: 12px; color: #666;">Lines After</div>
+                    </div>
+                    <div style="text-align: center;">
+                        <div style="font-size: 24px; font-weight: bold; color: #3498db;" id="percentReduced">0%</div>
+                        <div style="font-size: 12px; color: #666;">Reduced By</div>
                     </div>
                 </div>
                 
@@ -174,9 +176,9 @@
                 </div>
                 
                 <!-- Related Tools -->
-                <div style="margin-top: 40px;">
+                <div style="margin-top: 40px; text-align: center;">
                     <h3>Related Tools:</h3>
-                    <div style="display: flex; flex-wrap: wrap; gap: 10px;">
+                    <div style="display: flex; flex-wrap: wrap; gap: 10px; justify-content: center;">
                         <a href="/whitespace-normalizer" class="btn btn-secondary">Whitespace Normalizer</a>
                         <a href="/line-break-remover" class="btn btn-secondary">Line Break Remover</a>
                         <a href="/remove-duplicates" class="btn btn-secondary">Remove Duplicates</a>
