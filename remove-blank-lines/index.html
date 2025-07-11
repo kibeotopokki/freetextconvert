@@ -4,15 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Remove Blank Lines Online - Delete Empty Lines from Text Free | Free Text Convert</title>
-    <meta name="description" content="Remove blank lines from text online instantly. Delete empty lines, clean up spacing, fix documents. Free blank line remover tool - no signup required.">
-    <link rel="canonical" href="https://freetextconvert.com/remove-blank-lines">
+    <meta name="description" content="Remove blank lines from text online instantly. Delete empty lines, clean up spacing, fix formatting. Free blank line remover with smart whitespace detection.">
     <link rel="stylesheet" href="../style.css">
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📝</text></svg>">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="manifest" href="/site.webmanifest">
     
-    <!-- Google Analytics -->
+    <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-792NQ00CEV"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
@@ -21,15 +22,16 @@
         gtag('config', 'G-792NQ00CEV');
     </script>
     
-    <!-- Schema Markup for SoftwareApplication -->
+    <!-- Schema Markup -->
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
-        "@type": "SoftwareApplication",
-        "name": "Remove Blank Lines Online Tool",
-        "applicationCategory": "UtilityApplication",
+        "@type": "WebApplication",
+        "name": "Remove Blank Lines Tool",
+        "description": "Free online tool to remove blank lines and empty lines from text instantly",
+        "url": "https://freetextconvert.com/remove-blank-lines",
+        "applicationCategory": "DeveloperApplication",
         "operatingSystem": "Any",
-        "description": "Remove blank lines from text online. Delete empty lines, clean up spacing in documents instantly.",
         "offers": {
             "@type": "Offer",
             "price": "0",
@@ -41,389 +43,436 @@
 <body>
     <div class="container">
         <header>
-            <h1>Free Text Convert</h1>
+            <h1><a href="/" style="text-decoration: none; color: inherit;">Free Text Convert</a></h1>
             <p class="tagline">Simple, fast, and free text transformation tools</p>
             <nav style="margin-top: 15px; text-align: center;">
                 <a href="/" style="margin-right: 20px; color: #3498db; text-decoration: none;">Home</a>
                 <a href="/tools" style="margin-right: 20px; color: #3498db; text-decoration: none;">All Tools</a>
-                <a href="/blog" style="margin-right: 20px; color: #3498db; text-decoration: none;">Blog</a>
-                <a href="/data-cleaning-suite" style="color: #3498db; text-decoration: none;">Data Cleaning Suite</a>
+                <a href="/blog" style="color: #3498db; text-decoration: none;">Blog</a>
             </nav>
         </header>
 
         <main>
             <div class="tool-card">
-                <h2>Remove Blank Lines Online</h2>
+                <h2>Remove Blank Lines</h2>
                 <p style="text-align: center; color: #666; margin-bottom: 30px;">
-                    Instantly remove blank lines from any text. Clean up documents, code, lists, and more with our free blank line remover tool.
+                    Remove empty lines from your text instantly. Need to clean up data? Try our <a href="/data-cleaning-suite" style="color: #3498db;">Data Cleaning Suite</a> for multiple operations.
                 </p>
-                
+
+                <div class="input-section">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                        <label for="input">Enter or paste text with blank lines:</label>
+                        <div>
+                            <button onclick="loadExample('document')" class="btn" style="padding: 5px 15px; font-size: 14px;">
+                                Document Example
+                            </button>
+                            <button onclick="loadExample('list')" class="btn" style="padding: 5px 15px; font-size: 14px;">
+                                List Example
+                            </button>
+                        </div>
+                    </div>
+                    <textarea 
+                        id="input" 
+                        placeholder='Paste your text here with blank lines...
+
+Like this...
+
+
+And this...'
+                        rows="12"
+                        style="margin-bottom: 10px; font-family: 'Courier New', monospace; font-size: 14px;"
+                        spellcheck="false"
+                    ></textarea>
+                    <div id="errorDisplay" style="color: #e74c3c; font-weight: bold; margin-top: 10px; min-height: 20px;"></div>
+                </div>
+
+                <div style="margin: 25px 0;">
+                    <div class="button-grid" style="grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));">
+                        <button onclick="removeBlankLines()" class="btn btn-primary" title="Remove all blank lines">
+                            🧹 Remove Blank Lines
+                        </button>
+                        <button onclick="clearAll()" class="btn btn-secondary" title="Clear all fields">
+                            🗑️ Clear All
+                        </button>
+                    </div>
+                </div>
+
                 <!-- Options Section -->
-                <div style="margin-bottom: 20px;">
-                    <h3 style="margin-bottom: 15px;">Options:</h3>
-                    <div style="display: flex; flex-wrap: wrap; gap: 20px; align-items: center;">
-                        <label style="display: flex; align-items: center;">
-                            <input type="checkbox" id="trimWhitespace" checked style="margin-right: 5px;">
+                <div style="background: #f8f9fa; padding: 20px; border-radius: 10px; margin: 20px 0;">
+                    <h4 style="margin-top: 0;">Options:</h4>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                        <label style="display: flex; align-items: center; cursor: pointer;">
+                            <input type="checkbox" id="trimWhitespace" checked style="margin-right: 8px;">
                             Trim whitespace from lines
                         </label>
-                        <label style="display: flex; align-items: center;">
-                            <input type="checkbox" id="removeWhitespaceOnly" checked style="margin-right: 5px;">
-                            Remove lines with only spaces/tabs
+                        <label style="display: flex; align-items: center; cursor: pointer;">
+                            <input type="checkbox" id="removeLinesWithOnlySpaces" checked style="margin-right: 8px;">
+                            Remove lines with only spaces
                         </label>
-                        <label style="display: flex; align-items: center;">
-                            <input type="checkbox" id="preserveSingleBlank" style="margin-right: 5px;">
-                            Keep single blank lines (remove multiple)
+                        <label style="display: flex; align-items: center; cursor: pointer;">
+                            <input type="checkbox" id="preserveSingleBlank" style="margin-right: 8px;">
+                            Keep single blank lines
                         </label>
-                        <label style="display: flex; align-items: center;">
-                            <input type="checkbox" id="removeLeadingTrailing" checked style="margin-right: 5px;">
-                            Remove leading/trailing blank lines
+                        <label style="display: flex; align-items: center; cursor: pointer;">
+                            <input type="checkbox" id="removeTrailing" checked style="margin-right: 8px;">
+                            Remove trailing blank lines
                         </label>
                     </div>
                 </div>
-                
-                <!-- Quick Examples -->
-                <div style="margin-bottom: 20px;">
-                    <h3 style="margin-bottom: 15px;">Quick Examples:</h3>
-                    <div style="text-align: center;">
-                        <button class="btn btn-secondary" onclick="loadExample('basic')" style="margin-right: 10px;">
-                            Basic Text
-                        </button>
-                        <button class="btn btn-secondary" onclick="loadExample('code')" style="margin-right: 10px;">
-                            Code
-                        </button>
-                        <button class="btn btn-secondary" onclick="loadExample('document')" style="margin-right: 10px;">
-                            Document
-                        </button>
-                        <button class="btn btn-secondary" onclick="loadExample('list')">
-                            List
-                        </button>
+
+                <div class="output-section">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                        <label for="output">Cleaned text:</label>
+                        <span id="outputInfo" style="color: #27ae60; font-size: 14px;"></span>
                     </div>
-                </div>
-                
-                <!-- Input Section -->
-                <div style="margin-bottom: 20px;">
-                    <label for="inputText" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
-                        <strong>Enter your text:</strong>
-                        <span id="inputStats" style="color: #666; font-size: 14px;">0 characters</span>
-                    </label>
                     <textarea 
-                        id="inputText" 
-                        style="width: 100%; min-height: 200px; padding: 10px; border: 1px solid #ddd; border-radius: 5px; font-family: monospace; resize: vertical;"
-                        placeholder="Type or paste your text here..."
+                        id="output" 
+                        readonly 
+                        placeholder="Your cleaned text will appear here..."
+                        rows="12"
+                        style="font-family: 'Courier New', monospace; font-size: 14px; background: #f8f9fa;"
+                        spellcheck="false"
                     ></textarea>
                 </div>
-                
-                <!-- Buttons -->
-                <div style="text-align: center; margin-bottom: 20px;">
-                    <button class="btn btn-primary" onclick="removeBlankLines()" style="margin-right: 10px;">
-                        🧹 Remove Blank Lines
+
+                <div class="action-buttons">
+                    <button onclick="copyToClipboard()" class="btn btn-primary">
+                        📋 Copy Result
                     </button>
-                    <button class="btn btn-secondary" onclick="swapText()" style="margin-right: 10px;">
-                        🔄 Swap
+                    <button onclick="download()" class="btn btn-secondary">
+                        💾 Download
                     </button>
-                    <button class="btn btn-secondary" onclick="clearAll()">
-                        Clear All
+                    <button onclick="clearAll()" class="btn btn-secondary">
+                        🗑️ Clear All
                     </button>
                 </div>
-                
-                <!-- Stats -->
-                <div style="display: flex; justify-content: center; gap: 30px; flex-wrap: wrap; margin-bottom: 20px;">
-                    <div style="text-align: center;">
-                        <div style="font-size: 24px; font-weight: bold; color: #3498db;" id="linesRemoved">0</div>
-                        <div style="font-size: 12px; color: #666;">Lines Removed</div>
-                    </div>
-                    <div style="text-align: center;">
-                        <div style="font-size: 24px; font-weight: bold; color: #3498db;" id="totalLinesBefore">0</div>
-                        <div style="font-size: 12px; color: #666;">Lines Before</div>
-                    </div>
-                    <div style="text-align: center;">
-                        <div style="font-size: 24px; font-weight: bold; color: #3498db;" id="totalLinesAfter">0</div>
-                        <div style="font-size: 12px; color: #666;">Lines After</div>
-                    </div>
-                    <div style="text-align: center;">
-                        <div style="font-size: 24px; font-weight: bold; color: #3498db;" id="percentReduced">0%</div>
-                        <div style="font-size: 12px; color: #666;">Reduced By</div>
-                    </div>
+
+                <!-- Stats Section -->
+                <div id="stats" style="display: none; margin-top: 30px; padding: 20px; background: #e8f4f8; border-radius: 10px;">
+                    <h3 style="margin-top: 0;">Statistics:</h3>
+                    <div id="statsContent" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px;"></div>
                 </div>
-                
-                <!-- Output Section -->
-                <div style="margin-bottom: 20px;">
-                    <label for="outputText" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
-                        <strong>Output (Clean text without blank lines)</strong>
-                        <button class="btn btn-success" onclick="copyOutput()">
-                            📋 Copy Clean Text
-                        </button>
-                    </label>
-                    <textarea 
-                        id="outputText" 
-                        style="width: 100%; min-height: 200px; padding: 10px; border: 1px solid #ddd; border-radius: 5px; font-family: monospace; resize: vertical;"
-                        placeholder="Clean text will appear here..."
-                        readonly
-                    ></textarea>
+
+                <!-- Internal Link Section -->
+                <div style="background: #f0f8ff; padding: 20px; border-radius: 10px; margin: 30px 0; text-align: center;">
+                    <p style="margin: 0; font-size: 16px;">
+                        Need to remove duplicates too? Clean your data with our 
+                        <a href="/remove-duplicates" style="color: #3498db; font-weight: bold;">Remove Duplicates Tool</a>
+                        - perfect for list cleanup!
+                    </p>
                 </div>
-                
-                <!-- Information Box -->
-                <div style="background: #e8f4f8; border-left: 4px solid #3498db; padding: 20px; margin: 30px 0; border-radius: 4px;">
-                    <h3 style="margin-top: 0; color: #2c3e50;">💡 About Remove Blank Lines Tool</h3>
-                    <p>This tool helps you clean up text by removing unwanted blank lines. Perfect for:</p>
-                    <ul style="margin: 10px 0;">
-                        <li>Cleaning code with excessive spacing</li>
-                        <li>Formatting documents copied from PDFs</li>
-                        <li>Processing data exports with empty rows</li>
-                        <li>Fixing email text with extra line breaks</li>
+
+                <!-- Common Use Cases -->
+                <div style="margin-top: 40px; padding: 20px; background: #f8f9fa; border-radius: 10px;">
+                    <h3>Common Use Cases:</h3>
+                    <ul style="line-height: 1.8;">
+                        <li><strong>Code Cleanup:</strong> Remove unnecessary blank lines from source code</li>
+                        <li><strong>Document Formatting:</strong> Clean up double-spaced or poorly formatted documents</li>
+                        <li><strong>Data Processing:</strong> Prepare CSV or list data by removing empty rows</li>
+                        <li><strong>Email Cleanup:</strong> Fix email threads with excessive blank lines</li>
+                        <li><strong>Log Files:</strong> Remove empty lines from system or application logs</li>
                     </ul>
-                    <p style="margin-bottom: 0;">All processing happens in your browser - your text is never sent to our servers.</p>
                 </div>
-                
-                <!-- Related Tools -->
-                <div style="margin-top: 40px; text-align: center;">
-                    <h3>Related Tools:</h3>
-                    <div style="display: flex; flex-wrap: wrap; gap: 10px; justify-content: center;">
-                        <a href="/whitespace-normalizer" class="btn btn-secondary">Whitespace Normalizer</a>
-                        <a href="/line-break-remover" class="btn btn-secondary">Line Break Remover</a>
-                        <a href="/remove-duplicates" class="btn btn-secondary">Remove Duplicates</a>
-                        <a href="/smart-cleanup-pipeline" class="btn btn-secondary">Smart Cleanup Pipeline</a>
+
+                <!-- Pro Tips -->
+                <div style="background: #e8f4f8; padding: 20px; margin: 30px 0; border-radius: 10px; border-left: 4px solid #3498db;">
+                    <h3>💡 Pro Tips</h3>
+                    <ul style="margin: 10px 0; line-height: 1.8;">
+                        <li>Use "Keep single blank lines" to maintain paragraph separation</li>
+                        <li>Enable "Trim whitespace" to clean up messy indentation</li>
+                        <li>Perfect for cleaning data before importing to Excel or databases</li>
+                        <li>Combine with our Line Filter tool for advanced text processing</li>
+                    </ul>
+                </div>
+
+                <!-- Related Tools Section -->
+                <div style="background: #e8f4f8; padding: 30px; border-radius: 10px; margin: 40px 0; text-align: center;">
+                    <h3 style="color: #2c3e50; margin-bottom: 20px;">🔄 Text Cleaning Suite</h3>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; max-width: 800px; margin: 0 auto;">
+                        <a href="/whitespace-normalizer" style="text-decoration: none;">
+                            <div style="background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); transition: transform 0.2s;">
+                                <div style="font-size: 32px; margin-bottom: 10px;">🧹</div>
+                                <div style="color: #2c3e50; font-weight: bold;">Whitespace Normalizer</div>
+                                <div style="color: #666; font-size: 14px; margin-top: 5px;">Fix all spacing issues</div>
+                            </div>
+                        </a>
+                        <a href="/remove-duplicates" style="text-decoration: none;">
+                            <div style="background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); transition: transform 0.2s;">
+                                <div style="font-size: 32px; margin-bottom: 10px;">🔄</div>
+                                <div style="color: #2c3e50; font-weight: bold;">Remove Duplicates</div>
+                                <div style="color: #666; font-size: 14px; margin-top: 5px;">Delete duplicate lines</div>
+                            </div>
+                        </a>
+                        <a href="/line-filter" style="text-decoration: none;">
+                            <div style="background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); transition: transform 0.2s;">
+                                <div style="font-size: 32px; margin-bottom: 10px;">🔍</div>
+                                <div style="color: #2c3e50; font-weight: bold;">Line Filter</div>
+                                <div style="color: #666; font-size: 14px; margin-top: 5px;">Filter lines by pattern</div>
+                            </div>
+                        </a>
                     </div>
                 </div>
             </div>
         </main>
 
         <footer>
+            <div style="margin-bottom: 20px;">
+                <a href="/privacy-policy" style="color: #3498db; margin-right: 20px;">Privacy Policy</a>
+                <a href="/terms-of-service" style="color: #3498db; margin-right: 20px;">Terms of Service</a>
+                <a href="/affiliate-disclosure" style="color: #3498db; margin-right: 20px;">Affiliate Disclosure</a>
+            </div>
+            <p>&copy; 2025 FreeTextConvert.com - Building tools developers love!</p>
+            
+            <!-- Donation Section - MUST BE INCLUDED -->
             <div style="background: #f8f9fa; padding: 30px 20px; margin: 40px auto 20px; max-width: 600px; border-radius: 15px; text-align: center; box-shadow: 0 2px 10px rgba(0,0,0,0.05);">
-                <h3 style="margin-bottom: 15px; color: #2c3e50;">☕ Love these free tools?</h3>
+                <h3 style="margin-bottom: 15px; color: #2c3e50;">
+                    ☕ Love these free tools?
+                </h3>
                 <p style="margin-bottom: 20px; color: #555; line-height: 1.6;">
-                    Hi! I'm Cino, solo developer of Free Text Convert. I'm building these tools to help writers and developers save time. Your support keeps them <strong>free</strong> and <strong>ad-free</strong> forever!
+                    Hi! I'm Cino, solo developer of Free Text Convert. 
+                    I'm building these tools to help writers and developers save time.
+                    Your support keeps them <strong>free</strong> and <strong>ad-free</strong> forever!
                 </p>
-                <a href="https://buymeacoffee.com/cinophan" target="_blank" rel="noopener" style="background: #FFDD00; color: #000000; padding: 14px 35px; border-radius: 30px; text-decoration: none; font-weight: bold; display: inline-block; transition: all 0.3s; font-size: 16px; box-shadow: 0 4px 15px rgba(255, 221, 0, 0.3);"
-                   onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 20px rgba(255, 221, 0, 0.4)'"
-                   onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 15px rgba(255, 221, 0, 0.3)'">
-                    <span style="font-size: 20px; vertical-align: middle;">☕</span> Buy me a coffee
+                <a href="https://buymeacoffee.com/cinophan"
+                   target="_blank"
+                   rel="noopener"
+                   style="background: #FFDD00; color: #000000; padding: 14px 35px;
+                          border-radius: 30px; text-decoration: none; font-weight: bold;
+                          display: inline-block; transition: all 0.3s; font-size: 16px;
+                          box-shadow: 0 4px 15px rgba(255, 221, 0, 0.3);"
+                   onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 20px rgba(255, 221, 0, 0.4)';"
+                   onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 15px rgba(255, 221, 0, 0.3)';">
+                    <span style="font-size: 20px; vertical-align: middle;">☕</span>
+                    Buy me a coffee
                 </a>
                 <p style="margin-top: 20px; font-size: 13px; color: #999;">
                     Even $3 helps me dedicate more time to building tools you need! 🙏
                 </p>
             </div>
-            <div style="margin-bottom: 20px;">
-                <a href="/privacy-policy" style="color: #3498db; margin-right: 20px;">Privacy Policy</a>
-                <a href="/terms-of-service" style="color: #3498db; margin-right: 20px;">Terms of Service</a>
-                <a href="/affiliate-disclosure" style="color: #3498db;">Affiliate Disclosure</a>
-            </div>
-            <p>&copy; 2025 FreeTextConvert.com - Building helpful tools one day at a time</p>
         </footer>
     </div>
-    
+
     <script>
-        // Example texts
-        const examples = {
-            basic: `This is a line of text
-
-Here's another line
-
-
-And here's a third line with multiple blank lines above
-
-
-
-Too many blank lines!`,
-            
-            code: `function processData() {
-    // Start processing
-
-
-    const data = getData();
-    
-
-    // Process each item
-    
-    
-    data.forEach(item => {
-        
-        
-        console.log(item);
-        
-        
-    });
-
-
-}`,
-            
-            document: `Chapter 1: Introduction
-
-
-The quick brown fox jumps over the lazy dog.
-
-
-
-This paragraph has too many blank lines before it.
-
-
-
-
-Chapter 2: Getting Started
-
-
-Let's remove these excessive blank lines.
-
-
-The end.`,
-            
-            list: `Shopping List:
-
-Milk
-
-Bread
-
-
-Eggs
-
-
-Cheese
-
-
-
-Apples
-
-Bananas
-
-
-`
-        };
-        
-        // Update input stats
-        function updateInputStats() {
-            const text = document.getElementById('inputText').value;
-            const lines = text.split('\n');
-            const nonBlankLines = lines.filter(line => line.trim() !== '').length;
-            document.getElementById('inputStats').textContent = `${lines.length} lines (${nonBlankLines} non-blank)`;
-        }
-        
-        // Main function to remove blank lines
-        function removeBlankLines() {
-            const input = document.getElementById('inputText').value;
-            const trimWhitespace = document.getElementById('trimWhitespace').checked;
-            const removeWhitespaceOnly = document.getElementById('removeWhitespaceOnly').checked;
-            const preserveSingleBlank = document.getElementById('preserveSingleBlank').checked;
-            const removeLeadingTrailing = document.getElementById('removeLeadingTrailing').checked;
-            
-            if (!input) {
-                document.getElementById('outputText').value = '';
-                updateStats(0, 0, 0);
+        // Standard functions that EVERY tool must have
+        function copyToClipboard() {
+            const output = document.getElementById('output');
+            if (output.value === '') {
+                showNotification('Nothing to copy!', 'error');
                 return;
             }
             
+            output.select();
+            output.setSelectionRange(0, 99999);
+            
+            try {
+                document.execCommand('copy');
+                showNotification('Copied to clipboard!', 'success');
+            } catch (err) {
+                showNotification('Failed to copy', 'error');
+            }
+        }
+
+        function clearAll() {
+            document.getElementById('input').value = '';
+            document.getElementById('output').value = '';
+            document.getElementById('outputInfo').textContent = '';
+            document.getElementById('errorDisplay').textContent = '';
+            document.getElementById('stats').style.display = 'none';
+        }
+
+        function showNotification(message, type) {
+            const existing = document.querySelector('.copy-notification');
+            if (existing) {
+                existing.remove();
+            }
+            
+            const notification = document.createElement('div');
+            notification.className = 'copy-notification';
+            notification.textContent = message;
+            
+            if (type === 'error') {
+                notification.style.backgroundColor = '#e74c3c';
+            } else if (type === 'warning') {
+                notification.style.backgroundColor = '#f39c12';
+            }
+            
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.classList.add('show');
+            }, 10);
+            
+            setTimeout(() => {
+                notification.classList.remove('show');
+                setTimeout(() => {
+                    notification.remove();
+                }, 300);
+            }, 3000);
+        }
+
+        // Tool-specific functions
+        const examples = {
+            document: `This is a document with excessive blank lines.
+
+
+Sometimes there are too many blank lines.
+
+
+
+
+Like this section here.
+
+
+And we need to clean it up.
+
+
+
+The end.`,
+            list: `Item 1
+
+Item 2
+
+
+Item 3
+
+
+
+
+Item 4
+
+Item 5`
+        };
+
+        function loadExample(type) {
+            document.getElementById('input').value = examples[type];
+            removeBlankLines();
+        }
+
+        function removeBlankLines() {
+            const input = document.getElementById('input').value;
+            const errorDisplay = document.getElementById('errorDisplay');
+            const outputInfo = document.getElementById('outputInfo');
+            const statsDiv = document.getElementById('stats');
+            const statsContent = document.getElementById('statsContent');
+            
+            if (!input) {
+                errorDisplay.textContent = 'Please enter some text';
+                return;
+            }
+            
+            errorDisplay.textContent = '';
+            
+            // Get options
+            const trimWhitespace = document.getElementById('trimWhitespace').checked;
+            const removeLinesWithOnlySpaces = document.getElementById('removeLinesWithOnlySpaces').checked;
+            const preserveSingleBlank = document.getElementById('preserveSingleBlank').checked;
+            const removeTrailing = document.getElementById('removeTrailing').checked;
+            
+            // Split into lines
             let lines = input.split('\n');
             const originalLineCount = lines.length;
             
-            // Process lines based on options
+            // Process lines
             let processedLines = [];
-            let lastWasBlank = false;
+            let previousWasBlank = false;
+            let blankLinesRemoved = 0;
             
             for (let i = 0; i < lines.length; i++) {
                 let line = lines[i];
                 
-                // Trim whitespace if option is selected
+                // Trim whitespace if option is enabled
                 if (trimWhitespace) {
                     line = line.trim();
                 }
                 
                 // Check if line is blank
-                const isBlank = removeWhitespaceOnly ? line.trim() === '' : line === '';
+                const isBlank = removeLinesWithOnlySpaces ? line.trim() === '' : line === '';
                 
-                if (!isBlank) {
-                    processedLines.push(lines[i]); // Use original line if not trimming
-                    lastWasBlank = false;
-                } else if (preserveSingleBlank && !lastWasBlank) {
-                    processedLines.push(lines[i]);
-                    lastWasBlank = true;
-                } else if (!preserveSingleBlank) {
-                    // Skip blank lines entirely
-                    continue;
+                if (isBlank) {
+                    if (preserveSingleBlank && !previousWasBlank) {
+                        processedLines.push(line);
+                        previousWasBlank = true;
+                    } else {
+                        blankLinesRemoved++;
+                    }
+                } else {
+                    processedLines.push(line);
+                    previousWasBlank = false;
                 }
             }
             
-            // Remove leading/trailing blank lines if option is selected
-            if (removeLeadingTrailing) {
-                // Remove leading blank lines
-                while (processedLines.length > 0 && processedLines[0].trim() === '') {
-                    processedLines.shift();
-                }
-                
-                // Remove trailing blank lines
+            // Remove trailing blank lines if option is enabled
+            if (removeTrailing) {
                 while (processedLines.length > 0 && processedLines[processedLines.length - 1].trim() === '') {
                     processedLines.pop();
+                    blankLinesRemoved++;
                 }
             }
             
-            const output = processedLines.join('\n');
-            document.getElementById('outputText').value = output;
+            const result = processedLines.join('\n');
+            document.getElementById('output').value = result;
             
-            // Update statistics
-            const newLineCount = processedLines.length;
-            const linesRemoved = originalLineCount - newLineCount;
-            updateStats(linesRemoved, originalLineCount, newLineCount);
-        }
-        
-        // Update statistics
-        function updateStats(removed, before, after) {
-            document.getElementById('linesRemoved').textContent = removed;
-            document.getElementById('totalLinesBefore').textContent = before;
-            document.getElementById('totalLinesAfter').textContent = after;
+            // Update stats
+            outputInfo.textContent = `Removed ${blankLinesRemoved} blank lines`;
             
-            const percent = before > 0 ? Math.round((removed / before) * 100) : 0;
-            document.getElementById('percentReduced').textContent = percent + '%';
+            // Show detailed stats
+            statsDiv.style.display = 'block';
+            statsContent.innerHTML = `
+                <div style="text-align: center;">
+                    <div style="font-size: 24px; color: #3498db;">${originalLineCount}</div>
+                    <div style="color: #666;">Original Lines</div>
+                </div>
+                <div style="text-align: center;">
+                    <div style="font-size: 24px; color: #27ae60;">${processedLines.length}</div>
+                    <div style="color: #666;">Final Lines</div>
+                </div>
+                <div style="text-align: center;">
+                    <div style="font-size: 24px; color: #e74c3c;">${blankLinesRemoved}</div>
+                    <div style="color: #666;">Lines Removed</div>
+                </div>
+                <div style="text-align: center;">
+                    <div style="font-size: 24px; color: #f39c12;">${Math.round((blankLinesRemoved / originalLineCount) * 100)}%</div>
+                    <div style="color: #666;">Reduction</div>
+                </div>
+            `;
         }
-        
-        // Clear all
-        function clearAll() {
-            document.getElementById('inputText').value = '';
-            document.getElementById('outputText').value = '';
-            updateStats(0, 0, 0);
-            updateInputStats();
-        }
-        
-        // Copy output
-        function copyOutput() {
-            const output = document.getElementById('outputText');
-            output.select();
-            document.execCommand('copy');
+
+        function download() {
+            const output = document.getElementById('output').value;
+            if (!output) {
+                showNotification('Nothing to download!', 'error');
+                return;
+            }
             
-            // Visual feedback
-            const btn = event.target;
-            const originalText = btn.innerHTML;
-            btn.innerHTML = '✅ Copied!';
-            btn.style.background = '#27ae60';
+            const blob = new Blob([output], { type: 'text/plain' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'cleaned_text.txt';
+            document.body.appendChild(a);
+            a.click();
+            window.URL.revokeObjectURL(url);
+            document.body.removeChild(a);
             
-            setTimeout(() => {
-                btn.innerHTML = originalText;
-                btn.style.background = '';
-            }, 2000);
+            showNotification('Downloaded successfully!', 'success');
         }
-        
-        // Swap text
-        function swapText() {
-            const input = document.getElementById('inputText');
-            const output = document.getElementById('outputText');
-            const temp = input.value;
-            input.value = output.value;
-            output.value = temp;
-            updateInputStats();
-        }
-        
-        // Load example
-        function loadExample(type) {
-            document.getElementById('inputText').value = examples[type];
-            updateInputStats();
-            removeBlankLines();
-        }
-        
-        // Event listeners
-        document.getElementById('inputText').addEventListener('input', updateInputStats);
-        document.getElementById('inputText').addEventListener('paste', function() {
-            setTimeout(updateInputStats, 10);
+
+        // Auto-process on input change
+        document.getElementById('input').addEventListener('input', function() {
+            if (this.value) {
+                removeBlankLines();
+            }
         });
-        
-        // Initialize
-        updateInputStats();
+
+        // Process when options change
+        document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
+            checkbox.addEventListener('change', function() {
+                const input = document.getElementById('input').value;
+                if (input) {
+                    removeBlankLines();
+                }
+            });
+        });
     </script>
 </body>
 </html>
