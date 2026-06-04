@@ -19,6 +19,36 @@
     <meta property="og:description" content="Convert PDF to text instantly. Extract all text from PDF files online.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://freetextconvert.com/pdf-to-text">
+
+    <!-- Structured data: WebApplication + FAQ -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "WebApplication",
+          "name": "PDF to Text Converter",
+          "url": "https://freetextconvert.com/pdf-to-text",
+          "applicationCategory": "UtilitiesApplication",
+          "operatingSystem": "Any (web-based)",
+          "browserRequirements": "Requires a modern web browser with JavaScript enabled",
+          "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+          "description": "Free online PDF to text converter that extracts text from PDF files directly in your browser. No signup, no uploads, and no limits."
+        },
+        {
+          "@type": "FAQPage",
+          "mainEntity": [
+            { "@type": "Question", "name": "Is this PDF to text converter free?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. FreeTextConvert's PDF to Text tool is completely free with no signup, no watermarks, and no limit on how many files you convert." } },
+            { "@type": "Question", "name": "Are my PDF files uploaded to a server?", "acceptedAnswer": { "@type": "Answer", "text": "No. All text extraction happens locally in your browser. Your PDF never leaves your device, which makes this tool a good fit for private, confidential, or sensitive documents." } },
+            { "@type": "Question", "name": "Can it extract text from scanned PDFs or images?", "acceptedAnswer": { "@type": "Answer", "text": "Not yet. Scanned PDFs are images with no selectable text layer, so a standard extractor cannot read them. For those files you need a converter with OCR (optical character recognition)." } },
+            { "@type": "Question", "name": "What is the largest PDF I can convert?", "acceptedAnswer": { "@type": "Answer", "text": "You can convert PDF files up to 50MB. Because processing happens on your own device, very large files may take a few seconds depending on your computer's speed." } },
+            { "@type": "Question", "name": "Can I extract text from only certain pages?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. For multi-page PDFs you can extract all pages or set a specific page range, then copy the result or download it as a .txt file." } },
+            { "@type": "Question", "name": "Does it work on mobile and in every browser?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. The tool runs in any modern browser on desktop, tablet, or phone, including Chrome, Edge, Firefox, and Safari." } }
+          ]
+        }
+      ]
+    }
+    </script>
     
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-792NQ00CEV"></script>
@@ -312,6 +342,54 @@
                     </div>
                 </div>
             </div>
+            <div class="tool-card">
+                <h2>How to Convert a PDF to Text</h2>
+                <p>Extracting text from a PDF with this tool takes a few seconds and happens entirely on your device:</p>
+                <ol>
+                    <li><strong>Add your PDF.</strong> Drag a file into the box above or click to select one from your computer or phone (up to 50MB).</li>
+                    <li><strong>Choose your options.</strong> Keep all pages or set a page range, and decide whether to preserve line breaks, remove extra spaces, or add page numbers.</li>
+                    <li><strong>Extract the text.</strong> Press <em>Extract Text</em> and the readable content appears instantly in the box below.</li>
+                    <li><strong>Copy or download.</strong> Copy the text to your clipboard or save it as a clean <code>.txt</code> file.</li>
+                </ol>
+
+                <h2>When You Need a PDF to Text Converter</h2>
+                <p>PDFs are built for sharing and printing, not for editing. Converting one to plain text is the fastest way to reuse its content. People reach for this tool to:</p>
+                <ul>
+                    <li>Copy quotes, figures, or paragraphs out of reports, invoices, and contracts.</li>
+                    <li>Pull text from research papers and ebooks for notes or citations.</li>
+                    <li>Move content into a word processor, CMS, or email without retyping it.</li>
+                    <li>Feed clean text into other tools &mdash; for example, fixing broken line breaks with our <a href="/line-break-remover">Line Break Remover</a> or tidying spacing with the <a href="/whitespace-normalizer">Whitespace Normalizer</a>.</li>
+                    <li>Make a document's words accessible to screen readers and searchable on your computer.</li>
+                </ul>
+
+                <h2>Why Use This PDF to Text Tool</h2>
+                <ul>
+                    <li><strong>100% private.</strong> Your file is processed in your browser and never uploaded to a server &mdash; safe for confidential documents.</li>
+                    <li><strong>Free and unlimited.</strong> No signup, no watermarks, and no daily caps.</li>
+                    <li><strong>Page control.</strong> Extract an entire document or just the pages you need.</li>
+                    <li><strong>Clean output.</strong> Options to preserve paragraphs, strip extra spaces, and number pages so the result is ready to use.</li>
+                </ul>
+
+                <h2>Frequently Asked Questions</h2>
+
+                <h3>Is this PDF to text converter free?</h3>
+                <p>Yes. FreeTextConvert's PDF to Text tool is completely free with no signup, no watermarks, and no limit on how many files you convert.</p>
+
+                <h3>Are my PDF files uploaded to a server?</h3>
+                <p>No. All text extraction happens locally in your browser. Your PDF never leaves your device, which makes this tool a good fit for private, confidential, or sensitive documents.</p>
+
+                <h3>Can it extract text from scanned PDFs or images?</h3>
+                <p>Not yet. Scanned PDFs are images with no selectable text layer, so a standard extractor cannot read them. For those files you need a converter with OCR (optical character recognition).</p>
+
+                <h3>What is the largest PDF I can convert?</h3>
+                <p>You can convert PDF files up to 50MB. Because processing happens on your own device, very large files may take a few seconds depending on your computer's speed.</p>
+
+                <h3>Can I extract text from only certain pages?</h3>
+                <p>Yes. For multi-page PDFs you can extract all pages or set a specific page range, then copy the result or download it as a .txt file.</p>
+
+                <h3>Does it work on mobile and in every browser?</h3>
+                <p>Yes. The tool runs in any modern browser on desktop, tablet, or phone, including Chrome, Edge, Firefox, and Safari.</p>
+            </div>
         </main>
 
         <footer>
@@ -322,7 +400,7 @@
                 <a href="/affiliate-disclosure" style="color: #3498db; margin-right: 20px;">Affiliate Disclosure</a>
             </div>
             
-            <p>&copy; 2025 FreeTextConvert.com - Your privacy-first text tools</p>
+            <p>&copy; 2025-2026 FreeTextConvert.com - Your privacy-first text tools</p>
 
             <!-- Donation Section - Add before closing </footer> tag -->
             <div style="background: #f8f9fa; padding: 30px 20px; margin: 40px auto 20px; max-width: 600px; border-radius: 15px; text-align: center; box-shadow: 0 2px 10px rgba(0,0,0,0.05);">
