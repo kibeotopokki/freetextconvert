@@ -532,4 +532,20 @@ article p strong:first-child {
                 font-size: 1.5em;
             }
         }
+
+/* === Tool-page content & FAQ readability (applies site-wide to .tool-card body text) === */
+.tool-card h2:not(:first-child) {
+    margin-top: 45px;
+}
+
+.tool-card h3 {
+    margin-top: 28px;
+    margin-bottom: 8px;
+    color: #2c3e50;
+}
+
+.tool-card p {
+    margin-bottom: 18px;
+    line-height: 1.8;
+}
    
